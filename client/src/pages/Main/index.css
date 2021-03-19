@@ -1,0 +1,178 @@
+@import  url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
+
+@font-face{
+  font-family: Pixel-font;
+  src: url(../../fonts/Minecraft.ttf);
+}
+
+:root {
+  --primary-color: #020122;
+  --primary-color2: #13262F;
+  --secondary-color: #F9C80E;
+  --font-color: #DCEDFF;
+}
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+  outline: none;
+  font-family: Pixel-font, sans-serif;
+}
+
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 100vw;
+  animation: gradient 5s linear infinite alternate;
+  background: linear-gradient(45deg,#2b2895, #1a1766, #020122);
+  background-size: 600% 600%;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+@media(min-width: 1040px){
+  #homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  #logo-menu {
+    min-width: 400px;
+    max-width: 40vw;
+    animation: is-bouncing 2s ease infinite alternate;
+  }
+
+  .login-fields{
+    background-color: #13262F;
+  }
+}
+
+@media(max-width:1039px){
+  #homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  #logo-menu {
+    max-width: 450px;
+    min-width: 40vw;
+    animation: is-upping-scale 1s ease-out infinite alternate;
+  }
+}
+
+.login-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 400px;
+  min-height: 100vh;
+}
+
+.login-fields .field{
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  width: 80%;
+  margin: 15px 0;
+}
+
+.login-fields .field label {
+  color: #DCEDFF;
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+
+.login-fields .field
+input[type='email'], 
+input[type='password'] {
+  width: 100%;
+  border-radius: 30px;
+  font-size: 16px;
+  margin-top: 10px;
+  padding: 13px 12px;
+  border: 2px solid var(--primary2-color);
+}
+
+.login-fields .field
+input[type='email']:focus, 
+input[type='password']:focus{
+  border: 2px solid var(--secondary-color);
+  background-color: #ddd;
+}
+
+#button-login {
+  padding: 15px;
+  margin-top: 50px;
+  color: var(--primary-color);
+  font-size: 23px;
+  font-weight: 700;
+  background-color: var(--secondary-color);
+  border-radius: 30px;
+  border: 2px solid var(--font-color);
+  width: 40%;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+#button-login:hover {
+  background-color:#ac9237;
+  color: var(--primary-color);
+  transition: 0.2s;
+  transform: scale(1.02);
+}
+
+#button-login:active {
+  transform: translateY(5px) scale(1.02);
+  transition: 50ms;
+}
+
+.login-fields .footer {
+  display: flex;
+  justify-content: center;
+}
+
+.login-fields .footer a {
+  text-decoration: none;
+  margin: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+ @keyframes gradient {
+  from /*INICIO ANIMAÇÃO*/{
+      background-position: 0 50%;
+  }
+
+  to {
+      background-position: 100% 50%;
+  }
+}
+
+@keyframes is-bouncing {
+  to {
+    transform: translateY(30px);
+  }
+}
+
+@keyframes is-upping-scale {
+  to {
+    transform: scale(1.1);
+  }
+}
