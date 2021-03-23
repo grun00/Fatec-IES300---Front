@@ -1,0 +1,63 @@
+@import '../../global.css';
+
+#register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+#logo {
+    animation: is-upping-scale 2s ease infinite alternate;
+    max-width: 300px;
+    min-width: 300px;
+    margin: 30px 0 0 30px;
+    cursor: pointer;
+}
+
+#register-area {
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+    max-width: 2000px;
+    background-color: #d6dcf6;
+    border: 3px solid var(--secondary-color);
+    border-radius: 16px;
+}
+
+#register-area h1 {
+    font-size: 35px;
+    text-align: left;
+    margin: 50px 0 -100px 50px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+#register-area .fields-area .field label{
+    color: var(--primary-color);
+}
+
+#register-page .fields-area .field input[type='email'], 
+#register-page .fields-area .field input[type='text'], 
+#register-page .fields-area .field input[type='password'] {
+    border: 2px solid black;
+}
+
+#register-page .fields-area .footer a {
+    margin: 10px;
+    font-size: 19px;
+    color: var(--primary2-color);
+    margin: 15px;
+    padding: 10px 16px;
+}
+
+#register-page .fields-area .footer a:hover {
+    border-radius: 30px;
+    background-color: #9ba4ce;
+    transition: .5s;
+}
+
+@keyframes is-upping-scale {
+    to {
+        transform: scale(1.1);
+    }
+}

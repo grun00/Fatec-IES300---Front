@@ -1,0 +1,101 @@
+@font-face {
+    font-family: Pixel-font;
+    src: url(./fonts/Minecraft.ttf)
+}
+
+:root {
+    --primary-color: #03013f;
+    --primary-color2: #13262F;
+    --secondary-color: #F9C80E;
+    --font-color: #DCEDFF;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: Pixel-font, sans-serif;
+}
+
+.fields-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 400px;
+    min-height: 100vh;
+}
+
+.fields-area .field {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    width: 80%;
+    margin: 15px 0;
+}
+
+.fields-area .field label {
+    color: #DCEDFF;
+    font-weight: 600;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.fields-area .field input[type='email'],
+.fields-area .field input[type='password'],
+.fields-area .field input[type='text'] {
+    width: 100%;
+    border-radius: 30px;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 13px 12px;
+    border: 2px solid var(--primary2-color);
+}
+
+.fields-area .field input[type='email']:focus,
+.fields-area .field input[type='password']:focus,
+.fields-area .field input[type='text']:focus {
+    border: 2px solid var(--secondary-color);
+    background-color: #ddd;
+}
+
+.button-accept {
+    padding: 15px;
+    margin-top: 50px;
+    color: var(--primary-color);
+    font-size: 23px;
+    font-weight: 700;
+    background-color: var(--secondary-color);
+    border-radius: 30px;
+    border: 2px solid var(--font-color);
+    width: 40%;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+}
+
+.button-accept:hover {
+    background-color: #ac9237;
+    color: var(--primary-color);
+    transition: 0.2s;
+    transform: scale(1.02);
+}
+
+.button-accept:active {
+    transform: translateY(5px) scale(1.02);
+    transition: 50ms;
+}
+
+.fields-area .footer {
+    display: flex;
+    justify-content: center;
+}
+
+.fields-area .footer a {
+    text-decoration: none;
+    margin: 10px;
+    font-size: 14px;
+    color: #fff;
+}
