@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import connectSocket from '../../services/socket';
+import api from '../../services/api';
 
 const Main = () => {
-    return (
-        <h1> Jogo do Vitão</h1>
+return (
+        <div>
+        <h1>Jogo do Vitão</h1>
+        <div>
+        </div>
+    </div>
     )
 }
 
