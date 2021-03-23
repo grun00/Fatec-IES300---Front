@@ -1,0 +1,72 @@
+@import '../../global.css';
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 100vw;
+    animation: gradient 5s linear infinite alternate;
+    background: linear-gradient(45deg, #2b2895, #1a1766, #020122);
+    background-size: 600% 600%;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+@media(min-width: 1040px) {
+    #logo-menu {
+        min-width: 400px;
+        max-width: 40vw;
+        animation: is-bouncing 2s ease infinite alternate;
+    }
+
+    .toFill-area {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    #background-login {
+        background-color: #13262F;
+    }
+
+    #background-login .fields-area .field input[type='email'],
+    #background-login .fields-area .field input[type='password'] {
+        border-top-left-radius: 0;
+        border-bottom-right-radius: 0;
+
+    }
+}
+
+@media(max-width:1039px) {
+    #logo-menu {
+        max-width: 300px;
+        min-width: 300px;
+        animation: is-upping-scale 1s ease-out infinite alternate;
+    }
+
+    .toFill-area {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@keyframes gradient {
+    from/*INICIO ANIMAÇÃO*/
+    {
+        background-position: 0 50%;
+    }
+    to {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes is-bouncing {
+    to {
+        transform: translateY(30px);
+    }
+}
+
+@keyframes is-upping-scale {
+    to {
+        transform: scale(1.1);
+    }
+}
