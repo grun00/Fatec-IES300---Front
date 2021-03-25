@@ -25,8 +25,8 @@ const SocketTest = () => {
 
     const handleConnect = (e) => {
         e.preventDefault()
-        const socket = connectSocket()
-        setSocket(socket)
+        socket.open()
+        socket.on("connect", () => console.log("Connected"))
         setServerInfo(true)
     }
     const handleDisconnect = (e) => {
@@ -141,7 +141,7 @@ const SocketTest = () => {
             <div className="btn-group">
                 <button className="button-accept" onClick={handleDisconnect}>Disconnect</button>
                 <button className="button-accept" onClick={handleServerInfo}>Get Server Info</button>
-                <button className="button-accept" onclick={handleConnect}>Reconnect</button>
+                <button className="button-accept" onclick={handleConnect}>Reconnect Not Working</button>
             </div>
 
         </div>
