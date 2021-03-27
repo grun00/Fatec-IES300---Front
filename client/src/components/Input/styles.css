@@ -1,0 +1,28 @@
+.input-field {
+    width: 100%;
+    padding-top: 5%;
+}
+
+label {
+    color: #DCEDFF;
+    font-weight: 600;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+input {
+    width: 100%;
+    border-radius: 30px;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 13px 12px;
+    border: 2px solid var(--primary2-color);
+}
+
+input:focus,
+{
+    border: 2px solid var(--secondary-color);
+    background-color: #ddd;
+}
+

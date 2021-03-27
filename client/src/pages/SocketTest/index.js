@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import connectSocket from '../../services/socket';
 import api from '../../services/api';
+import { Input } from "../../components/Input/textInput"
 
 import "./styles.css"
 
@@ -9,6 +10,7 @@ const SocketTest = () => {
     const [player, setPlayer] = useState({
         name: ''
     })
+    const [nameInput, setNameInput] = useState("")
     const [updateInfo, setUpdateInfo] = useState(false)
     const [socket, setSocket] = useState(null)
     const [disabled, setDisabled] = useState(false)
@@ -36,11 +38,13 @@ const SocketTest = () => {
     }
 
     const handleChange = (e) => {
-        setPlayer({ ...player, [e.target.name]: e.target.value.trim() })
+        const {name,  value} = e.target
+        setPlayer((player) => ({ ...player, [name]: value.trim() }))
+        setNameInput(() => (value.trim()))
     }
 
     const handleChangeRoomName = (e) => {
-        setRoomName(e.target.value.trim())
+        setRoomName(() =>  e.target.value.trim())
     }
 
     const createRoom = (e) => {
@@ -59,6 +63,7 @@ const SocketTest = () => {
 
     const leaveRoom = (e) => {
         e.preventDefault()
+        console.log("Here", roomName)
         socket.emit("leaveRoom", roomName)
         setUpdateInfo(true)
         setRoomName("")
@@ -66,19 +71,17 @@ const SocketTest = () => {
 
     const addNewPlayer = (e) => {
         e.preventDefault()
-        socket.emit("newPlayer", player)
-        setUpdateInfo(true)
-        setPlayer({ name: "" })
-        setDisabled(true)
+        if(player.name) {
+            socket.emit("newPlayer", player)
+            setUpdateInfo(true)
+            setNameInput("")
+            setDisabled(true)
+        }
     }
 
     useEffect(() => {
         if (updateInfo) {
-            socket.emit("getOnlinePlayers")
-            socket.on("onlinePlayers", (data) => {
-                console.log(data)
-                setOnlinePlayers(Object.keys(data))
-            })
+            socket.emit("getServerInfo")
             socket.on("serverInfo", (data) => {
                 setServerInfo(data)
             })
@@ -89,6 +92,7 @@ const SocketTest = () => {
     useEffect(() => {
         const socket = connectSocket()
         setSocket(socket)
+        setUpdateInfo(true)
     }, [])
 
     return (
@@ -99,9 +103,8 @@ const SocketTest = () => {
                     <h3>Server Info:</h3>
                     {serverInfo && socket
                         ? Object.entries(serverInfo.channels).map(([key, value], id) => {
-                            console.log(value)
                             return (
-                                <div className="inner-content">
+                                <div id={id} className="inner-content">
                                     <p id={id}>Room Name: {key}</p>
                                     <p>Members: {value.map((item, id) => {
                                         return <span id={id}> {item} </span>
@@ -120,22 +123,12 @@ const SocketTest = () => {
                 </div>
 
             </div>
-            <div className="field">
-                <div className="input-field">
-                <label htmlFor="name">Player Name:</label>
-                    <input type="text" name="name" value={player.name} onChange={handleChange} disabled={disabled}></input>
-                </div>
-            </div>
-            <button className="button-accept" onClick={addNewPlayer} disabled={disabled}>Submit</button>
-            <div className="field">
-                <div className="input-field">
-                <label htmlFor="room">Room Name:</label>
-                <input type="text" name="room" value={roomName} onChange={handleChangeRoomName}></input>
-                </div>
-            </div>
+            <Input onChange={handleChange} labelText={"name"} inputName={"name"} inputValue={nameInput}/>
+            <button className="button-accept" onClick={addNewPlayer}>Submit</button>
+            <Input onChange={handleChangeRoomName} labelText={"room"} inputName={"room"} inputValue={roomName}/>
             <div className="btn-group">
                 <button className="button-accept" onClick={joinRoom}>Join Room</button>
-                <button className="button-accept" onclick={leaveRoom}>Leave Room</button>
+                <button className="button-accept" onClick={leaveRoom}>Leave Room</button>
                 <button className="button-accept" onClick={createRoom}>Create Room</button>
             </div>
             <div className="btn-group">

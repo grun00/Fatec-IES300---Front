@@ -2,8 +2,7 @@ import React from 'react';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-//Importing Styles
-import "./global.css"
+
 
 //Importing pages
 import Login from "./pages/Login";
