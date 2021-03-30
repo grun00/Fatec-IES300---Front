@@ -4,7 +4,7 @@ import '../global.css'
 
 import { Link } from 'react-router-dom';
 
-export default (props) =>
+const login = (props) =>
     <div className="fields-area">
         <div>
             <img id="logo-menu" src={Logo} />
@@ -24,8 +24,8 @@ export default (props) =>
 
         <div className="footer">
             <Link to="/RegisterScreen"> Não possuo cadastro </Link>
-            <a href="#">Esqueci minha senha</a>
+            <Link to="/ForgotPassword"> Esqueci minha senha </Link>
         </div>
     </div>
 
-
+export default login;

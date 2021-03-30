@@ -1,16 +1,17 @@
 import React from 'react';
 import './index.css';
 
-import Logo from '../../images/logo.png'
-import RegisterForm from '../../components/RegisterForm'
+//Components
+import Logo from '../../images/logo.png';
+import RegisterForm from '../../components/RegisterForm';
+
+//Link
 import { Link } from 'react-router-dom';
 
-
-const Page = () => {
-    return (
+const Page = () =>
 
         <React.Fragment>
-            <Link to="/"><img id="logo" src={Logo} /></Link>
+            <Link to="/"><img id="logo" src={Logo} alt="Show do Vitão - Homepage" /></Link>
             <div id="register-page">
                 <div id="register-area">
                     <h1>Cadastro</h1>
@@ -18,7 +19,5 @@ const Page = () => {
                 </div>
             </div>
         </React.Fragment>
-    );
-}
 
 export default Page;

@@ -3,7 +3,8 @@ import '../global.css';
 
 import { Link } from 'react-router-dom';
 
-export default (props) =>
+const registerForm = (props) =>
+
     <div className="fields-area">
         <div className="field">
             <label htmlFor="nome">Nome:</label>
@@ -33,9 +34,10 @@ export default (props) =>
         <button className="button-accept" type="submit">Cadastrar</button>
 
         <div className="footer">
-            <Link to="/">Voltar</Link>
+            <Link to="/"> Voltar </Link>
         </div>
     </div>
 
+export default registerForm;
 
 
