@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 
 const Page = () => {
     return (
-
         <React.Fragment>
             <Link to="/"><img id="logo" src={Logo} /></Link>
             <div id="register-page">
