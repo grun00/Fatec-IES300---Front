@@ -14,42 +14,6 @@
    id="svg8"
    inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
    sodipodi:docname="drawing.svg">
-  <defs
-     id="defs2" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.76540933"
-     inkscape:cx="-128.42851"
-     inkscape:cy="465.50456"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
-     inkscape:document-rotation="0"
-     showgrid="false"
-     inkscape:lockguides="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1027"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     inkscape:snap-bbox="false"
-     showguides="false" />
-  <metadata
-     id="metadata5">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
@@ -92,15 +56,17 @@
       <path
          id="hp-cloud-4"
          data-name="hp-cloud"
+         d="m 1149.69,205.91 a 13.29,13.29 0 0 1 6.2,1.53 8.76,8.76 0 0 1 8.63,-7.65 8.64,8.64 0 0 1 6.55,3 v -1.12 a 15.42,15.42 0 1 1 30.84,0 16,16 0 0 1 -0.18,2.41 5.86,5.86 0 0 1 9.86,1.72 10.06,10.06 0 0 1 19.93,2.07 10.43,10.43 0 0 1 -0.11,1.52 11.19,11.19 0 0 1 -4.15,21.51 c -6.08,0 -70.08,2.33 -77.53,2.33 a 13.68,13.68 0 0 1 -0.04,-27.32 z"
+         fill="#ffffff" x="200px"
+         y="-200px"
+         opacity="0.4" />
+      <path
+         id="hp-cloud-4"
+         data-name="hp-cloud"
          d="m 2980,654.3 a 28.72,28.72 0 0 0 -13.39,3.3 18.93,18.93 0 0 0 -18.67,-16.53 18.68,18.68 0 0 0 -14.17,6.51 c 0.06,-0.8 0.09,-1.61 0.09,-2.42 a 33.34,33.34 0 1 0 -66.66,0 34.49,34.49 0 0 0 0.4,5.22 12.68,12.68 0 0 0 -21.3,3.72 21.75,21.75 0 0 0 -43.09,4.48 22.54,22.54 0 0 0 0.24,3.29 24.19,24.19 0 0 0 9,46.51 c 13.15,0 151.48,5 167.59,5 A 29.56,29.56 0 0 0 2980,654.3 Z"
          fill="#ffffff"
          opacity="0.4" />
-      <path
-         id="hp-cloud-5"
-         data-name="hp-cloud"
-         d="m 1678.86,314.91 a 17.57,17.57 0 0 0 -8.19,2 11.58,11.58 0 0 0 -11.42,-10.11 11.43,11.43 0 0 0 -8.67,4 c 0,-0.49 0.05,-1 0.05,-1.48 a 20.39,20.39 0 1 0 -40.78,0 21.1,21.1 0 0 0 0.24,3.19 7.75,7.75 0 0 0 -13,2.28 13.3,13.3 0 0 0 -26.36,2.74 13.79,13.79 0 0 0 0.15,2 14.8,14.8 0 0 0 5.49,28.45 c 8,0 92.67,3.08 102.52,3.08 a 18.08,18.08 0 0 0 -0.03,-36.15 z"
-         fill="#ffffff"
-         opacity="0.4" />
+
       <path
          id="hp-cloud-6"
          data-name="hp-cloud"
@@ -1389,6 +1355,7 @@
              fill="#e94b59" />
           <g
              id="hp-trump-arm">
+             
             <path
                d="m 1108.88,521.32 c 0,0 7.61,-8.31 9.48,-13 2.57,-6.46 -18.26,-16.3 -21.22,-16.71 -2.18,-0.3 -3.66,5.15 -3.66,5.15 0,0 -4.26,-3.58 -4.69,-3.07 -0.43,0.51 -4.49,16.39 -4.49,16.39 z"
                fill="#f8bb97"

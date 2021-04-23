@@ -6,11 +6,10 @@ import Input from "./Input/textInput";
 import { Link } from "react-router-dom";
 
 const login = (props) => (
-  <div className="fields-area">
+  <div className="fields-area background-fill">
     <div>
-      <img id="logo-menu" src={Logo} />
+      <img id="logo-menu" src={Logo} alt="Menu's logo" />
     </div>
-
     <Input
       inputType="email"
       inputName="email"
@@ -30,7 +29,7 @@ const login = (props) => (
     </button>
 
     <div className="footer">
-      <Link to="/RegisterScreen"> Não possuo cadastro </Link>
+      <Link to="/RegisterScreen"> Nao possuo cadastro </Link>
       <Link to="/ForgotPassword"> Esqueci minha senha </Link>
     </div>
   </div>

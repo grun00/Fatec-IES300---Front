@@ -9,6 +9,8 @@ import RegisterScreen from "./pages/RegisterScreen";
 import ForgotPassword from "./pages/ForgotPassword";
 import SocketTest from "./pages/SocketTest";
 import LeaderBoard from "./pages/LeaderBoard";
+import ChangePassword from "./pages/ChangePassword";
+import GamePage from "./pages/GamePage";
 
 const Routes = () => (
   <BrowserRouter>
@@ -18,6 +20,8 @@ const Routes = () => (
       <Route exact path="/ForgotPassword" component={ForgotPassword} />
       <Route path="/socket" component={SocketTest} />
       <Route path="/ranking" component={LeaderBoard} />
+      <Route path="/changepassword" component={ChangePassword} />
+      <Route path="/gamepage" component={GamePage} />
 
     </Switch>
   </BrowserRouter>

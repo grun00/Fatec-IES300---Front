@@ -3,18 +3,18 @@ import "./index.css";
 import Logo from "../../images/logo.png";
 
 //Components
-import ForgotPassword from "../../components/ForgotPassword";
+import ChangePassword from "../../components/ChangePassword";
 
 //Link
 import { Link } from "react-router-dom";
 
 const Page = () => (
   <React.Fragment>
-    <div id="forgot-password-page">
+    <div id="change-password-page">
       <Link to="/"><img id="logo" src={Logo} alt="Show do Vitão - Homepage" /></Link>
         <div id="form-area">
-          <h1>Esqueci minha senha</h1>
-          <ForgotPassword />
+          <h1>Crie sua nova senha</h1>
+          <ChangePassword />
       </div>
     </div>
   </React.Fragment>

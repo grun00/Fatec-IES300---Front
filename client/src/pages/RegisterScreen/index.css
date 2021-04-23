@@ -3,57 +3,102 @@
 #register-page {
     display: flex;
     flex-direction: column;
-    align-items: center
+    align-items: center;
+    justify-items: center;
 }
 
 #logo {
     animation: is-upping-scale 2s ease infinite alternate;
     max-width: 300px;
     min-width: 300px;
-    margin: 30px 0 0 30px;
+    margin-top: 1.5rem;
     cursor: pointer;
 }
 
 #register-area {
     display: flex;
     flex-direction: column;
-    min-width: 600px;
-    max-width: 2000px;
-    background-color: #d6dcf6;
+    background-color: var(--primary-color);
     border: 3px solid var(--secondary-color);
-    border-radius: 16px;
+    margin: 2rem 4rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 26px -1px var(--font-color);
 }
 
 #register-area h1 {
     font-size: 35px;
     text-align: left;
-    margin: 50px 0 -100px 50px;
-    color: var(--primary-color);
+    padding: 2.3rem;
+    padding-bottom: 0rem;
+    color: var(--font-color);
     text-transform: uppercase;
 }
 
-#register-area .fields-area .field label{
-    color: var(--primary-color);
+#register-area .fields-area {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    max-width: 1000px;
+    min-width: 400px;
+    flex-wrap: wrap;
 }
 
-#register-page .fields-area .field input[type='email'], 
-#register-page .fields-area .field input[type='text'], 
-#register-page .fields-area .field input[type='password'] {
-    border: 2px solid black;
+#register-area .fields-area .input-field {
+    min-width: 280px;
+    max-width: 400px;
+    margin: 0 2rem;
 }
 
-#register-page .fields-area .footer a {
-    margin: 10px;
+#register-area .fields-area .input-field:nth-child(3) {
+    flex-wrap: wrap;
+    max-width: 870px;
+    min-width: 90%;
+    margin: 0;
+}
+
+@media (max-width:1100px) {
+    #register-area .fields-area {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    #register-area .fields-area .input-field {
+        min-width: 280px;
+        max-width: 400px;
+        margin: 0 2rem;
+        margin-top: 1.5rem;
+    }
+
+    #register-area .fields-area .input-field:nth-child(3) {
+        min-width: 280px;
+        max-width: 400px;
+        margin: 0 2rem;
+        margin-top: 1.5rem;
+    }
+}
+
+#register-page .fields-area .footer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+#register-page .fields-area .footer a{
     font-size: 19px;
-    color: var(--primary-color);
-    margin: 15px;
     padding: 10px 16px;
 }
 
-#register-page .fields-area .footer a:hover {
-    border-radius: 30px;
-    background-color: #9ba4ce;
-    transition: .5s;
+@media (max-width: 900px){
+    #register-area {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    #register-area h1{
+        text-align: center;
+    }
 }
 
 @keyframes is-upping-scale {

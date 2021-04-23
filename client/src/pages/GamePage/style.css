@@ -1,0 +1,137 @@
+@import "../../global.css";
+
+#gamepage-area {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  
+}
+
+#game-area {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: var(--question-area);
+  justify-content: space-evenly;
+}
+
+#question-area {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#powers-area {
+    height: 100%;
+    width: 40%;
+    background-color: var(--powers-area);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+span:is(#span-countdown, #IsComplete, #powers-title) {
+  font-size: 3rem;
+  text-align: center;
+  color: var(--font-color);
+  font-family: "Pixel-font";
+  color: #ffffff;
+  text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+    0 20px 20px rgba(0, 0, 0, 0.15);
+}
+
+#question {
+    font-size: 2rem;
+    padding: 1rem;
+}
+
+#question p {
+    color: var(--font-color);
+}
+
+#alternatives-area {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#power-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.hability {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 135px;
+  height: 135px;
+  border-radius: 20%;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.hability:hover {
+  background-color: #47555c;
+  transition: all 0.3s ease;
+}
+
+.hability button.hability-button {
+    background: none;
+    color: var(--font-color);
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.img-button {
+    cursor: pointer;
+    width: 60px;
+}
+
+#jump-button {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+#jump-button label {
+    font-size: 1rem;
+}
+
+#jump-button #jump-button-id {
+    width: 70%;
+    max-width: 300px;
+    background-color: #8B0000;
+    color: var(--font-color);
+    padding: 1rem;
+    border-radius: 8px;
+    text-shadow: 4px 3px 0 rgb(51, 51, 51);
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 18px;
+    box-shadow: 0 5px 0 #8b0000c5;
+    transition: all 0.4s ease;
+}
+
+#jump-button #jump-button-id:hover {
+    background-color: #8b0000c5;
+    transform: scale(1.03);
+    transition: all 0.4s ease;
+}
+
+#jump-button #jump-button-id:active {
+    box-shadow: none;
+    transform: translateY(3px) scale(1.03);
+    transition: 50ms;
+}
+

@@ -13,13 +13,15 @@ const forgotPassword = (props) => (
       placeholderText="Insira o seu email para recuperação"
     />
 
-    <button className="button-accept" type="submit">
-      Enviar codigo
-    </button>
-
     <div className="footer">
-      <Link to="/RegisterScreen"> Não possuo cadastro </Link>
-      <Link to="/"> Lembrei minha senha </Link>
+      <button className="button-accept" type="submit">
+        Enviar codigo
+      </button>
+
+      <div className="links">
+        <Link to="/RegisterScreen"> Nao possuo cadastro </Link>
+        <Link to="/"> Lembrei minha senha </Link>
+      </div>
     </div>
   </div>
 );

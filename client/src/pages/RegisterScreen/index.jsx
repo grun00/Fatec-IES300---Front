@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom';
 const Page = () =>
 
         <React.Fragment>
-            <Link to="/"><img id="logo" src={Logo} alt="Show do Vitão - Homepage" /></Link>
             <div id="register-page">
+                <Link to="/"><img id="logo" src={Logo} alt="Show do Vitão - Homepage" /></Link>
                 <div id="register-area">
                     <h1>Cadastro</h1>
                     <RegisterForm/>

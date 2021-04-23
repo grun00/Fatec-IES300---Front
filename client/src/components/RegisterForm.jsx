@@ -1,24 +1,26 @@
 import React from "react";
 import "../global.css";
 import Input from "./Input/textInput";
-
 import { Link } from "react-router-dom";
 
 const registerForm = (props) => (
   <div className="fields-area">
     <Input
+      inputId="input-name"
       inputName="name"
       placeholderText="Insira seu nome"
       labelText="Nome"
     />
 
     <Input
+      inputId="input-user"
       inputName="user"
       placeholderText="Insira um nome de usuário"
-      labelText="Usuário"
+      labelText="Usuario"
     />
 
     <Input
+      inputId="input-email"
       inputType="email"
       inputName="email"
       placeholderText="Insira um e-mail"
@@ -26,6 +28,7 @@ const registerForm = (props) => (
     />
 
     <Input
+      inputId="input-password"
       inputType="password"
       inputName="password"
       placeholderText="Insira uma senha"
@@ -33,17 +36,18 @@ const registerForm = (props) => (
     />
 
     <Input
+      inputId="input-password-repeat"
       inputType="password"
       inputName="password-repeat"
       placeholderText="Repita a sua senha"
       labelText="Repita a senha"
     />
 
-    <button className="button-accept" type="submit">
-      Cadastrar
-    </button>
-
     <div className="footer">
+      <button className="button-accept" type="submit">
+        Cadastrar
+      </button>
+
       <Link to="/"> Voltar </Link>
     </div>
   </div>
