@@ -38,7 +38,7 @@ const gamepage = (props) => {
               <Countdown date={Date.now() + 90000} renderer={renderer} />
             </div>
             <div id="question">
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto nam culpa laborum iste rem illum ad dolorum totam deserunt, blanditiis enim corporis, amet quisquam in, nulla pariatur nesciunt? Neque, ipsa.</p>
+              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto nam culpa laborum iste rem illum ad dolorum totam deserunt, blanditiis enim corporis, amet quisquam in, nulla pariatur nesciunt? Neque, ipsa.</p> 
             </div>
             <div id="alternatives-area">          
               <AnswerField Alt="A" AltA="Alternativa 1"/> {/* A pergunta será puxada pelo AltX*/ }
