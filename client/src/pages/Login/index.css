@@ -1,52 +1,50 @@
 @import '../../global.css';
 
-body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-width: 100vw;
-    animation: gradient 5s linear infinite alternate;
-    background: linear-gradient(45deg, #2b2895, #1a1766, #020122);
-    background-size: 600% 600%;
-    background-repeat: no-repeat;
-    min-height: 100vh;
+#area-login {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
 }
 
-@media(min-width: 1040px) {
+@media(min-width: 900px) {
+
+    #area-login {
+        flex-direction: row-reverse;
+    }
+    
+    .background-fill {
+        background: var(--primary-color);
+        height: 100vh;
+    }
+    
     #logo-menu {
         min-width: 400px;
         max-width: 40vw;
         animation: is-bouncing 2s ease infinite alternate;
     }
-
-    .toFill-area {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-    }
-
-    #background-login {
-        background-color: #13262F;
-    }
-
-    #background-login .fields-area .field input[type='email'],
-    #background-login .fields-area .field input[type='password'] {
-        border-top-left-radius: 0;
-        border-bottom-right-radius: 0;
-
-    }
 }
 
-@media(max-width:1039px) {
+@media(max-width:899px) {
+
     #logo-menu {
         max-width: 300px;
         min-width: 300px;
         animation: is-upping-scale 1s ease-out infinite alternate;
     }
 
-    .toFill-area {
-        display: flex;
+    #area-login {
+        flex-direction: row;
         justify-content: center;
+
     }
+
+    .background-fill {
+        background: none;
+        height: 100vh;
+    }
+    
 }
 
 @keyframes gradient {

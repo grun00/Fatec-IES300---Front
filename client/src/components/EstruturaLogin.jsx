@@ -1,31 +1,66 @@
-import React from 'react';
-import Logo from '../images/logo.png';
-import '../global.css'
+import React, { useState } from "react";
+import api from "../services/api";
+import Logo from "../images/logo.png";
+import "../global.css";
+import Input from "./Input/textInput";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-export default (props) =>
-    <div className="fields-area">
-        <div>
-            <img id="logo-menu" src={Logo} />
-        </div>
+const Login = (props) => {
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
 
-        <div className="field">
-            <label htmlFor="email">Email:</label>
-            <input id="email" type="email" maxLength="70" placeholder="Insira o seu email" />
-        </div>
+  const login = () => {
+    api.post(
+      "/players/login",
+      {
+        email: userEmail,
+        password: userPassword
+      }
+    ).then((res) => {
+      if (res.data){
+        window.location = "/gamepage"
+      } else {
+        window.location = "/"
+      }
+    })
+  };
 
-        <div className="field">
-            <label htmlFor="password">Senha:</label>
-            <input id="password" type="password" maxLength="30" placeholder="Insira sua senha" />
-        </div>
+  return (
+    <div className="fields-area background-fill">
+      <div>
+        <img id="logo-menu" src={Logo} alt="Menu's logo" />
+      </div>
+      <Input
+        inputType="email"
+        inputName="email"
+        labelText="E-mail"
+        placeholderText="Insira seu email"
+        onChange={(e) => {
+          setUserEmail(e.target.value);
+        }}
+      />
 
-        <button className="button-accept" type="submit">Login</button>
+      <Input
+        inputType="password"
+        inputName="password"
+        placeholderText="Insira sua senha"
+        labelText="Senha"
+        onChange={(e) => {
+          setUserPassword(e.target.value);
+        }}
+      />
 
-        <div className="footer">
-            <Link to="/RegisterScreen"> Não possuo cadastro </Link>
-            <a href="#">Esqueci minha senha</a>
-        </div>
+      <button className="button-accept" type="submit" onClick={ login }>
+        Login
+      </button>
+
+      <div className="footer">
+        <Link to="/RegisterScreen"> Nao possuo cadastro </Link>
+        <Link to="/ForgotPassword"> Esqueci minha senha </Link>
+      </div>
     </div>
+  );
+};
 
-
+export default Login;

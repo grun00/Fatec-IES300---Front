@@ -1,41 +1,84 @@
-import React from 'react';
-import '../global.css';
+import React, {useState} from "react";
+import "../global.css";
+import Input from "./Input/textInput";
+import { Link } from "react-router-dom";
+import api from '../services/api'
 
-import { Link } from 'react-router-dom';
 
-export default (props) =>
+const RegisterForm = (props) => {
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userNome, setUserNome] = useState("");
+
+  const register = () => {
+    api.post(
+      "/players",
+      {
+        nome: userNome,
+        username: userName,
+        netWorth: 0,
+        email: userEmail,
+        password: userPassword
+      }
+    ).then((res) => {
+      window.location = "/"
+    })
+  };
+
+  return (
     <div className="fields-area">
-        <div className="field">
-            <label htmlFor="nome">Nome:</label>
-            <input id="nome" type="text" placeholder="Insira seu nome" />
-        </div>
+      <Input
+        inputId="input-name"
+        inputName="name"
+        placeholderText="Insira seu nome"
+        labelText="Nome"
+        onChange={(e)=>{setUserNome(e.target.value)}}
+      />
 
-        <div className="field">
-            <label htmlFor="user">Nome de usuário:</label>
-            <input id="user" type="text" placeholder="Insira um nome de usuário" />
-        </div>
+      <Input
+        inputId="input-user"
+        inputName="user"
+        placeholderText="Insira um nome de usuário"
+        labelText="Usuario"
+        onChange={(e)=>{setUserName(e.target.value)}}
+      />
 
-        <div className="field">
-            <label htmlFor="email">E-mail:</label>
-            <input id="email" type="email" placeholder="Insira um email aqui" />
-        </div>
+      <Input
+        inputId="input-email"
+        inputType="email"
+        inputName="email"
+        placeholderText="Insira um e-mail"
+        labelText="E-mail"
+        onChange={(e)=>{setUserEmail(e.target.value)}}
+      />
 
-        <div className="field">
-            <label htmlFor="password">Insira uma senha:</label>
-            <input id="password" type="password" placeholder="Insira sua senha" />
-        </div>
+      <Input
+        inputId="input-password"
+        inputType="password"
+        inputName="password"
+        placeholderText="Insira uma senha"
+        labelText="Senha"
+        onChange={(e)=>{setUserPassword(e.target.value)}}
+      />
 
-        <div className="field">
-            <label htmlFor="passwordVerify">Repita a senha:</label>
-            <input id="passwordVerify" type="password" placeholder="Verifique sua senha" />
-        </div>
+      <Input
+        inputId="input-password-repeat"
+        inputType="password"
+        inputName="password-repeat"
+        placeholderText="Repita a sua senha"
+        labelText="Repita a senha"
+      />
 
-        <button className="button-accept" type="submit">Cadastrar</button>
+      <div className="footer">
+        <button className="button-accept" type="submit" onClick={register}>
+          Cadastrar
+        </button>
 
-        <div className="footer">
-            <Link to="/">Voltar</Link>
-        </div>
+        <Link to="/"> Voltar </Link>
+      </div>
     </div>
+  );
+};
 
-
-
+export default RegisterForm;

@@ -5,7 +5,7 @@ import "./style.css";
 import TrophyIcon from "../../components/Trophy"
 
 
-const LeaderBoard = () => {
+const PageLeaderBoard = () => {
     const [players, setPlayers] = useState([])
 
     useEffect( () => {
@@ -38,4 +38,4 @@ const LeaderBoard = () => {
     )
 }
 
-export default LeaderBoard;
+export default PageLeaderBoard;

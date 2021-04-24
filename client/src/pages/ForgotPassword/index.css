@@ -1,0 +1,116 @@
+@import "../../global.css";
+
+#forgot-password-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+#logo {
+  animation: is-upping-scale 2s ease infinite alternate;
+  max-width: 300px;
+  min-width: 300px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
+#form-area {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  border: 3px solid var(--secondary-color);
+  margin: 2rem 4rem;
+  border-radius: 8px;
+  min-width: 280px;
+  box-shadow: 0px 0px 26px -1px var(--font-color);
+}
+
+#form-area h1 {
+  font-size: 35px;
+  text-align: left;
+  padding: 2.3rem;
+  padding-bottom: 0rem;
+  color: var(--font-color);
+  text-transform: uppercase;
+}
+
+#form-area .fields-area {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  max-width: 1000px;
+  min-width: 400px;
+  flex-wrap: wrap;
+}
+
+#form-area .fields-area .input-field {
+  min-width: 80%;
+  margin: 0 2rem;
+}
+
+#form-area .fields-area .footer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+#form-area .fields-area .footer a {
+  font-size: 19px;
+  padding: 10px 16px;
+}
+
+.fields-area .footer .links a {
+  text-decoration: none;
+  margin: 10px;
+  font-size: 1rem;
+  color: var(--font-color);
+}
+
+.fields-area .footer .links a:hover{
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+@media (max-width: 1100px) {
+  #form-area .fields-area .footer a {
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  #form-area h1 {
+    font-size: 2rem;
+  }
+
+  #form-area .fields-area .footer .links {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  #form-area .fields-area .footer a {
+    padding: 0.7rem;
+    margin: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  #form-area {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  #form-area h1 {
+    text-align: center;
+  }
+}
+
+@keyframes is-upping-scale {
+  to {
+    transform: scale(1.1);
+  }
+}

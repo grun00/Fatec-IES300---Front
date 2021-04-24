@@ -1,24 +1,23 @@
 import React from 'react';
 import './index.css';
 
-import Logo from '../../images/logo.png'
-import RegisterForm from '../../components/RegisterForm'
+//Components
+import Logo from '../../images/logo.png';
+import RegisterForm from '../../components/RegisterForm';
+
+//Link
 import { Link } from 'react-router-dom';
 
-
-const Page = () => {
-    return (
+const PageRegisterScreen = () =>
 
         <React.Fragment>
-            <Link to="/"><img id="logo" src={Logo} /></Link>
             <div id="register-page">
+                <Link to="/"><img id="logo" src={Logo} alt="Show do Vitão - Homepage" /></Link>
                 <div id="register-area">
                     <h1>Cadastro</h1>
                     <RegisterForm/>
                 </div>
             </div>
         </React.Fragment>
-    );
-}
 
-export default Page;
+export default PageRegisterScreen;
