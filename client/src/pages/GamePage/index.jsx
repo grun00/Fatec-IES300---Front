@@ -9,7 +9,7 @@ import Carta from '../../assets/carta.svg';
 import Univ from '../../assets/universitario.svg';
 
 
-const gamepage = (props) => {
+const PageGamepage = (props) => {
   const IsComplete = () => <span id="IsComplete">Esgotado!</span>;
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
@@ -88,4 +88,4 @@ const gamepage = (props) => {
 
 }
 
-export default gamepage;
+export default PageGamepage;

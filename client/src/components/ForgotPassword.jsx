@@ -4,8 +4,9 @@ import { Input } from "./Input/textInput";
 
 import { Link } from "react-router-dom";
 
-const forgotPassword = (props) => (
-  <div className="fields-area">
+const ForgotPassword = (props) => {
+  return (
+    <div className="fields-area">
     <Input
       inputType="email"
       labelText="Email"
@@ -24,6 +25,9 @@ const forgotPassword = (props) => (
       </div>
     </div>
   </div>
-);
+  )
+}
+  
+  
 
-export default forgotPassword;
+export default ForgotPassword;

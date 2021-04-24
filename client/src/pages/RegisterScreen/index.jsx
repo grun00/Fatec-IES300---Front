@@ -8,7 +8,7 @@ import RegisterForm from '../../components/RegisterForm';
 //Link
 import { Link } from 'react-router-dom';
 
-const Page = () =>
+const PageRegisterScreen = () =>
 
         <React.Fragment>
             <div id="register-page">
@@ -20,4 +20,4 @@ const Page = () =>
             </div>
         </React.Fragment>
 
-export default Page;
+export default PageRegisterScreen;

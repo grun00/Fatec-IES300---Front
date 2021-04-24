@@ -8,7 +8,7 @@ import ChangePassword from "../../components/ChangePassword";
 //Link
 import { Link } from "react-router-dom";
 
-const Page = () => (
+const PageChangePassword = () => (
   <React.Fragment>
     <div id="change-password-page">
       <Link to="/"><img id="logo" src={Logo} alt="Show do Vitão - Homepage" /></Link>
@@ -20,4 +20,4 @@ const Page = () => (
   </React.Fragment>
 );
 
-export default Page;
+export default PageChangePassword;
