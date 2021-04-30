@@ -15,7 +15,7 @@ const RegisterForm = (props) => {
     api.post(
       "/players",
       {
-        nome: userNome,
+        name: userNome,
         username: userName,
         netWorth: 0,
         email: userEmail,
