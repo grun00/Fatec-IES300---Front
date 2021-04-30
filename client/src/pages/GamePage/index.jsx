@@ -1,15 +1,33 @@
-import React from 'react';
-import './style.css';
+import React, {useEffect, useState} from 'react';
 import Countdown from 'react-countdown';
+import _ from 'lodash';
+
+import './style.css';
 import Header from '../../components/Header/Header';
 import AnswerField from '../../components/AnswerField/AnswerField';
-
 import Placa from '../../assets/placa.svg';
 import Carta from '../../assets/carta.svg';
 import Univ from '../../assets/universitario.svg';
 
+import api from '../../services/api';
 
 const PageGamepage = (props) => {
+  const [questions, setQuestions] = useState([]);
+  const [alternatives, setAlternatives] = useState([]);
+  useEffect( ()=>{
+    const fetchQuestions = async () => {
+      const response = await api.get("/questions?search=match&nivel1=5&nivel2=5&nivel3=5&nivel4=1")
+            setQuestions(response.data)
+            return 'done'
+    }
+    fetchQuestions()
+    questions.forEach((item) =>{
+      const alts = item.alternatives
+      alts.push(item.response)
+      setAlternatives(_.shuffle(alts))
+  }
+  )
+  }, [])
   const IsComplete = () => <span id="IsComplete">Esgotado!</span>;
   const renderer = ({ minutes, seconds, completed }) => {
     if (completed) {
@@ -38,13 +56,17 @@ const PageGamepage = (props) => {
               <Countdown date={Date.now() + 90000} renderer={renderer} />
             </div>
             <div id="question">
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto nam culpa laborum iste rem illum ad dolorum totam deserunt, blanditiis enim corporis, amet quisquam in, nulla pariatur nesciunt? Neque, ipsa.</p> 
+              <p>
+                {questions[0]?questions[0].question:null}
+              </p> 
             </div>
-            <div id="alternatives-area">          
-              <AnswerField Alt="A" AltA="Alternativa 1"/> {/* A pergunta será puxada pelo AltX*/ }
-              <AnswerField Alt="B" AltB="Alternativa 2"/> {/* A pergunta será puxada pelo AltX*/ }
-              <AnswerField Alt="C" AltC="Alternativa 3"/> {/* A pergunta será puxada pelo AltX*/ }
-              <AnswerField Alt="D" AltD="Alternativa 4"/> {/* A pergunta será puxada pelo AltX*/ }
+            <div id="alternatives-area">   
+              <AnswerField 
+                Alt="A" 
+                AltA={alternatives[0]?alternatives[0]:null} /> 
+              <AnswerField Alt="B" AltB={alternatives[1]?alternatives[1]:null}/> 
+              <AnswerField Alt="C" AltC={alternatives[2]?alternatives[2]:null}/> 
+              <AnswerField Alt="D" AltD={alternatives[3]?alternatives[3]:null}/> 
             </div>
           </div>
           <div id="powers-area">
