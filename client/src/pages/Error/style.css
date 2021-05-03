@@ -1,0 +1,82 @@
+@import url('../../global.css');
+
+#Error404page-area {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+span#not-found {
+    display: none;
+}
+
+#Error-area {
+    margin: 8rem 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#Error-area img {
+    width: 800px;
+}
+
+#Error-area h1 {
+    color: var(--secondary-color);
+    text-shadow: 4px 3px 0px #333;
+    letter-spacing: 2px;
+    font-size: 2.5rem;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+#Error-area h2 {
+    color: var(--secondary-color);
+    text-shadow: 4px 3px 0px #333;
+    letter-spacing: 2px;
+    font-size: 2rem;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+
+    #Error-area img {
+        width: 500px;
+    }
+    
+    #Error-area h1 {
+        font-size: 2rem;
+    }
+
+    #Error-area h2 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 510px) {
+
+    #Error-area img {
+        width: 280px;
+    }
+    
+    #Error-area h1 {
+        display: none;
+    }
+
+    #Error-area h2 {
+        display: none;
+    }
+
+    span#not-found {
+        font-family: 'Pixel-font';
+        text-shadow: 4px 3px 0px #333;
+        text-align: center;
+        display: flex;
+        margin-top: 1.5rem;
+        font-size: 1.8rem;
+        color: var(--secondary-color);
+    }
+}
