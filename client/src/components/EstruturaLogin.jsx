@@ -19,7 +19,7 @@ const Login = (props) => {
       }
     ).then((res) => {
       if (res.data){
-        window.location = "/gamepage"
+        window.location = "/lobby"
       } else {
         window.location = "/"
       }
