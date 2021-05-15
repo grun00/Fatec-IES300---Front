@@ -1,6 +1,8 @@
 import React from 'react';
 import './style.css';
 
+import { Link } from "react-router-dom";
+
 import Logo from '../../images/logo.png';
 
 const header = (props) => {
@@ -13,12 +15,17 @@ const header = (props) => {
                 <label htmlFor="hamburguer-checkbox" className="label-hamburguer">
                     <div className="menu">
                         <span className="hamburguer"></span>
+                        <ul id="links-hamburguer">
+                            <li><Link to='/lobby'>Lobby</Link></li>
+                            <li><Link to='/ranking'>Ranking</Link></li>
+                            <li><Link to='/meuperfil'>Meu perfil</Link></li>
+                            <li><Link to='/comprar'>Comprar VituCoins</Link></li>
+                            <li><Link to='/'>Sair</Link></li>
+                        </ul>
                     </div>
                 </label>
-
             </nav>
         </React.Fragment>
     )
 }
-
 export default header;

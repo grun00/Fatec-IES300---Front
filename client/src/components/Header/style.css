@@ -3,9 +3,10 @@
 nav#header {
     display: flex;
     width: 100%;
-    height: 10vh;
+    height: 90px;
     background-color: var(--primary-color);
     align-items: center;
+    z-index: 1;
 }
 
 nav h3 {
@@ -14,12 +15,11 @@ nav h3 {
 }
 
 img#logo-header {
-    top: 6px;
-    left: 40px;
+    top: 10px;
+    left: 30px;
     position: absolute;
-    max-width: 160px;
-    width: 20%;
-    min-width: 100px;
+    max-width: 130px;
+    min-width: 130px;
     animation: is-upping-scale 2s ease  infinite alternate;
     cursor: pointer;
 }
@@ -64,7 +64,7 @@ img#logo-header {
     width: 100%;
     height: 100%;
     position: absolute;
-    transition: 0.5s ease;
+    transition: 0.3s ease;
 }
 
 .hamburguer::before {
@@ -75,18 +75,63 @@ img#logo-header {
     bottom: -10px;
 }
 
+#links-hamburguer {
+    list-style: none;
+    position: absolute;
+    top: 80px;
+    right: 20px;
+}
+
+#links-hamburguer li {
+    display: none;
+    text-align: right;
+    padding: 0.6rem;
+    width: 300px;
+    cursor: default;
+}
+
+#links-hamburguer li a{
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.3rem;
+    color: var(--primary-color);
+}
+
 input:checked ~ label .hamburguer {
     transform: rotate(45deg);
+    background-color: var(--primary-color);
 }
 
 input:checked ~ label .hamburguer::before {
     transform: rotate(90deg);
     top: 0;
+    background-color: var(--primary-color);
 }
 
 input:checked ~ label .hamburguer::after{
     transform: rotate(90deg);
     bottom: 0;
+    background-color: var(--primary-color);
+}
+
+input:checked ~ label .menu:hover {
+    transform: none;
+}
+
+input:checked ~ label span{
+    box-shadow: 0 0 0 320px var(--secondary-color), 0 0 0 320px var(--secondary-color);
+}
+
+input:checked ~ label ul#links-hamburguer li{
+    display: flex;
+    flex-direction: row-reverse;
+    transition: all 0.3s ease;
+}
+
+
+input:checked ~ label ul#links-hamburguer li a:hover{
+    color: var(--font-color);
+    transition: all 0.3s;
 }
 
 @keyframes is-upping-scale {

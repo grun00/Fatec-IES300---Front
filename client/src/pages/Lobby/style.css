@@ -1,0 +1,84 @@
+@import url(../../global.css);
+
+#PageLobby-area {
+    display: flex;
+    flex-direction: column;
+}
+
+#Lobby-area {
+    width: 80%;
+    max-width: 1400px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--font-color);
+    border: 3px solid var(--primary-color);
+    margin: 2rem 4rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 26px -1px var(--primary-color);
+}
+
+#Lobby-area h1{
+    align-self: center;
+    padding: 2rem;
+    text-shadow: 1px 3px 0 #7A7A7A, 1px 13px 5px #aba8a8;
+    border-radius: 50px;
+    animation: letter-spacing 3s ease-in-out infinite alternate ;
+}
+
+#Lobby-area #Lobby-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#Lobby-area #Lobby-buttons .input-field {
+    min-width: 270px;
+    max-width: 270px;
+    margin: 2rem;
+}
+
+#Lobby-area #Lobby-buttons .input-field label{
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+#Lobby-area #Lobby-buttons .input-field input{
+    color: #000;
+}
+
+#Lobby-area #Lobby-buttons input::placeholder {
+    color: #7a7a7a;
+}
+
+#Lobby-area #Lobby-buttons .input-field .underline::before {
+    border: var(--primary-color) 1px solid;
+}
+
+#Lobby-area #Lobby-buttons button.button-accept {
+    height: 30%;
+    justify-self: center;
+    align-self: flex-end;
+}
+
+#Lobby-fields-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+@keyframes letter-spacing {
+    50% {
+        letter-spacing: 8px;
+    }
+
+    100% {
+        letter-spacing: 0;
+    }
+}

@@ -1,0 +1,65 @@
+@import url('../../global.css');
+
+#Lobby-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 250px;
+    height: 250px;
+    margin: 1rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px -1px var(--primary-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#Lobby-field:hover {
+    background-color: #ccc;
+    transition: all 0.2s ease;
+}
+
+#Lobby-field #room-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Lobby-field #room-info img#icon-field {
+    width: 120px;
+    align-self: center;
+}
+
+#Lobby-field #room-info #room-name-code {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#Lobby-field #room-info #room-name-code #room-code {
+    color: #7A7A7A;
+    font-weight: 700;
+    justify-self: center;
+} 
+
+#Lobby-field #infos-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#Lobby-field #infos-field #user-numbers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#Lobby-field #infos-field #user-numbers img{
+    width: 50px;
+}
+
+#Lobby-field #infos-field #user-numbers small{
+    font-size: 1rem;
+}

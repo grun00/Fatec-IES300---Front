@@ -1,17 +1,17 @@
 import React from "react";
 import "../global.css";
-import { Input } from "./Input/textInput";
+import { Input } from "./Input/textInput";import { Link } from "react-router-dom";
 
-import { Link } from "react-router-dom";
-
-const changePassword = (props) => (
-  <div className="fields-area">
+const ChangePassword = (props) => {
+  return (
+    <div className="fields-area">
     <Input
       inputType="password"
       labelText="Nova senha"
       inputName="password"
       placeholderText="Insira sua nova senha"
     />
+    
     <Input
       inputType="password"
       labelText="Repitir senha"
@@ -26,6 +26,7 @@ const changePassword = (props) => (
       <Link to="/"> Lembrei minha senha </Link>
     </div>
   </div>
-);
+  );
+}
 
-export default changePassword;
+export default ChangePassword;

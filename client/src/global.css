@@ -9,7 +9,7 @@
     --primary-color: #13262F;
     --question-area: #080f13;
     --powers-area: #1d2529;
-    --secondary-color: #f9c60ed0;
+    --secondary-color: #d6ac12;
     --font-color: #fff;
 }
 
@@ -24,9 +24,12 @@
 h1, h2, h3, h4, h5, h6, label, a, button{
     font-family: Pixel-font;
 }
+
 div#root {
-    width: 100vw;
+    width: 100%
 }
+
+
 body {
     background: url(./assets/drawing.svg);
     animation: none;
@@ -34,7 +37,7 @@ body {
     background-repeat: no-repeat;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
     body {
         min-width: 100vw;
         animation: gradient 5s linear infinite alternate;
@@ -75,18 +78,18 @@ body {
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1.4px;
+    transition: 70ms;
 }
 
 .button-accept:hover {
-    background-color:  #f9c60ea9;
-    
+    background-color:  #b8930d;
     transition: all .3s ease;
-
+    
 }
 
 .button-accept:active {
     transform: translateY(5px);
-    transition: 50ms;
+    transition: 70ms;
 }
 
 .fields-area .footer {
