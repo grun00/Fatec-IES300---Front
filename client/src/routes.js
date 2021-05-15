@@ -12,6 +12,7 @@ import LeaderBoard from "./pages/LeaderBoard";
 import ChangePassword from "./pages/ChangePassword";
 import GamePage from "./pages/GamePage";
 import Lobby from "./pages/Lobby";
+import BuyCoins from "./pages/BuyCoins"
 import Error404 from "./pages/Error";
 
 const Routes = () => (
@@ -25,6 +26,7 @@ const Routes = () => (
       <Route exact path="/changepassword" component={ChangePassword} />
       <Route exact path="/gamepage" component={GamePage} />
       <Route exact path="/lobby" component={Lobby} />
+      <Route exact path="/comprar" component={BuyCoins} />
       <Route component={Error404} />
 
     </Switch>

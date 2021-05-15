@@ -1,0 +1,242 @@
+@import url("../../global.css");
+
+#PageBuyCoins-area {
+  display: flex;
+  flex-direction: column;
+}
+
+#BuyCoins-area {
+  width: 80%;
+  max-width: 1400px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--font-color);
+  border: 3px solid var(--primary-color);
+  margin: 2rem 4rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 26px -1px var(--primary-color);
+}
+
+#BuyCoins-area h1 {
+  font-size: 2.3rem;
+  align-self: center;
+  text-align: center;
+  padding: 1rem;
+  text-shadow: 1px 3px 0 #7a7a7a, 1px 13px 5px #aba8a8;
+  border-radius: 50px;
+}
+
+#BuyCoins-area h3 {
+  font-size: 1.7rem;
+  text-shadow: 1px 3px 0 #7a7a7a;
+}
+
+#BuyCoins-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem 4rem;
+    flex-wrap: wrap;
+}
+
+#BuyCoins-form #Vitucoins-qtd {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 2rem 1rem;
+}
+
+#BuyCoins-form #Vitucoins-qtd .radiocoin-field{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-self: center;
+    padding: 0.3rem 1rem;
+    border-radius: 8px;
+}
+
+#BuyCoins-form #Vitucoins-qtd .radiocoin-field input[type="radio"]{
+    display: none;
+}
+
+
+#BuyCoins-form #Vitucoins-qtd .radiocoin-field label{
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-family: 'Roboto';
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    text-transform: none;
+    width: 100%;
+}
+
+#BuyCoins-form #Vitucoins-qtd .radiocoin-field input[type="radio"]:checked ~ label {
+    background-color: #7a7a7a;
+    transition: all 0.2s;
+}
+
+#BuyCoins-form #Vitucoins-qtd .radiocoin-field label img.vitucoin-buy{
+    width: 50px;
+    animation: bitcoin-rotating 2.5s ease-in-out alternate infinite;
+}
+
+#BuyCoins-form #data-fields {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 1rem;
+  width: 100%;
+}
+
+#BuyCoins-form #data-fields #payment-fields {
+  width: 50%;
+  max-width: 480px;
+}
+
+#BuyCoins-form #data-fields #value-field {
+  width: 50%;
+  max-width: 400px;
+}
+
+#BuyCoins-form #data-fields #payment-fields .input-field {
+  max-width: 400px;
+  margin: 2rem;
+}
+
+#BuyCoins-form #data-fields #payment-fields .input-field label {
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+#BuyCoins-form #data-fields #payment-fields .input-field input {
+  color: #000;
+}
+
+#BuyCoins-form #data-fields #payment-fields input::placeholder {
+  color: #000000;
+}
+
+#BuyCoins-form #data-fields #payment-fields .input-field .underline::before {
+  border: var(--primary-color) 1px solid;
+}
+
+#BuyCoins-form #data-fields #value-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  color: var(--primary-color);
+}
+
+#BuyCoins-form #data-fields #value-field #value-fields2 span#value {
+  font-size: 7rem;
+  display: flex;
+}
+
+#BuyCoins-form #data-fields #value-field #value-fields2 span#real {
+  font-size: 3rem;
+  margin-right: 2rem;
+}
+
+
+#BuyCoins-form #data-fields #value-field #value-fields2 span#cent {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  align-self: flex-end;
+}
+
+#BuyCoins-form #data-fields #value-field #value-fields2 h3 {
+  font-family: 'Roboto';
+  color: var(--primary-color);
+  text-shadow: none;
+}
+
+
+
+#BuyCoins-form #data-fields #value-field .underline-hor::before {
+  content: '';
+  position: absolute;
+  background-color: #7a7a7a;
+  border: #7a7a7a 1px solid;
+  border-radius: 16px;
+  height: 85%;
+  bottom: 0;
+  left: 0;
+  filter: opacity(0.5);
+}
+
+#BuyCoins-form .button-accept {
+  align-self: center;
+  margin-top: 2rem;
+}
+
+img#bitcoin-rotating {
+  width: 150px;
+  position: absolute;
+  cursor: pointer;
+  animation: bitcoin-walking 1.5s ease-in-out infinite alternate;
+}
+
+img#bitcoin-rotating:hover {
+  animation-play-state: paused;
+}
+
+.error {
+  background-color: rgb(255, 197, 197);
+}
+
+.successful{
+  background-color: rgb(204, 255, 199);
+}
+
+h6:is(#valido, #invalido) {
+  display: none;
+  font-family: 'Roboto';
+  margin-left: 30px;
+  margin-top: -20px;
+  font-size: 0.8rem;
+}
+
+h6#valido {
+  color: rgb(16, 44, 12);
+}
+
+h6#invalido {
+  color: rgb(54, 18, 18);
+}
+
+@media (max-width: 1366px) {
+  #BuyCoins-area {
+    width: 90%;
+  }
+
+  #BuyCoins-form #data-fields #payment-fields .input-field {
+    max-width: 350px;
+    margin: 2rem;
+  }
+}
+
+@keyframes bitcoin-rotating {
+  from {
+      transform: rotate(-25deg);
+  } to {
+      transform: rotate(50deg);
+  }
+}
+
+@keyframes bitcoin-walking {
+  from {
+      transform: translateX(-50px) rotate(-20deg);
+  } to {
+      transform: translateX(300px) rotate(200deg);
+  }
+}
+
