@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/textInput";
 import RoomLobby from "../../components/RoomLobby/RoomLobby";
+import connectSocket from "../../services/socket"
 
 const PageLobby = (props) => {
+  const [socket, setSocket] = useState();
+  const [roomName, setRoomName] = useState();
+  const [roomList, setRoomList] = useState([])
+  const [roomPwd,setRoomPwd] = useState()
+  const [roomId,setRoomId] = useState()
+  const [player, setPlayer] = useState({name: "Vitao"});
+  const [serverInfo, setSeverInfo] = useState();
 
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
@@ -18,6 +26,41 @@ const PageLobby = (props) => {
         modal.classList.remove("show");
       }
     });
+  }
+  
+  useEffect(() => {
+    const socket = connectSocket();
+    setSocket(socket)
+    setPlayer({name: "Vitao"})
+    socket.emit("newPlayer", player)
+    socket.io.emit("getServerInfo", data => {
+        setSeverInfo(data)
+        console.log(serverInfo)
+    })
+  }, [])
+  
+  const createRoom = (e) => {
+        e.preventDefault()
+        console.log("Clicked")
+        socket.emit("createRoom", roomName)
+        socket.on("roomCreated", () => {
+          socket.emit("getServerInfo", data => {
+            console.log(data)
+            setSeverInfo(data)
+          })
+        })
+        if(!roomList){
+          setRoomList([])
+        } else {
+        const roomNameList = [...roomList]
+        roomNameList.push(roomName)
+        setRoomList(roomNameList)
+        }
+  }
+
+  const joinRoom = (e) => {
+      e.preventDefault()
+      socket.emit("joinRoom", roomName)
   }
 
   return (
@@ -58,8 +101,10 @@ const PageLobby = (props) => {
           </div>
 
           <div id="Lobby-fields-area">
-            {/* GERAÇÃO POR SCRIPT */}
-            <RoomLobby />
+            {!roomList ? null : roomList.map(room =>{
+             return (<RoomLobby key={room} roomName={room} onClick={joinRoom}/>)
+            }) }
+
           </div>
 
           <div id="modal-create-room-container" className="modal-container">
@@ -72,6 +117,8 @@ const PageLobby = (props) => {
                   name="create-room-input-name"
                   labelText="Nome da sala"
                   placeholderText="Insira o nome da sala"
+                  onChange = {(e) => {
+                    setRoomName(e.target.value)}}
                 />
 
                 <Input
@@ -81,6 +128,7 @@ const PageLobby = (props) => {
                   labelText="Senha"
                   placeholderText="Insira uma senha para sala"
                   maxLength="8"
+                  onChange = {(e) => {setRoomPwd(e.value)}}
                 />
 
                 <Input
@@ -89,9 +137,10 @@ const PageLobby = (props) => {
                   labelText="Codigo"
                   placeholderText="Insira um código personalizado"
                   maxLength="4"
+                  onChange = {(e) => {setRoomId(e.value)}}
                 />
 
-                <button className="button-accept">Criar sala agora</button>
+                <button className="button-accept" onClick={createRoom}>Criar sala agora</button>
               </div>
             </div>
           </div>

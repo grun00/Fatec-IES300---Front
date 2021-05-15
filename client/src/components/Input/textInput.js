@@ -10,6 +10,7 @@ export const Input = ({
   inputValue,
   onChange,
   maxLength,
+  isRequired,
 }) => {
   return (
     <div className="input-field">
@@ -22,6 +23,7 @@ export const Input = ({
         onChange={onChange}
         placeholder={placeholderText}
         maxLength={maxLength}
+        required={isRequired}
       />
       <div className="underline"></div>
     </div>

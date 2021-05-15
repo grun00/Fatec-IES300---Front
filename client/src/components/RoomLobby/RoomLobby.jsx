@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
 import AvatarIcon from "../../assets/avatar.svg";
 
@@ -7,8 +7,13 @@ const RoomLobby = (props) => {
   const [roomName, setRoomName] = useState("Sala X");
   const [roomCode, setRoomCode] = useState("0001");
 
+  useEffect(() => {
+    setRoomName(props.roomName) 
+    
+  })
+  
   return (
-    <div id="Lobby-field">
+    <div id="Lobby-field" onClick={props.onClick}>
       <div id="room-info">
         <img id="icon-field" src={AvatarIcon} alt="Avatar Icon" />
         <div id="room-name-code">
