@@ -1,84 +1,154 @@
 @import url(../../global.css);
 
 #PageLobby-area {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #Lobby-area {
-    width: 80%;
-    max-width: 1400px;
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--font-color);
-    border: 3px solid var(--primary-color);
-    margin: 2rem 4rem;
-    border-radius: 8px;
-    box-shadow: 0px 0px 26px -1px var(--primary-color);
+  width: 80%;
+  max-width: 1400px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--font-color);
+  border: 3px solid var(--primary-color);
+  margin: 2rem 4rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 26px -1px var(--primary-color);
 }
 
-#Lobby-area h1{
-    align-self: center;
-    padding: 2rem;
-    text-shadow: 1px 3px 0 #7A7A7A, 1px 13px 5px #aba8a8;
-    border-radius: 50px;
-    animation: letter-spacing 3s ease-in-out infinite alternate ;
+#Lobby-area h1 {
+  font-size: 2.3rem;
+  align-self: center;
+  padding: 2rem;
+  text-shadow: 1px 3px 0 #7a7a7a, 1px 13px 5px #aba8a8;
+  border-radius: 50px;
+  animation: letter-spacing 3s ease-in-out infinite alternate;
 }
 
 #Lobby-area #Lobby-buttons {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 #Lobby-area #Lobby-buttons .input-field {
-    min-width: 270px;
-    max-width: 270px;
-    margin: 2rem;
+  min-width: 270px;
+  max-width: 270px;
+  margin: 2rem;
 }
 
-#Lobby-area #Lobby-buttons .input-field label{
-    color: var(--primary-color);
-    font-size: 1rem;
+#Lobby-area #Lobby-buttons .input-field label {
+  color: var(--primary-color);
+  font-size: 1rem;
 }
 
-#Lobby-area #Lobby-buttons .input-field input{
-    color: #000;
+#Lobby-area #Lobby-buttons .input-field input {
+  color: #000;
 }
 
 #Lobby-area #Lobby-buttons input::placeholder {
-    color: #7a7a7a;
+  color: #7a7a7a;
 }
 
 #Lobby-area #Lobby-buttons .input-field .underline::before {
-    border: var(--primary-color) 1px solid;
+  border: var(--primary-color) 1px solid;
 }
 
 #Lobby-area #Lobby-buttons button.button-accept {
-    height: 30%;
-    justify-self: center;
-    align-self: flex-end;
+  height: 30%;
+  justify-self: center;
+  align-self: flex-end;
 }
 
 #Lobby-fields-area {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    padding: 2rem;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+#modal-create-room {
+  display: flex;
+  position: relative;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  width: 600px;
+  height: 600px;
+  background-color: var(--primary-color);
+  border: 3px solid var(--secondary-color);
+  padding: 2rem;
+  margin: 2rem 4rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 26px -1px var(--font-color);
+}
+
+#modal-create-room h3 {
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 1.5px;
+}
+
+#modal-create-room .modal-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+#modal-create-room .modal-fields .input-field {
+  margin: 1rem;
+}
+
+.modal-close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  padding-left: 2px;
+  position: absolute;
+  top: -30px;
+  right: -15px;
+  font-size: 3rem;
+  border: 5px solid var(--secondary-color);
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  #Lobby-area h1 {
+    padding: 1.5rem;
+    font-size: 1.7rem;
+  }
+
+  #Lobby-area {
+      width: 90%;
+      margin: 1rem 0;
+  }
+}
+@media (max-width: 550px) {
+  #Lobby-area h1 {
+    animation: none;
+    text-align: center;
+  }
 }
 
 @keyframes letter-spacing {
-    50% {
-        letter-spacing: 8px;
-    }
+  50% {
+    letter-spacing: 8px;
+  }
 
-    100% {
-        letter-spacing: 0;
-    }
+  100% {
+    letter-spacing: 0;
+  }
 }
