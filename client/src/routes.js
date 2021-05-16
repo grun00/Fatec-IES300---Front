@@ -1,7 +1,10 @@
-import React from "react";
+import React , { useState, useMemo } from "react";
 
 //Link
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+
+//Context
+import { UserContext, AuthContext } from "./context/UserContext";
 
 //Importing pages
 import Login from "./pages/Login";
@@ -15,22 +18,32 @@ import Lobby from "./pages/Lobby";
 import BuyCoins from "./pages/BuyCoins"
 import Error404 from "./pages/Error";
 
-const Routes = () => (
+const Routes = () => {
+  const [user, setUser] = useState(null)
+  const [authorized, setAuthorized] = useState(false)
+  const userObject = useMemo(() => ({user, setUser}), [user, setUser])
+  const auth = useMemo(() => ({authorized, setAuthorized}), [authorized, setAuthorized])
+
+return (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Login} />
-      <Route exact path="/RegisterScreen" component={RegisterScreen} />
-      <Route exact path="/ForgotPassword" component={ForgotPassword} />
-      <Route exact path="/socket" component={SocketTest} />
-      <Route exact path="/ranking" component={LeaderBoard} />
-      <Route exact path="/changepassword" component={ChangePassword} />
-      <Route exact path="/gamepage" component={GamePage} />
-      <Route exact path="/lobby" component={Lobby} />
-      <Route exact path="/comprar" component={BuyCoins} />
-      <Route component={Error404} />
-
+      <AuthContext.Provider value={auth}>
+        <UserContext.Provider value={userObject}>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/RegisterScreen" component={RegisterScreen} />
+          <Route exact path="/ForgotPassword" component={ForgotPassword} />
+          <Route exact path="/socket" component={SocketTest} />
+          <Route exact path="/ranking" component={LeaderBoard} />
+          <Route exact path="/changepassword" component={ChangePassword} />
+          <Route exact path="/gamepage" component={GamePage} />
+          <Route exact path="/lobby" component={Lobby} />
+          <Route exact path="/comprar" component={BuyCoins} />
+        </UserContext.Provider>
+      </AuthContext.Provider>
+        <Route path="*" component={Error404} />
     </Switch>
   </BrowserRouter>
 );
+} 
 
 export default Routes;

@@ -3,14 +3,16 @@ import "./style.css";
 import AvatarIcon from "../../assets/avatar.svg";
 
 const RoomLobby = (props) => {
-  const [numberUser, setNumberUser] = useState("0/2");
-  const [roomName, setRoomName] = useState("Sala X");
-  const [roomCode, setRoomCode] = useState("0001");
+  const [userCount, setUserCount] = useState(0);
+  const [maxUsers, setMaxUsers] = useState(2);
+  const [roomName, setRoomName] = useState("");
+  const [roomCode, setRoomCode] = useState("");
 
   useEffect(() => {
     setRoomName(props.roomName) 
-    
-  })
+    setRoomCode(props.roomCode)
+    setUserCount(props.userCount)
+    })
   
   return (
     <div id="Lobby-field" onClick={props.onClick}>
@@ -24,7 +26,7 @@ const RoomLobby = (props) => {
       <div id="infos-field">
         <div id="user-numbers">
           <img src={AvatarIcon} alt="Avatar Icon" />
-          <small>{numberUser}</small>
+          <small>{userCount}/{maxUsers}</small>
         </div>
       </div>
     </div>

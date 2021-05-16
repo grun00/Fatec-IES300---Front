@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./style.css";
 
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/textInput";
 import RoomLobby from "../../components/RoomLobby/RoomLobby";
 import connectSocket from "../../services/socket"
+import { UserContext } from "../../context/UserContext"
+import {useHistory} from "react-router-dom";
 
 const PageLobby = (props) => {
-  const [socket, setSocket] = useState();
-  const [roomName, setRoomName] = useState();
-  const [roomList, setRoomList] = useState([])
+  const [socket, setSocket] = useState(null);
+  const [serverInfo, setSeverInfo] = useState(null);
+  const [roomName, setRoomName] = useState(null);
+  const [roomFilter, setRoomFilter] = useState("")
   const [roomPwd,setRoomPwd] = useState()
   const [roomId,setRoomId] = useState()
-  const [player, setPlayer] = useState({name: "Vitao"});
-  const [serverInfo, setSeverInfo] = useState();
+  const [updateInfo, setUpdateInfo] = useState(false)
+
+  const { user } = useContext(UserContext)
+  const { authorized} = useContext(UserContext)
+  const history = useHistory()
+
 
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
@@ -29,38 +36,59 @@ const PageLobby = (props) => {
   }
   
   useEffect(() => {
+     if (updateInfo) {
+       socket.emit("getServerInfo")
+       socket.on("serverInfo", (data) => {
+        setSeverInfo(data)
+      })
+    }
+    return () => setUpdateInfo(false)
+    }, [updateInfo])
+
+  useEffect(() => {
+    if (user) {
     const socket = connectSocket();
     setSocket(socket)
-    setPlayer({name: "Vitao"})
-    socket.emit("newPlayer", player)
-    socket.io.emit("getServerInfo", data => {
-        setSeverInfo(data)
-        console.log(serverInfo)
-    })
+    console.log(authorized)
+    socket.emit("newPlayer", user)
+    setUpdateInfo(true)
+    }
   }, [])
   
+
   const createRoom = (e) => {
-        e.preventDefault()
-        console.log("Clicked")
-        socket.emit("createRoom", roomName)
-        socket.on("roomCreated", () => {
-          socket.emit("getServerInfo", data => {
-            console.log(data)
-            setSeverInfo(data)
-          })
-        })
-        if(!roomList){
-          setRoomList([])
-        } else {
-        const roomNameList = [...roomList]
-        roomNameList.push(roomName)
-        setRoomList(roomNameList)
-        }
-  }
+    e.preventDefault()
+    socket.emit("createRoom", roomName)
+    socket.on("roomCreated", () => {
+      setUpdateInfo(true)
+      history.push("/gamepage")
+      })
+    }
 
   const joinRoom = (e) => {
-      e.preventDefault()
-      socket.emit("joinRoom", roomName)
+    e.preventDefault()
+    const roomAttrs = e.currentTarget.innerText.split("\n")
+    const roomObject = {
+      name: roomAttrs[0],
+      id: roomAttrs[1],
+      userCount: Number(roomAttrs[2].substr(0,1)),
+      maxPlayers: Number(roomAttrs[2].substr(2))
+    }
+    if (roomObject.userCount < roomObject.maxPlayers){
+      socket.emit("joinRoom", roomObject.name)
+      setUpdateInfo(true)
+      history.push("/gamepage")
+    }
+  }
+  
+ const handleFilter = (room) => {
+   if(room && roomFilter){
+      if(room.props.roomName.toLoweCase().includes(roomFilter.toLoweCase()) || room.props.roomCode.toLoweCase().includes(roomFilter.toLoweCase())){
+        return room
+      }
+   } else {
+     return room
+   }
   }
 
   return (
@@ -75,6 +103,7 @@ const PageLobby = (props) => {
               name="search-room-input"
               placeholderText="Procure uma sala específica"
               labelText="Procurar nome"
+              onChange={e => setRoomFilter(e.target.value)}
             />
 
             <Input
@@ -82,11 +111,8 @@ const PageLobby = (props) => {
               name="search-code-room-input"
               placeholderText="Procure o código da sala"
               labelText="Procurar codigo"
+              onChange={e => setRoomFilter(e.target.value)}
             />
-
-            <button className="button-accept" type="submit">
-              Pesquisar
-            </button>
           </div>
 
           <div id="Lobby-create-room">
@@ -101,10 +127,23 @@ const PageLobby = (props) => {
           </div>
 
           <div id="Lobby-fields-area">
-            {!roomList ? null : roomList.map(room =>{
-             return (<RoomLobby key={room} roomName={room} onClick={joinRoom}/>)
-            }) }
-
+            {
+            !(socket && serverInfo) ? null : 
+            Object.entries(serverInfo?.channels).map(([room, players], id)=>{
+              if (room !== "General") {
+                return (
+                  <RoomLobby 
+                    key={id} 
+                    roomName={room}
+                    roomCode={(("0000" + id).substr(-4,4))}
+                    onClick={joinRoom}
+                    userCount={players.length}
+                  />
+                )
+              }
+             }).filter(handleFilter)
+            }
+            
           </div>
 
           <div id="modal-create-room-container" className="modal-container">
