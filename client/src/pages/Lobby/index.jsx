@@ -83,7 +83,7 @@ const PageLobby = (props) => {
   
  const handleFilter = (room) => {
    if(room && roomFilter){
-      if(room.props.roomName.toLoweCase().includes(roomFilter.toLoweCase()) || room.props.roomCode.toLoweCase().includes(roomFilter.toLoweCase())){
+      if(room.props.roomName.toLowerCase().includes(roomFilter.toLowerCase()) || room.props.roomCode.toLowerCase().includes(roomFilter.toLowerCase())){
         return room
       }
    } else {
