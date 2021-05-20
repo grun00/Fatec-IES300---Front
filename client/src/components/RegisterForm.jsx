@@ -27,13 +27,14 @@ const RegisterForm = (props) => {
   };
 
   return (
-    <div className="fields-area">
+    <form className="fields-area">
       <Input
         inputId="input-name"
         inputName="name"
         placeholderText="Insira seu nome"
         labelText="Nome"
         onChange={(e)=>{setUserNome(e.target.value)}}
+        isRequired="true"
       />
 
       <Input
@@ -42,6 +43,7 @@ const RegisterForm = (props) => {
         placeholderText="Insira um nome de usuário"
         labelText="Usuario"
         onChange={(e)=>{setUserName(e.target.value)}}
+        isRequired="true"
       />
 
       <Input
@@ -51,6 +53,7 @@ const RegisterForm = (props) => {
         placeholderText="Insira um e-mail"
         labelText="E-mail"
         onChange={(e)=>{setUserEmail(e.target.value)}}
+        isRequired="true"
       />
 
       <Input
@@ -60,6 +63,7 @@ const RegisterForm = (props) => {
         placeholderText="Insira uma senha"
         labelText="Senha"
         onChange={(e)=>{setUserPassword(e.target.value)}}
+        isRequired="true"
       />
 
       <Input
@@ -68,6 +72,7 @@ const RegisterForm = (props) => {
         inputName="password-repeat"
         placeholderText="Repita a sua senha"
         labelText="Repita a senha"
+        isRequired="true"
       />
 
       <div className="footer">
@@ -77,7 +82,7 @@ const RegisterForm = (props) => {
 
         <Link to="/"> Voltar </Link>
       </div>
-    </div>
+    </form>
   );
 };
 

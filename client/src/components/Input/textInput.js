@@ -10,7 +10,7 @@ export const Input = ({
   inputValue,
   onChange,
   maxLength,
-  isRequired,
+  isRequired = Boolean,
 }) => {
   return (
     <div className="input-field">

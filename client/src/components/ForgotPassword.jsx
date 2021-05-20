@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 
 const ForgotPassword = (props) => {
   return (
-    <div className="fields-area">
+    <form className="fields-area">
     <Input
       inputType="email"
       labelText="Email"
       inputName="email"
       placeholderText="Insira o seu email para recuperação"
+      isRequired="true"
     />
 
     <div className="footer">
@@ -24,7 +25,7 @@ const ForgotPassword = (props) => {
         <Link to="/"> Lembrei minha senha </Link>
       </div>
     </div>
-  </div>
+  </form>
   )
 }
   

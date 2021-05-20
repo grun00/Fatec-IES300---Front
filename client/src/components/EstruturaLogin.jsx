@@ -33,7 +33,7 @@ const Login = (props) => {
   };
 
   return (
-    <div className="fields-area background-fill">
+    <form className="fields-area background-fill">
       <div>
         <img id="logo-menu" src={Logo} alt="Menu's logo" />
       </div>
@@ -45,6 +45,7 @@ const Login = (props) => {
         onChange={(e) => {
           setUserEmail(e.target.value);
         }}
+        isRequired="true"
       />
 
       <Input
@@ -55,6 +56,7 @@ const Login = (props) => {
         onChange={(e) => {
           setUserPassword(e.target.value);
         }}
+        isRequired="true"
       />
 
       <button className="button-accept" type="submit" onClick={ login }>
@@ -65,7 +67,7 @@ const Login = (props) => {
         <Link to="/RegisterScreen"> Nao possuo cadastro </Link>
         <Link to="/ForgotPassword"> Esqueci minha senha </Link>
       </div>
-    </div>
+    </form>
   );
 };
 
