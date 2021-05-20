@@ -26,6 +26,17 @@ const RegisterForm = (props) => {
     })
   };
 
+  const verifyPassword = () => {
+    let password = document.getElementById('input-password');
+    let toVerify = document.getElementById('input-password-repeat');
+    let error = document.getElementById('password-error');
+
+    if (password.value !== toVerify.value)
+      error.style.display = 'flex'
+    else
+      error.style.display = 'none'
+  }
+
   return (
     <form className="fields-area">
       <Input
@@ -62,10 +73,13 @@ const RegisterForm = (props) => {
         inputName="password"
         placeholderText="Insira uma senha"
         labelText="Senha"
-        onChange={(e)=>{setUserPassword(e.target.value)}}
+        onChange={(e)=>{
+          setUserPassword(e.target.value);
+          verifyPassword();
+        }}
         isRequired="true"
       />
-
+      
       <Input
         inputId="input-password-repeat"
         inputType="password"
@@ -73,6 +87,7 @@ const RegisterForm = (props) => {
         placeholderText="Repita a sua senha"
         labelText="Repita a senha"
         isRequired="true"
+        onChange={(e) => {verifyPassword()}}
       />
 
       <div className="footer">

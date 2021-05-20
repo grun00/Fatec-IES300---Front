@@ -15,6 +15,7 @@ const PageRegisterScreen = () =>
                 <Link to="/"><img id="logo" src={Logo} alt="Show do Vitão - Homepage" /></Link>
                 <div id="register-area">
                     <h1>Cadastro</h1>
+                    <h5 id="password-error">As senhas não conferem!</h5>
                     <RegisterForm/>
                 </div>
             </div>
