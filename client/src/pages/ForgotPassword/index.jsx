@@ -3,7 +3,7 @@ import "./index.css";
 import Logo from "../../images/logo.png";
 
 //Components
-import ForgotPassword from "../../components/ForgotPassword";
+import ForgotPassword from "../../components/Login/ForgotPassword";
 
 //Link
 import { Link } from "react-router-dom";

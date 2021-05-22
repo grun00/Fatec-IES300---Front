@@ -1,6 +1,6 @@
 import React from "react";
-import "../global.css";
-import { Input } from "./Input/textInput";
+import "../../global.css";
+import { Input } from "../Input/textInput";
 
 import { Link } from "react-router-dom";
 

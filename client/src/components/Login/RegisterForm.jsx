@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import "../global.css";
-import Input from "./Input/textInput";
+import "../../global.css";
+import Input from "../Input/textInput";
 import { Link } from "react-router-dom";
-import api from '../services/api'
+import api from '../../services/api'
 
 
 const RegisterForm = (props) => {
