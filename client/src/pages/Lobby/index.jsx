@@ -4,23 +4,25 @@ import "./style.css";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/textInput";
 import RoomLobby from "../../components/RoomLobby/RoomLobby";
-import connectSocket from "../../services/socket"
-import { UserContext } from "../../context/UserContext"
-import {useHistory} from "react-router-dom";
+import {
+  AuthContext,
+  SocketContext,
+  UserContext,
+} from "../../context/UserContext";
+import { useHistory } from "react-router-dom";
+import connectSocket from "../../services/socket";
 
 const PageLobby = (props) => {
-  const [socket, setSocket] = useState(null);
+  const { user } = useContext(UserContext);
+  const { socket, setSocket } = useContext(SocketContext);
+  const { authorized } = useContext(AuthContext);
+  const history = useHistory();
   const [serverInfo, setSeverInfo] = useState(null);
   const [roomName, setRoomName] = useState(null);
-  const [roomFilter, setRoomFilter] = useState("")
-  const [roomPwd,setRoomPwd] = useState()
-  const [roomId,setRoomId] = useState()
-  const [updateInfo, setUpdateInfo] = useState(false)
-
-  const { user } = useContext(UserContext)
-  const { authorized} = useContext(UserContext)
-  const history = useHistory()
-
+  const [roomFilter, setRoomFilter] = useState("");
+  const [roomPwd, setRoomPwd] = useState();
+  const [roomId, setRoomId] = useState();
+  const [updateInfo, setUpdateInfo] = useState(false);
 
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
@@ -34,62 +36,65 @@ const PageLobby = (props) => {
       }
     });
   }
-  
-  useEffect(() => {
-     if (updateInfo) {
-       socket.emit("getServerInfo")
-       socket.on("serverInfo", (data) => {
-        setSeverInfo(data)
-      })
-    }
-    return () => setUpdateInfo(false)
-    }, [updateInfo])
 
   useEffect(() => {
-    if (user) {
-    const socket = connectSocket();
-    setSocket(socket)
-    console.log(authorized)
-    socket.emit("newPlayer", user)
-    setUpdateInfo(true)
+    if (updateInfo) {
+      socket.emit("getServerInfo");
+      socket.on("serverInfo", (data) => {
+        setSeverInfo(data);
+      });
     }
-  }, [])
-  
+    return () => setUpdateInfo(false);
+  }, [updateInfo]);
+
+  useEffect(() => {
+    if (user && authorized) {
+      const socket = connectSocket();
+      setSocket(socket);
+      socket.emit("newPlayer", user);
+      setUpdateInfo(true);
+    }
+  }, []);
 
   const createRoom = (e) => {
-    e.preventDefault()
-    socket.emit("createRoom", roomName)
+    e.preventDefault();
+    socket.emit("createRoom", roomName);
     socket.on("roomCreated", () => {
-      setUpdateInfo(true)
-      history.push("/gamepage")
-      })
-    }
+      setUpdateInfo(true);
+      history.push("/gamepage");
+    });
+  };
 
   const joinRoom = (e) => {
-    e.preventDefault()
-    const roomAttrs = e.currentTarget.innerText.split("\n")
+    e.preventDefault();
+    const roomAttrs = e.currentTarget.innerText.split("\n");
     const roomObject = {
       name: roomAttrs[0],
       id: roomAttrs[1],
-      userCount: Number(roomAttrs[2].substr(0,1)),
-      maxPlayers: Number(roomAttrs[2].substr(2))
-    }
-    if (roomObject.userCount < roomObject.maxPlayers){
-      socket.emit("joinRoom", roomObject.name)
-      setUpdateInfo(true)
-      history.push("/gamepage")
-    }
-  }
-  
- const handleFilter = (room) => {
-   if(room && roomFilter){
-      if(room.props.roomName.toLowerCase().includes(roomFilter.toLowerCase()) || room.props.roomCode.toLowerCase().includes(roomFilter.toLowerCase())){
-        return room
+      userCount: Number(roomAttrs[2].substr(0, 1)),
+      maxPlayers: Number(roomAttrs[2].substr(2)),
+    };
+    socket.emit("joinRoom", roomObject.name);
+    socket.on("joinedRoom", (data) => {
+      if (data) {
+        setUpdateInfo(true);
+        history.push("/gamepage");
       }
-   } else {
-     return room
-   }
-  }
+    });
+  };
+
+  const handleFilter = (room) => {
+    if (room && roomFilter) {
+      if (
+        room.props.roomName.toLowerCase().includes(roomFilter.toLowerCase()) ||
+        room.props.roomCode.toLowerCase().includes(roomFilter.toLowerCase())
+      ) {
+        return room;
+      }
+    } else {
+      return room;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -103,7 +108,7 @@ const PageLobby = (props) => {
               name="search-room-input"
               placeholderText="Procure uma sala específica"
               labelText="Procurar nome"
-              onChange={e => setRoomFilter(e.target.value)}
+              onChange={(e) => setRoomFilter(e.target.value)}
             />
 
             <Input
@@ -111,7 +116,7 @@ const PageLobby = (props) => {
               name="search-code-room-input"
               placeholderText="Procure o código da sala"
               labelText="Procurar codigo"
-              onChange={e => setRoomFilter(e.target.value)}
+              onChange={(e) => setRoomFilter(e.target.value)}
             />
           </div>
 
@@ -127,23 +132,23 @@ const PageLobby = (props) => {
           </div>
 
           <div id="Lobby-fields-area">
-            {
-            !(socket && serverInfo) ? null : 
-            Object.entries(serverInfo?.channels).map(([room, players], id)=>{
-              if (room !== "General") {
-                return (
-                  <RoomLobby 
-                    key={id} 
-                    roomName={room}
-                    roomCode={(("0000" + id).substr(-4,4))}
-                    onClick={joinRoom}
-                    userCount={players.length}
-                  />
-                )
-              }
-             }).filter(handleFilter)
-            }
-            
+            {!(socket && serverInfo)
+              ? null
+              : Object.entries(serverInfo?.channels)
+                  .map(([room, roomData], id) => {
+                    if (room !== "General") {
+                      return (
+                        <RoomLobby
+                          key={id}
+                          roomName={room}
+                          roomCode={("0000" + id).substr(-4, 4)}
+                          onClick={joinRoom}
+                          userCount={roomData.players.length}
+                        />
+                      );
+                    }
+                  })
+                  .filter(handleFilter)}
           </div>
 
           <div id="modal-create-room-container" className="modal-container">
@@ -156,8 +161,9 @@ const PageLobby = (props) => {
                   name="create-room-input-name"
                   labelText="Nome da sala"
                   placeholderText="Insira o nome da sala"
-                  onChange = {(e) => {
-                    setRoomName(e.target.value)}}
+                  onChange={(e) => {
+                    setRoomName(e.target.value);
+                  }}
                 />
 
                 <Input
@@ -167,7 +173,9 @@ const PageLobby = (props) => {
                   labelText="Senha"
                   placeholderText="Insira uma senha para sala"
                   maxLength="8"
-                  onChange = {(e) => {setRoomPwd(e.value)}}
+                  onChange={(e) => {
+                    setRoomPwd(e.value);
+                  }}
                 />
 
                 <Input
@@ -176,10 +184,14 @@ const PageLobby = (props) => {
                   labelText="Codigo"
                   placeholderText="Insira um código personalizado"
                   maxLength="4"
-                  onChange = {(e) => {setRoomId(e.value)}}
+                  onChange={(e) => {
+                    setRoomId(e.value);
+                  }}
                 />
 
-                <button className="button-accept" onClick={createRoom}>Criar sala agora</button>
+                <button className="button-accept" onClick={createRoom}>
+                  Criar sala agora
+                </button>
               </div>
             </div>
           </div>
