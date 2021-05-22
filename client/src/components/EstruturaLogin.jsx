@@ -34,9 +34,8 @@ const Login = (props) => {
 
   return (
     <form className="fields-area background-fill">
-      <div>
         <img id="logo-menu" src={Logo} alt="Menu's logo" />
-      </div>
+      
       <Input
         inputType="email"
         inputName="email"
@@ -62,7 +61,6 @@ const Login = (props) => {
       <button className="button-accept" type="submit" onClick={ login }>
         Login
       </button>
-
       <div className="footer">
         <Link to="/RegisterScreen"> Nao possuo cadastro </Link>
         <Link to="/ForgotPassword"> Esqueci minha senha </Link>
