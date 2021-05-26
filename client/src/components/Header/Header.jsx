@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './style.css';
 
 import { Link } from "react-router-dom";
 
 import Logo from '../../images/logo.png';
 
-const header = (props) => {
+import { SocketContext } from '../../context/UserContext';
+
+const Header = (props) => {
+    const {socket} = useContext(SocketContext)
     return (
         <React.Fragment>
             <nav id="header">
@@ -28,4 +31,4 @@ const header = (props) => {
         </React.Fragment>
     )
 }
-export default header;
+export default Header;

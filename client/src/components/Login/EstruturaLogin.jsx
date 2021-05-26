@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import api from "../services/api";
-import Logo from "../images/logo.png";
-import "../global.css";
-import Input from "./Input/textInput";
-import { UserContext, AuthContext } from "../context/UserContext"
+import api from "../../services/api";
+import Logo from "../../images/logo.png";
+import "../../global.css";
+import Input from "../Input/textInput";
+import { AuthContext, UserContext } from "../../context/UserContext"
 
 import { Link, useHistory } from "react-router-dom";
 

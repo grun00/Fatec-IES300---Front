@@ -3,7 +3,7 @@ import './index.css';
 
 //Components
 import Logo from '../../images/logo.png';
-import RegisterForm from '../../components/RegisterForm';
+import RegisterForm from '../../components/Login/RegisterForm';
 
 //Link
 import { Link } from 'react-router-dom';

@@ -26,7 +26,8 @@ h1, h2, h3, h4, h5, h6, label, a, button{
 }
 
 div#root {
-    width: 100%
+    width: 100%;
+    position: relative;
 }
 
 body {
@@ -131,6 +132,14 @@ body {
 
 .modal-container.show #modal-create-room {
     animation: modal 0.2s;
+}
+
+#sound-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    cursor: pointer;
 }
 
 @keyframes modal {
