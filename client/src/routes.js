@@ -17,6 +17,7 @@ import GamePage from "./pages/GamePage";
 import Lobby from "./pages/Lobby";
 import BuyCoins from "./pages/BuyCoins"
 import Error404 from "./pages/Error";
+import MyProfile from "./pages/MyProfile";
 
 const Routes = () => {
   const [user, setUser] = useState(null)
@@ -38,6 +39,7 @@ return (
           <Route exact path="/gamepage" component={GamePage} />
           <Route exact path="/lobby" component={Lobby} />
           <Route exact path="/comprar" component={BuyCoins} />
+          <Route exact path="/meuperfil" component={MyProfile} />
         </UserContext.Provider>
       </AuthContext.Provider>
         <Route path="*" component={Error404} />
