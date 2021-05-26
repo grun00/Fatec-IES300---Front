@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import api from "../services/api";
-import Logo from "../images/logo.png";
-import "../global.css";
-import Input from "./Input/textInput";
+import React, { useState, useContext } from "react";
+import api from "../../services/api";
+import Logo from "../../images/logo.png";
+import "../../global.css";
+import Input from "../Input/textInput";
+import { AuthContext, UserContext } from "../../context/UserContext"
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Login = (props) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const {setUser} = useContext(UserContext)
+  const {setAuthorized} = useContext(AuthContext)
+  const history = useHistory()
 
   const login = () => {
     api.post(
@@ -19,9 +23,11 @@ const Login = (props) => {
       }
     ).then((res) => {
       if (res.data){
-        window.location = "/gamepage"
+        setUser(res.data)
+        setAuthorized(true)
+        history.push("/lobby")
       } else {
-        window.location = "/"
+        history.push("/")
       }
     })
   };

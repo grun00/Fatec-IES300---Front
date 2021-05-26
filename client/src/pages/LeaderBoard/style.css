@@ -31,11 +31,10 @@
 }
 
 .title-container .Bitcoin-image {
-    width: 60px;
+    width: 70px;
     position: absolute;
-    filter: brightness(0.85);
-    top: 25px;
-    animation: bitcoin-rotating 3s ease-in-out alternate infinite;
+    top: 10px;
+    animation: bitcoin-rotating 2.5s ease-in-out alternate-reverse infinite;
 }
 
 .title-container .Bitcoin-image:first-child {
@@ -43,6 +42,7 @@
 }
 .title-container .Bitcoin-image:last-child {
     right: -40px;
+    animation: bitcoin-rotating 2.5s ease-in-out alternate infinite;
 }
 
 .player-list {
@@ -112,8 +112,8 @@
     }
 
     .title-container .Bitcoin-image {
-        width: 40px;
-        top: 15px;
+        width: 50px;
+        top: 5px;
     }
 
     .title-container .Bitcoin-image:first-child {
@@ -162,10 +162,7 @@
         text-align: center;
     }
 
-
-    
 }
-
 
 
 @keyframes bitcoin-rotating {
@@ -175,7 +172,6 @@
         transform: rotate(50deg);
     }
 }
-
 
 @keyframes is-bouncing-ranking {
     50% {

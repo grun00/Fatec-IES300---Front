@@ -29,7 +29,6 @@ div#root {
     width: 100%
 }
 
-
 body {
     background: url(./assets/drawing.svg);
     animation: none;
@@ -109,4 +108,38 @@ body {
 .fields-area .footer .links a:hover{
     transform: scale(1.1);
     transition: 0.3s;
+}
+
+
+.modal-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+.modal-container.show{
+    display: flex;
+}
+
+.modal-container.show #modal-create-room {
+    animation: modal 0.2s;
+}
+
+@keyframes modal {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -60px, 0);
+
+    } to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import Login from '../../components/EstruturaLogin';
+import Login from '../../components/Login/EstruturaLogin';
 
 const PageLogin = () =>
   <React.Fragment>
