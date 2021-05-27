@@ -2,21 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import Countdown from "react-countdown";
 import _ from "lodash";
 
-<<<<<<< Updated upstream
 import "./style.css";
 import Header from "../../components/Header/Header";
 import AnswerField from "../../components/AnswerField/AnswerField";
 import Placa from "../../assets/placa.svg";
 import Carta from "../../assets/carta.svg";
 import Univ from "../../assets/universitario.svg";
-=======
-import './style.css';
-import Header from '../../components/HeaderInGame/HeaderInGame';
-import AnswerField from '../../components/AnswerField/AnswerField';
-import Placa from '../../assets/placa.svg';
-import Carta from '../../assets/carta.svg';
-import Univ from '../../assets/universitario.svg';
->>>>>>> Stashed changes
 
 import { AuthContext, SocketContext } from "../../context/UserContext";
 
