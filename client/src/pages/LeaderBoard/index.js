@@ -41,8 +41,8 @@ const PageLeaderBoard = () => {
                     <div className="player-rank" key={id}>
                       <div className="trophy-area">
                         <TrophyIcon rank={id + 1} width={30} fill="goldenrod" />
-                        <p className="player-name" key={player.name}>
-                        {player.name}
+                        <p className="player-name" key={player.username}>
+                        {player.username}
                         </p>
                       </div>
                       <span className="player-networth" key={id}>

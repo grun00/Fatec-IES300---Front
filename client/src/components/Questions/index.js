@@ -17,7 +17,7 @@ const Questionaire = (
                 key={index}
                 index={index}
                 alternative={alternative}
-                onClick={handleChosenAlternative}
+                handleClick={handleChosenAlternative}
               />
             );
           })}

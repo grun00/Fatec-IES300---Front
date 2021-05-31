@@ -10,9 +10,14 @@ const AnswerField = (props) => {
         4: "E"
     })
 
+    const innerClick = (e, f) => {
+        e.preventDefault();
+        return f(e);
+    } 
+
     return (
         <React.Fragment>
-            <button className="answer-button" index={props.index} onClick={e => props.onClick(e)} >
+            <button className="answer-button" index={props.index} onClick={(e) => innerClick(e, props.handleClick) } >
                 {altLetters[props.index]}. <span id="answer" >{props.alternative}</span>
             </button>
         </React.Fragment>

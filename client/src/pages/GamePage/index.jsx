@@ -1,10 +1,17 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+  useCallback,
+} from "react";
 import Countdown, { zeroPad } from "react-countdown";
 import _ from "lodash";
 
 import "./style.css";
 import Header from "../../components/Header/Header";
 import Questionaire from "../../components/Questions/index";
+import Timer from "../../components/Timer";
 import Placa from "../../assets/placa.svg";
 import Carta from "../../assets/carta.svg";
 import Univ from "../../assets/universitario.svg";
@@ -22,10 +29,12 @@ const PageGamepage = () => {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [questionNumber, setQuestionNumber] = useState(-1);
   const [isReady, setIsReady] = useState(false);
-  const [currentTime, setCurrentTime] = useState(false);
   const [timeUp, setTimeUp] = useState(false);
   const [matchStart, setMatchStart] = useState(false);
   const [matchData, setMatchData] = useState(null);
+  const [startTimer, setStartTimer] = useState(false);
+  const [maxTime, setMaxTime] = useState(15);
+  const [correct, setCorrect] = useState(true);
 
   const { socket } = useContext(SocketContext);
   const { authorized } = useContext(AuthContext);
@@ -33,21 +42,15 @@ const PageGamepage = () => {
 
   const timerRef = useRef();
 
-
-  // socket.on("opponentReady", () => {
-    // setOpponentReady(true);
-  // });
-
   const handleChosenAlternative = (e) => {
     e.preventDefault();
     const chosen = e.currentTarget.attributes.index.value;
     const correct =
-      currentQuestion.answerIndex === Number(chosen)
-        ? true
-        : false;
+      currentQuestion.answerIndex === Number(chosen) ? true : false;
+    setCorrect(correct);
     const matchData = {
       questionNumber,
-      player: user.name,
+      player: user.username,
       myChosenAlternative: chosen,
       correct,
       currentTime: 0,
@@ -58,30 +61,37 @@ const PageGamepage = () => {
   useEffect(() => {
     setUpdateInfo(true);
   }, []);
-  
+
   useEffect(() => {
     if (matchStart || isReady) {
       setCurrentQuestion(questions[questionNumber]);
-      timerRef.current.start();
       setIsReady(false);
     }
   }, [questionNumber]);
 
   useEffect(() => {
+    if (currentQuestion) {
+      console.log("currentQuestion");
+    }
+  }, [currentQuestion]);
+
+  useEffect(() => {
     if (updateInfo) {
+      console.log("updateInfo");
       socket.emit("getRoomInfo");
       socket.on("roomInfo", (data) => {
         setRoomInfo(data);
+        console.log("getting new roomData");
         if (!questions) {
           setQuestions(data.questions);
         }
       });
     }
-    return () => setUpdateInfo(false);
   }, [updateInfo]);
 
   useEffect(() => {
     if (roomInfo.playerCount > 1) {
+      console.log("roomInfo");
       setMatchStart(true);
       if (questionNumber < 0) {
         setQuestionNumber(0);
@@ -90,19 +100,20 @@ const PageGamepage = () => {
   }, [roomInfo]);
 
   useEffect(() => {
-    if (isReady && (questionNumber < (questions.length - 1))) {
+    if (isReady && questionNumber < questions.length - 1) {
       setIsReady(false);
-      setQuestionNumber((prev) => prev += 1);
+      setQuestionNumber((prev) => (prev += 1));
     }
   }, [isReady]);
 
   useEffect(() => {
-    if(timeUp) {
-      if(!matchData){
-          const timeUpData = {
+    if (timeUp) {
+      console.log("timeUp");
+      if (!matchData) {
+        const timeUpData = {
           questionNumber,
-          player: user.name,
-          myChosenAlternative: 'timeUp', 
+          player: user.username,
+          myChosenAlternative: "timeUp",
           correct: false,
           currentTime: 0,
         };
@@ -113,19 +124,12 @@ const PageGamepage = () => {
     }
     setTimeUp(false);
     setMatchData(null);
-  }, [timeUp])
+  }, [timeUp]);
 
-  const IsComplete = () => <span id="IsComplete">Esgotado!</span>;
-  const renderer = ({ minutes, seconds, completed }) => {
-    if (completed) {
-      return <IsComplete />;
-    } else {
-      return (
-        <span id="span-countdown">
-          {zeroPad(minutes)}:{zeroPad(seconds)}
-        </span>
-      );
-    }
+  const timerZeroed = () => {
+    setIsReady(true);
+    setTimeUp(true);
+    
   };
 
   return (
@@ -135,20 +139,14 @@ const PageGamepage = () => {
         <div id="game-area">
           <div id="question-area">
             <h1>
-              {user.name} Question Number {questionNumber}
+              {user.username}{" "}
+              {questionNumber != -1 && questionNumber < 15
+                ? `Question Number ${questionNumber + 1}`
+                : null}
             </h1>
             <div id="countdown">
-              {matchStart ? (
-                <Countdown
-                  date={Date.now() + 20000}
-                  renderer={renderer}
-                  ref={timerRef}
-                  autoStart={false}
-                  onComplete={() => {
-                    setTimeUp(true);
-                    setIsReady(true);
-                  }}
-                />
+              {matchStart && currentQuestion ? (
+                <Timer maxTime={maxTime} onComplete={timerZeroed} />
               ) : (
                 <span id="IsComplete">Aguardando Adversário...</span>
               )}
@@ -191,7 +189,7 @@ const PageGamepage = () => {
               </div>
             </div>
             <div id="jump-button">
-              <span>Voce ainda pode pular: {"1"} questao!</span>
+              <span>Voce ainda pode pular: {"1"} questão!</span>
               <button id="jump-button-id">Pular</button>
             </div>
           </div>

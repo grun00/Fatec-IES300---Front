@@ -16,14 +16,15 @@ const PageLobby = (props) => {
   const { user } = useContext(UserContext);
   const { socket, setSocket } = useContext(SocketContext);
   const { authorized } = useContext(AuthContext);
-  const history = useHistory();
   const [serverInfo, setSeverInfo] = useState(null);
   const [roomName, setRoomName] = useState(null);
   const [roomFilter, setRoomFilter] = useState("");
   const [roomPwd, setRoomPwd] = useState();
   const [roomId, setRoomId] = useState();
   const [updateInfo, setUpdateInfo] = useState(false);
-
+  
+  const history = useHistory();
+  
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
     modal.classList.add("show");
