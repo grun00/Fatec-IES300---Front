@@ -2,21 +2,18 @@
 
 #area-login {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
 }
 
-@media(min-width: 900px) {
+@media(min-width: 700px) {
 
-    #area-login {
-        flex-direction: row-reverse;
-    }
-    
     .background-fill {
         background: var(--primary-color);
-        height: 100vh;
+        height: 100%;
+        min-width: 400px;
     }
     
     #logo-menu {
@@ -26,7 +23,7 @@
     }
 }
 
-@media(max-width:899px) {
+@media(max-width:699px) {
 
     #logo-menu {
         max-width: 300px;
@@ -37,7 +34,6 @@
     #area-login {
         flex-direction: row;
         justify-content: center;
-
     }
 
     .background-fill {

@@ -175,6 +175,7 @@ if(!user && !isAuth){
                   placeholderText="Somente os números"
                   onChange={valida}
                   maxLength="11"
+                  isRequired="true"
                 />
 
                 <h6 id="invalido">CPF Inválido!</h6>
@@ -184,12 +185,14 @@ if(!user && !isAuth){
                   inputName="namePayment"
                   labelText="Nome do Portador"
                   placeholderText="Insira o nome igual ao no cartão"
+                  isRequired="true"
                 />
 
                 <Input
                   inputName="cardNumber"
                   labelText="Numero do cartao"
                   placeholderText="Coloque os números do cartão"
+                  isRequired="true"
                 />
 
                 <Input
@@ -197,6 +200,7 @@ if(!user && !isAuth){
                   labelText="Codigo de seguranca"
                   placeholderText="Coloque os dígitos verificadores"
                   maxLength="3"
+                  isRequired="true"
                 />
               </div>
 

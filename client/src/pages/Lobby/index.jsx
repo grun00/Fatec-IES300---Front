@@ -159,16 +159,16 @@ const PageLobby = () => {
           <div id="modal-create-room-container" className="modal-container">
             <div id="modal-create-room">
               <h3>Criando sala</h3>
-              <div className="modal-fields">
+              <form className="modal-fields">
                 <button className="modal-close-button">X</button>
                 <Input
                   id="input-create-name"
                   name="create-room-input-name"
                   labelText="Nome da sala"
                   placeholderText="Insira o nome da sala"
-                  onChange={(e) => {
-                    setRoomName(e.target.value);
-                  }}
+                  onChange = {(e) => {
+                    setRoomName(e.target.value)}}
+                  isRequired="true"
                 />
 
                 <Input
@@ -194,10 +194,8 @@ const PageLobby = () => {
                   }}
                 />
 
-                <button className="button-accept" onClick={createRoom}>
-                  Criar sala agora
-                </button>
-              </div>
+                <button className="button-accept" onClick={createRoom}>Criar sala agora</button>
+              </form>
             </div>
           </div>
         </div>
