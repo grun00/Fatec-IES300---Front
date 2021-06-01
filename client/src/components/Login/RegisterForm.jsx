@@ -38,7 +38,7 @@ const RegisterForm = (props) => {
   }
 
   return (
-    <form className="fields-area">
+    <div className="fields-area">
       <Input
         inputId="input-name"
         inputName="name"
@@ -97,7 +97,7 @@ const RegisterForm = (props) => {
 
         <Link to="/"> Voltar </Link>
       </div>
-    </form>
+    </div>
   );
 };
 

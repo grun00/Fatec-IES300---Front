@@ -33,7 +33,7 @@ const Login = (props) => {
   };
 
   return (
-    <form className="fields-area background-fill">
+    <div className="fields-area background-fill">
         <img id="logo-menu" src={Logo} alt="Menu's logo" />
       
       <Input
@@ -58,14 +58,14 @@ const Login = (props) => {
         isRequired="true"
       />
 
-      <button className="button-accept" type="submit" onClick={ login }>
+      <button className="button-accept" type="submit" onClick={login}>
         Login
       </button>
       <div className="footer">
         <Link to="/RegisterScreen"> Nao possuo cadastro </Link>
         <Link to="/ForgotPassword"> Esqueci minha senha </Link>
       </div>
-    </form>
+    </div>
   );
 };
 
