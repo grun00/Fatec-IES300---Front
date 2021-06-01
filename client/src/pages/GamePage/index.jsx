@@ -2,7 +2,6 @@ import React, {
   useEffect,
   useState,
   useContext,
-  useRef,
 } from "react";
 
 import "./style.css";
@@ -21,28 +20,58 @@ import {
 import { Redirect } from "react-router";
 
 const PageGamepage = () => {
+  // Match Data
   const [roomInfo, setRoomInfo] = useState({});
   const [questions, setQuestions] = useState(null);
   const [updateInfo, setUpdateInfo] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [questionNumber, setQuestionNumber] = useState(-1);
+  const [matchData, setMatchData] = useState(null);
+  const [skips, setSkips] = useState(1);
+  
+  // Match Flags
   const [isReady, setIsReady] = useState(false);
   const [timeUp, setTimeUp] = useState(false);
   const [matchStart, setMatchStart] = useState(false);
-  const [matchData, setMatchData] = useState(null);
-  const [startTimer, setStartTimer] = useState(false);
-  const [maxTime, setMaxTime] = useState(15);
+  const [opponentSkipped, setOpponentSkipped] = useState(false);
   const [correct, setCorrect] = useState(false);
+  
+  // Timer States
+  const [maxTime, setMaxTime] = useState(15);
   const [roundMessage, setRoundMessage] = useState('')
-
+  
+  // Game Contexts
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserContext);
   const { isAuth } = useContext(AuthContext);
 
+  socket.on("opponentSkipped", () => {
+      const matchData = {
+        questionNumber,
+        player: user.username,
+        myChosenAlternative: "skipped",
+        correct: false,
+        currentTime: 0,
+      };
+      setMatchData(matchData);
+      setOpponentSkipped(true);
+  })
 
-  const timerRef = useRef();
-  
-  
+  const handleSkipQuestion = (e) => {
+    e.preventDefault();
+    if(skips){
+      const matchData = {
+        questionNumber,
+        player: user.username,
+        myChosenAlternative: "skipped",
+        correct: false,
+        currentTime: 0,
+      };
+      socket.emit('skipQuestion');
+      setMatchData(matchData);
+      setSkips(prev => prev -= 1);
+    }
+  } 
 
   const handleChosenAlternative = (e) => {
     e.preventDefault();
@@ -69,14 +98,9 @@ const PageGamepage = () => {
     if (matchStart || isReady) {
       setCurrentQuestion(questions[questionNumber]);
       setIsReady(false);
+      setMatchData(null);
     }
   }, [questionNumber]);
-
-  useEffect(() => {
-    if (currentQuestion) {
-      console.log("currentQuestion");
-    }
-  }, [currentQuestion]);
 
   useEffect(() => {
     if (updateInfo) {
@@ -105,15 +129,18 @@ const PageGamepage = () => {
   }, [roomInfo]);
 
   useEffect(() => {
-    if (isReady && (questionNumber < questions.length - 1)) {
+    if (isReady && (questionNumber < questions.length)) {
       setIsReady(false);
       setQuestionNumber((prev) => (prev += 1));
+      console.log(questionNumber);
+    } else if(isReady && (questionNumber >=  questions.length)) {
+      setRoundMessage("Jogo Encerrado!");
+      setMatchStart(false);
     }
   }, [isReady]);
 
   useEffect(() => {
     if (timeUp) {
-      console.log("timeUp");
       if (!matchData) {
         const timeUpData = {
           questionNumber,
@@ -130,10 +157,18 @@ const PageGamepage = () => {
     }
     setTimeUp(false);
     setMatchData(null);
+    setOpponentSkipped(false);
   }, [timeUp]);
 
   const timerZeroed = () => {
-    setRoundMessage(correct ?'Você Acertou!' : 'Você Errou!');
+    if(!roundMessage) {
+      if(opponentSkipped){
+        setRoundMessage('A questão foi pulada!');
+        setMatchData({...matchData, myChosenAlternative: "skipped", correct:false});
+      }else{
+        setRoundMessage(correct ?'Você Acertou!' : 'Você Errou!');
+      }
+    }
     setTimeout(() => {
       setIsReady(true);
       setTimeUp(true);
@@ -154,20 +189,20 @@ const PageGamepage = () => {
         <div id="game-area">
           <div id="question-area">
             <h1 className="username">Jogador: {user.username} </h1>
-            <h3 className="question-number"> {questionNumber != -1 && questionNumber < questions.length -1
+            <h3 className="question-number"> {questionNumber != -1 && (questionNumber <= questions.length - 1) 
                 ? `Pergunta nº ${questionNumber + 1}`
                 : null}
             </h3>
                 <span className="message">{roundMessage}</span>
             <div id="countdown">
-              {matchStart && (-1 > questionNumber < (questions.length - 1)) && !roundMessage ? (
+              {matchStart && (-1 < questionNumber && questionNumber <= (questions.length -1)) && !roundMessage ? (
                 <Timer maxTime={maxTime} onComplete={timerZeroed} />
               ) : 
                 null
               }
             </div>
-            {currentQuestion && 15 > questionNumber > -1 && !roundMessage 
-              ? Questionaire(currentQuestion, handleChosenAlternative, timeUp)
+            {currentQuestion && (15 >= questionNumber && questionNumber > -1) && !roundMessage 
+              ? Questionaire(currentQuestion, handleChosenAlternative, opponentSkipped)
               : null}
           </div>
           <div id="powers-area">
@@ -181,7 +216,7 @@ const PageGamepage = () => {
                   <img src={Univ} className="img-button" alt="Botão Univ" />
                 </label>
                 <button id="universitarios" className="ability-button">
-                  Universitarios
+                  Universitários
                 </button>
               </div>
 
@@ -204,8 +239,8 @@ const PageGamepage = () => {
               </div>
             </div>
             <div id="jump-button">
-              <span>Voce ainda pode pular: {"1"} questão!</span>
-              <button id="jump-button-id">Pular</button>
+              <span className='skip-counter'>Você ainda pode pular: {skips} questão!</span>
+              <button id="jump-button-id" onClick={handleSkipQuestion} disabled={skips ? false : true}>Pular</button>
             </div>
           </div>
         </div>

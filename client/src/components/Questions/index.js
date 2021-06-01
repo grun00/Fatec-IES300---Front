@@ -3,6 +3,7 @@ import AnswerField from "../AnswerField/AnswerField";
 const Questionaire = (
     questions,
     handleChosenAlternative,
+    opponentSkipped
   ) => {
     const { question, randomAlternatives } = questions
     return (
@@ -18,6 +19,7 @@ const Questionaire = (
                 index={index}
                 alternative={alternative}
                 handleClick={handleChosenAlternative}
+                disabled={opponentSkipped}
               />
             );
           })}
