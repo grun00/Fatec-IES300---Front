@@ -9,21 +9,22 @@ import {
   SocketContext,
   UserContext,
 } from "../../context/UserContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import connectSocket from "../../services/socket";
 
-const PageLobby = (props) => {
+const PageLobby = () => {
   const { user } = useContext(UserContext);
   const { socket, setSocket } = useContext(SocketContext);
-  const { authorized } = useContext(AuthContext);
-  const history = useHistory();
+  const { isAuth } = useContext(AuthContext);
   const [serverInfo, setSeverInfo] = useState(null);
   const [roomName, setRoomName] = useState(null);
   const [roomFilter, setRoomFilter] = useState("");
   const [roomPwd, setRoomPwd] = useState();
   const [roomId, setRoomId] = useState();
   const [updateInfo, setUpdateInfo] = useState(false);
-
+  
+  const history = useHistory();
+  
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
     modal.classList.add("show");
@@ -48,7 +49,7 @@ const PageLobby = (props) => {
   }, [updateInfo]);
 
   useEffect(() => {
-    if (user && authorized) {
+    if (user && isAuth) {
       const socket = connectSocket();
       setSocket(socket);
       socket.emit("newPlayer", user);
@@ -95,6 +96,10 @@ const PageLobby = (props) => {
       return room;
     }
   };
+
+  if(!user || !isAuth) {
+    return (<Redirect to="/" />)
+  }
 
   return (
     <React.Fragment>

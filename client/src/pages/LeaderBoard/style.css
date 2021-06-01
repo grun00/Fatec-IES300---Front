@@ -84,6 +84,11 @@
     transform: scale(1.05);
 }
 
+.current-player {
+    background-color: #5a3e23;
+    transform: scale(1.05);
+}
+
 .trophy-area {
     display: flex;
     justify-content: center;

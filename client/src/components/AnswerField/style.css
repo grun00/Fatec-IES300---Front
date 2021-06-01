@@ -19,7 +19,6 @@
 
 .answer-button:hover {
     background-color:  #f9c60ea9;
-    
     transition: all .3s ease;
 }
 
@@ -27,6 +26,15 @@
     transform: translateY(5px);
     transition: 50ms;
     box-shadow: none;
+}
+
+.clicked {
+    background-color: green;
+}
+
+.answer-button:disabled {
+    background-color: rgba(179, 72, 72, 0.575);
+    box-shadow: 0 5px 0 rgba(128, 128, 128, 0.089);
 }
 
 .answer-button span#answer {

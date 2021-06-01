@@ -34,7 +34,7 @@
 }
 
 
-span:is(#span-countdown, #IsComplete, #powers-title) {
+span:is(#span-countdown, .message, #powers-title) {
   font-size: 3rem;
   text-align: center;
   color: var(--font-color);
@@ -52,7 +52,7 @@ span:is(#span-countdown, #IsComplete, #powers-title) {
     padding: 1rem;
 }
 
-#question p {
+#question p, .username, .question-number {
     color: var(--font-color);
 }
 
@@ -67,7 +67,7 @@ span:is(#span-countdown, #IsComplete, #powers-title) {
     justify-content: space-around;
 }
 
-.hability {
+.ability {
   display: flex; 
   flex-direction: column;
   align-items: center;
@@ -79,12 +79,12 @@ span:is(#span-countdown, #IsComplete, #powers-title) {
   cursor: pointer;
 }
 
-.hability:hover {
+.ability:hover {
   background-color: #47555c;
   transition: all 0.3s ease;
 }
 
-.hability button.hability-button {
+.ability button.ability-button {
     background: none;
     color: var(--font-color);
     border: none;
