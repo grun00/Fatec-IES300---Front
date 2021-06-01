@@ -15,11 +15,11 @@ const Timer = (props) => {
     };
 
     useEffect(() => {
-        const timer = time > 0 && setInterval(() => setTime((time - 0.1).toFixed(2)), 100)
+        const timer = time > 0 && setTimeout(() => setTime((time - 0.1).toFixed(2)), 100)
         if(time != null && timer == 0) {
             setIsComplete(true);
         }
-        return () => clearInterval(timer);
+        return () => clearTimeout(timer);
       }, [time])
     
     useEffect(() => {

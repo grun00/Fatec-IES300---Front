@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import api from "../../services/api";
 import "./style.css";
@@ -6,10 +6,13 @@ import Header from "../../components/Header/Header";
 
 import TrophyIcon from "../../components/Trophy";
 import Bitcoin from "../../images/bitcoin.png"
+import { AuthContext, UserContext } from "../../context/UserContext";
+import { Redirect } from "react-router";
 
 const PageLeaderBoard = () => {
   const [players, setPlayers] = useState([]);
-
+  const {user} = useContext(UserContext);
+  const {isAuth} = useContext(AuthContext);
   useEffect(() => {
     api.get("/players").then((response) => {
       response.data.sort((a, b) => (a.netWorth < b.netWorth ? 1 : -1));
@@ -17,6 +20,9 @@ const PageLeaderBoard = () => {
     });
   }, []);
 
+  if(!user || !isAuth) {
+    return <Redirect to='/' />
+  }
   return (
     <>
       <div id="rankingpage-area">
@@ -38,7 +44,7 @@ const PageLeaderBoard = () => {
             {players
               ? players.map((player, id) => {
                   return (
-                    <div className="player-rank" key={id}>
+                    <div className={player.username === user.username ? "player-rank current-player" : "player-rank"} key={id}>
                       <div className="trophy-area">
                         <TrophyIcon rank={id + 1} width={30} fill="goldenrod" />
                         <p className="player-name" key={player.username}>

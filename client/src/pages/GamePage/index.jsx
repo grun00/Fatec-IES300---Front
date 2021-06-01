@@ -3,10 +3,7 @@ import React, {
   useState,
   useContext,
   useRef,
-  useCallback,
 } from "react";
-import Countdown, { zeroPad } from "react-countdown";
-import _ from "lodash";
 
 import "./style.css";
 import Header from "../../components/Header/Header";
@@ -21,6 +18,7 @@ import {
   SocketContext,
   UserContext,
 } from "../../context/UserContext";
+import { Redirect } from "react-router";
 
 const PageGamepage = () => {
   const [roomInfo, setRoomInfo] = useState({});
@@ -34,13 +32,17 @@ const PageGamepage = () => {
   const [matchData, setMatchData] = useState(null);
   const [startTimer, setStartTimer] = useState(false);
   const [maxTime, setMaxTime] = useState(15);
-  const [correct, setCorrect] = useState(true);
+  const [correct, setCorrect] = useState(false);
+  const [roundMessage, setRoundMessage] = useState('')
 
   const { socket } = useContext(SocketContext);
-  const { authorized } = useContext(AuthContext);
   const { user } = useContext(UserContext);
+  const { isAuth } = useContext(AuthContext);
+
 
   const timerRef = useRef();
+  
+  
 
   const handleChosenAlternative = (e) => {
     e.preventDefault();
@@ -60,6 +62,7 @@ const PageGamepage = () => {
 
   useEffect(() => {
     setUpdateInfo(true);
+    return () => socket.close();
   }, []);
 
   useEffect(() => {
@@ -91,16 +94,18 @@ const PageGamepage = () => {
 
   useEffect(() => {
     if (roomInfo.playerCount > 1) {
-      console.log("roomInfo");
       setMatchStart(true);
       if (questionNumber < 0) {
         setQuestionNumber(0);
+        setRoundMessage('');
       }
+    } else {
+      setRoundMessage("Aguardando adversário...")
     }
   }, [roomInfo]);
 
   useEffect(() => {
-    if (isReady && questionNumber < questions.length - 1) {
+    if (isReady && (questionNumber < questions.length - 1)) {
       setIsReady(false);
       setQuestionNumber((prev) => (prev += 1));
     }
@@ -117,6 +122,7 @@ const PageGamepage = () => {
           correct: false,
           currentTime: 0,
         };
+        setCorrect(false);
         socket.emit("recordAnswer", timeUpData);
       } else {
         socket.emit("recordAnswer", matchData);
@@ -127,10 +133,19 @@ const PageGamepage = () => {
   }, [timeUp]);
 
   const timerZeroed = () => {
-    setIsReady(true);
-    setTimeUp(true);
+    setRoundMessage(correct ?'Você Acertou!' : 'Você Errou!');
+    setTimeout(() => {
+      setIsReady(true);
+      setTimeUp(true);
+      setRoundMessage('')
+    }, 3000)
     
   };
+  
+  
+  if(!socket || !user || !isAuth) {
+    return (<Redirect to="/" />)
+  }
 
   return (
     <React.Fragment>
@@ -138,20 +153,20 @@ const PageGamepage = () => {
         <Header />
         <div id="game-area">
           <div id="question-area">
-            <h1>
-              {user.username}{" "}
-              {questionNumber != -1 && questionNumber < 15
-                ? `Question Number ${questionNumber + 1}`
+            <h1 className="username">Jogador: {user.username} </h1>
+            <h3 className="question-number"> {questionNumber != -1 && questionNumber < questions.length -1
+                ? `Pergunta nº ${questionNumber + 1}`
                 : null}
-            </h1>
+            </h3>
+                <span className="message">{roundMessage}</span>
             <div id="countdown">
-              {matchStart && currentQuestion ? (
+              {matchStart && (-1 > questionNumber < (questions.length - 1)) && !roundMessage ? (
                 <Timer maxTime={maxTime} onComplete={timerZeroed} />
-              ) : (
-                <span id="IsComplete">Aguardando Adversário...</span>
-              )}
+              ) : 
+                null
+              }
             </div>
-            {currentQuestion
+            {currentQuestion && 15 > questionNumber > -1 && !roundMessage 
               ? Questionaire(currentQuestion, handleChosenAlternative, timeUp)
               : null}
           </div>
@@ -161,29 +176,29 @@ const PageGamepage = () => {
             </div>
 
             <div id="power-buttons">
-              <div className="hability">
+              <div className="ability">
                 <label htmlFor="universitarios">
                   <img src={Univ} className="img-button" alt="Botão Univ" />
                 </label>
-                <button id="universitarios" className="hability-button">
+                <button id="universitarios" className="ability-button">
                   Universitarios
                 </button>
               </div>
 
-              <div className="hability">
+              <div className="ability">
                 <label htmlFor="cartas">
                   <img src={Carta} className="img-button" alt="Botão Carta" />
                 </label>
-                <button id="cartas" className="hability-button">
+                <button id="cartas" className="ability-button">
                   Cartas
                 </button>
               </div>
 
-              <div className="hability">
+              <div className="ability">
                 <label htmlFor="placas">
                   <img src={Placa} className="img-button" alt="Botão Placa" />
                 </label>
-                <button id="placas" className="hability-button">
+                <button id="placas" className="ability-button">
                   Placas
                 </button>
               </div>

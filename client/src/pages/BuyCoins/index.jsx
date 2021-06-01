@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/textInput";
 import Bitcoin from "../../images/bitcoin.png";
+import { Redirect } from "react-router";
+import {AuthContext, UserContext} from "../../context/UserContext"
 
 const BuyCoinsPage = (props) => {
   const [value, setValue] = useState(0);
+  const {user} = useContext(UserContext);
+  const {isAuth} = useContext(AuthContext);
 
   function valida(){
     let cpf = document.getElementById('cpf');
@@ -59,7 +63,9 @@ const BuyCoinsPage = (props) => {
       else
             return false;
 }
-
+if(!user && !isAuth){
+  return <Redirect to='/' />
+}
   return (
     <>
       <div id="PageBuyCoins-area">
