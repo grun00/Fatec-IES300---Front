@@ -1,0 +1,64 @@
+@import url("../../global.css");
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--font-color);
+  border-radius: 29% 71% 25% 75% / 73% 12% 88% 27%  ;
+  align-self: center;
+  width: 230px;
+  height: 280px;
+  margin: 1rem;
+  padding: 2.4rem 1rem;
+  align-items: center;
+  box-shadow: 0px 0px 10px var(--primary-color);
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.card:hover {
+  background-color: #ddd;
+  transition: all ease 200ms;
+}
+
+.card img.itemImage {
+  width: 150px;
+  border: 3px solid var(--primary-color);
+  margin-bottom: 1.3rem;
+  border-radius: 50%;
+}
+
+.card h3.nameItem {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 0 #999;
+}
+
+.card .itemValueArea {
+  display: flex;
+  position: relative;
+  justify-items: center;
+  align-items: center;
+  padding: 0.4rem;
+}
+
+.card .itemValueArea .itemValue {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.card .itemValueArea img.shopValueVitucoin {
+  width: 45px;
+  height: 45px;
+  animation: bitcoin-rotating 1.3s ease infinite alternate;
+}
+
+@keyframes bitcoin-rotating {
+  from {
+    transform: rotate(-25deg);
+  }
+  to {
+    transform: rotate(50deg);
+  }
+}
