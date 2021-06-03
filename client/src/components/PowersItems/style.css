@@ -1,0 +1,65 @@
+@import url("../../global.css");
+
+.cardBall {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--font-color);
+  border-radius: 10px;
+  align-self: center;
+  width: 230px;
+  height: 280px;
+  border-radius: 91% 9% 70% 30% / 30% 70% 30% 70%;
+  margin: 1rem;
+  padding: 2.4rem 1rem;
+  align-items: center;
+  box-shadow: 0px 0px 10px var(--primary-color);
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.cardBall:hover {
+  background-color: #ddd;
+  transition: all ease 200ms;
+}
+
+.cardBall img.powerImage {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 1.3rem;
+  border-radius: 50%;
+}
+
+.cardBall h3.powerItem {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 0 #999;
+}
+
+.cardBall .powerValueArea {
+  display: flex;
+  position: relative;
+  justify-items: center;
+  align-items: center;
+  padding: 0.4rem;
+}
+
+.cardBall .powerValueArea .powerValue {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.cardBall .powerValueArea img.powerValueVitucoin {
+  width: 45px;
+  height: 45px;
+  animation: bitcoin-rotating 1.3s ease infinite alternate;
+}
+
+@keyframes bitcoin-rotating {
+  from {
+    transform: rotate(-25deg);
+  }
+  to {
+    transform: rotate(50deg);
+  }
+}
