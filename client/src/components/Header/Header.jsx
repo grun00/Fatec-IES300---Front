@@ -20,9 +20,11 @@ const Header = (props) => {
                         <span className="hamburguer"></span>
                         <ul id="links-hamburguer">
                             <li><Link to='/lobby'>Lobby</Link></li>
+                            <li><Link to='/loja'>Loja</Link></li>
                             <li><Link to='/ranking'>Ranking</Link></li>
                             <li><Link to='/meuperfil'>Meu perfil</Link></li>
                             <li><Link to='/comprar'>Comprar VituCoins</Link></li>
+                            <li><Link to='/regras'>Regras</Link></li>
                             <li><Link to='/'>Sair</Link></li>
                         </ul>
                     </div>
