@@ -82,13 +82,33 @@ body {
     transition: 70ms;
 }
 
-.button-accept:hover {
-    background-color:  #b8930d;
-    transition: all .3s ease;
-    
+.button-deny {
+    padding: 1rem 2rem;
+    margin-top: 50px;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 100;
+    background-color: #9B111E;
+    text-shadow: 4px 3px 0 #7A7A7A;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    transition: 70ms;
 }
 
-.button-accept:active {
+.button-accept:hover {
+    background-color:  #b8930d;
+    transition: all .3s ease;  
+}
+
+.button-deny:hover{
+    background-color:  #5f0c14;
+    transition: all .3s ease;  
+}
+
+:is(.button-accept, .button-deny):active {
     transform: translateY(5px);
     transition: 70ms;
 }
@@ -131,7 +151,7 @@ body {
     display: flex;
 }
 
-.modal-container.show #modal-create-room {
+.modal-container.show :is(#modal-create-room, #modal-buy) {
     animation: modal 0.2s;
 }
 
