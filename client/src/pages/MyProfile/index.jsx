@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
 import Header from "../../components/Header/Header";
 import Avatar from "../../assets/avatar.svg";
 import Input from "../../components/Input/textInput";
 import Pencil from "../../assets/pencil.svg";
 import Vitucoin from "../../images/bitcoin.png";
+import {
+  AuthContext,
+  UserContext,
+} from "../../context/UserContext";
 
 const PageMyProfile = () => {
-  const [profileNickname, setProfileNickname] = useState("Astolfinho");
-  const [profileName, setProfileName] = useState("Astolfo Santos");
-  const [playerStatus, setPlayerStatus] = useState("Offline");
-  const [playerCreate, setPlayerCreate] = useState("02/06/2000");
-  const [playerNetworth, setPlayerNetworth] = useState("1000000");
-  const [playerVictorys, setPlayerVictorys] = useState("26");
-  const [playerAmount, setPlayerAmount] = useState("1300");
+  console.log('Chegou')
+  const {user} = useContext(UserContext);
+  console.log(user)
+  const [profileNickname, setProfileNickname] = useState(user.username);
+  const [profileName, setProfileName] = useState(user.name);
+  const [playerStatus, setPlayerStatus] = useState("Online");
+  const [playerCreate, setPlayerCreate] = useState(user.dt_criacao);
+  const [playerNetworth, setPlayerNetworth] = useState(user.netWorth);
+  const [playerVictorys, setPlayerVictorys] = useState(user.wins);
+  const [playerAmount, setPlayerAmount] = useState(user.money);
 
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
