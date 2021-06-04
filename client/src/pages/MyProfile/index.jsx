@@ -5,15 +5,10 @@ import Avatar from "../../assets/avatar.svg";
 import Input from "../../components/Input/textInput";
 import Pencil from "../../assets/pencil.svg";
 import Vitucoin from "../../images/bitcoin.png";
-import {
-  AuthContext,
-  UserContext,
-} from "../../context/UserContext";
+import {UserContext} from "../../context/UserContext";
 
 const PageMyProfile = () => {
-  console.log('Chegou')
   const {user} = useContext(UserContext);
-  console.log(user)
   const [profileNickname, setProfileNickname] = useState(user.username);
   const [profileName, setProfileName] = useState(user.name);
   const [playerStatus, setPlayerStatus] = useState("Online");
