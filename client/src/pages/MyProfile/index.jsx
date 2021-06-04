@@ -5,6 +5,7 @@ import Avatar from "../../assets/avatar.svg";
 import Input from "../../components/Input/textInput";
 import Pencil from "../../assets/pencil.svg";
 import Vitucoin from "../../images/bitcoin.png";
+import { divide } from "lodash";
 
 const PageMyProfile = () => {
   const [profileNickname, setProfileNickname] = useState("Astolfinho");
@@ -32,7 +33,7 @@ const PageMyProfile = () => {
     <>
       <div id="profile-page">
         <Header />
-        <form id="profile-area">
+        <div id="profile-area">
           <h1>Meu Perfil</h1>
           <div id="profile-data">
             <div id="photo-field">
@@ -54,7 +55,7 @@ const PageMyProfile = () => {
                   <h3>Nome: <span className="profile-infos">{profileName}</span></h3>
                   <h3>Nick: <span className="profile-infos">{profileNickname}</span></h3>
                   <div id="vitucoin-amount">
-                    <h3>Minhas Vitucoins</h3>
+                    <h2 className="h2-profile">Minhas Vitucoins</h2>
                     <img
                       id="image-amount"
                       src={Vitucoin}
@@ -85,16 +86,16 @@ const PageMyProfile = () => {
             <div id="modal-change-avatar">
               <h3>Escolha seu icone de avatar</h3>
               <div className="modal-fields">
-              <form className="modal-fields">
+              <div className="modal-fields">
                 <button className="modal-close-button">X</button>
 
                 <button className="button-accept">Selecionar</button>
-              </form>
+              </div>
               </div>
             </div>
           </div>
 
-        </form>
+        </div>
       </div>
     </>
   );
