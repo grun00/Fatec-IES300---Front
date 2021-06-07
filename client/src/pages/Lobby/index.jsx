@@ -62,7 +62,7 @@ const PageLobby = () => {
     socket.emit("createRoom", roomName);
     socket.on("roomCreated", () => {
       setUpdateInfo(true);
-      history.push("/gamepage");
+      history.push("/match");
     });
   };
 
@@ -79,7 +79,7 @@ const PageLobby = () => {
     socket.on("joinedRoom", (data) => {
       if (data) {
         setUpdateInfo(true);
-        history.push("/gamepage");
+        history.push("/match");
       }
     });
   };

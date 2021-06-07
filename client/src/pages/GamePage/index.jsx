@@ -17,6 +17,7 @@ import {
   SocketContext,
   UserContext,
 } from "../../context/UserContext";
+
 import { Redirect } from "react-router";
 
 const PageGamepage = () => {
@@ -34,6 +35,7 @@ const PageGamepage = () => {
   const [timeUp, setTimeUp] = useState(false);
   const [matchStart, setMatchStart] = useState(false);
   const [opponentSkipped, setOpponentSkipped] = useState(false);
+  const [playerSkipped, setPlayerSkipped] = useState(false);
   const [correct, setCorrect] = useState(false);
   
   // Timer States
@@ -70,6 +72,7 @@ const PageGamepage = () => {
       socket.emit('skipQuestion');
       setMatchData(matchData);
       setSkips(prev => prev -= 1);
+      setPlayerSkipped(true);
     }
   } 
 
@@ -157,12 +160,13 @@ const PageGamepage = () => {
     }
     setTimeUp(false);
     setMatchData(null);
+    setPlayerSkipped(false);
     setOpponentSkipped(false);
   }, [timeUp]);
 
   const timerZeroed = () => {
     if(!roundMessage) {
-      if(opponentSkipped){
+      if(opponentSkipped || playerSkipped){
         setRoundMessage('A questão foi pulada!');
         setMatchData({...matchData, myChosenAlternative: "skipped", correct:false});
       }else{
@@ -170,9 +174,11 @@ const PageGamepage = () => {
       }
     }
     setTimeout(() => {
-      setIsReady(true);
-      setTimeUp(true);
+      setOpponentSkipped(false);
+      setPlayerSkipped(false);
       setRoundMessage('')
+      setTimeUp(true);
+      setIsReady(true);
     }, 3000)
     
   };

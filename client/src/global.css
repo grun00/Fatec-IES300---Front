@@ -32,7 +32,7 @@ div#root {
 }
 
 body {
-    background: url(./assets/drawing.svg);
+    background: url('./assets/drawing.svg');
     animation: none;
     background-color: #76c9e8;
     background-repeat: no-repeat;
