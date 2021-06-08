@@ -1,0 +1,368 @@
+@import '../../../global.css';
+
+.inativo {
+    display: none;
+}
+
+#vitinho svg{
+    width: 100px;
+    height: 150px;
+    position: fixed;
+    top: calc(100% - 144px);
+}
+
+
+.convidados svg, .universitarios svg{
+    width: 100%;
+    height: 150px;
+    position: fixed;
+    top: calc(100% - 150px);
+}
+
+.respostaUniversitarios, .respostaConvidados {
+    font-family: NATS, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 80px;
+    color: red;
+}
+
+
+.container {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 100vw;
+    animation: gradient 5s linear infinite alternate;
+    background: #ffff;
+    background-size: 600% 600%;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+.gameToFill-area {
+    display: grid;
+    grid-template-rows: 75px calc(100vh - 75px);
+}
+
+.header {
+    background: #13262F;
+    width: 100vw;
+}
+
+#logo-header {
+    max-width: 140px;
+    min-width: 140px;
+    margin: 5px;
+    animation: is-upping-scale 1s ease-out infinite alternate;
+}
+
+#configLogin {
+    float: right;
+    width: 160px;
+    height: 75px;
+    display: grid;
+    margin-right: 30px;
+    grid-template-columns: 1fr 1fr;
+    padding: 8px;
+}
+
+.border-icone {
+    width: 60px;
+    margin: 10px;
+}
+
+#div-login-header {
+    border-radius: 100%;
+    background: #C4C4C4;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+}
+
+#login-header {
+    width: 55px;
+    position: relative;
+    margin: 5px 3px;
+    z-index: 2;
+}
+
+#menu-header {
+    width: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+#div-menu-container {
+    position: fixed;
+    top: -25vh;
+    right: -65vh;
+    width: 150vh;
+    height: 150vh;
+    border-radius: 100%;
+    background: #13262F;
+    z-index: 1;
+}
+
+#div-menu-itens {
+    position: relative;
+    top: 50vh;
+    margin: 44px;
+    text-align: right;
+    width: 70vh;
+    color: white;
+}
+
+#div-menu-itens a {
+    display: block;
+    color: wheat;
+    margin: 20px;
+    font-family: NATS, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    text-decoration: none;
+}
+
+.gameInterface-area {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;  
+}
+
+.perguntaSection {
+    background: rgba(19, 38, 47, 0.45);     
+}
+
+#pergunta, .alternativa, .opcaoPular, .opcaoParar {
+    font-family: NATS, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+}
+
+#tempo {
+    margin-left: calc(50% - 43px);
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 86px;
+    height: 40px;
+    font-size: 35px;
+    font-family: sans-serif;
+}
+
+#pergunta {
+    color: black;
+    margin: 5px 12px;
+}
+
+.ajudaSection {
+    background: rgba(19, 38, 47, 0.6);
+}
+
+.iconesAjuda {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+}
+
+.iconesCartas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.containerAjuda, .containerCarta{
+    height: 100px;
+    font-family: NATS, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    color: black;
+    text-align: center;
+    float: left;
+}
+
+.containerAjuda{
+    margin: 12px;
+}
+.containerCarta{
+    margin: 10px;
+}
+
+.opcaoAjuda {
+    width: 70px;
+    height: 70px;
+    position: relative;
+    margin-left: calc(50% - 35px);
+    margin-bottom: 5px;
+    border-radius: 100%;
+    background: #C4C4C4;    
+    cursor: pointer;
+}
+
+.disabledOpcaoAjuda {
+    cursor: default;;
+}
+
+.icone-ajuda {
+    width: 57px;
+    margin: 6px;
+}
+
+.icone-carta {
+    width: 125px;
+    margin: 40px;
+}
+
+.opcaoPular {
+    background: #13262F;
+    border-radius: 15px;
+    color: white;
+}
+
+.opcaoParar {
+    position: relative;
+    margin-top: 200px;
+    width: 300px;
+    margin-left: calc( 50% - 150px);
+    border-radius: 10px;
+    background: #8C1C13;
+    color: white;
+}
+
+.field {
+    padding: 3px 10px;
+}
+
+.alternativa {
+    color: white;
+}
+
+.eliminada {
+    background: #785D1B;
+}
+
+.naoEscolhida {
+    background: #D5A021;
+    cursor: pointer;
+}
+
+.desabilitada {
+    cursor: default;
+}
+
+.eliminada, .eliminada:focus {
+    background: #785D1B;
+    border: 2px solid #785D1B;    
+}
+
+.escolhida, .escolhida:focus{
+    background: #ece803;
+    border: 2px solid #ece803;
+    background-image: url('../../../images/escolhido.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-x: 22px;
+}
+
+.correta, .correta:focus{
+    background: #096C07;
+    border: 2px solid #096C07;
+    background-image: url('../../../images/certo.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-x: 22px;
+}
+
+.errada, .errada:focus {
+    background: #8C1C13;
+    border: 2px solid #8C1C13;  
+    background-image: url('../../../images/errado.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-x: 22px;  
+}
+
+.gameLoad-area, .gameCartas-area {
+    position: absolute;
+    top: 75px;
+    background: #000000c9;
+    width: 100vw;
+    height: calc(100vh - 75px);
+    text-align: center;
+}
+
+.gameLoad-area h1,  .gameLoad-area h4 {
+    font-family: NATS, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    color: white;
+}
+
+.gameLoad-area h1 {
+    font-size: 5rem;
+    margin-top: calc(50vh - 7rem);
+}
+
+.gameLoad-area h4 {
+    font-size: 1rem;
+    font-size: 1.25rem;
+}
+
+
+
+@media(min-width: 1040px) {
+   /* #logo-menu {
+        min-width: 400px;
+        max-width: 40vw;
+        animation: is-bouncing 2s ease infinite alternate;
+    }
+
+    .toFill-area {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    #background-gamescreen {
+        background-color: #13262F;
+    }
+*/
+    
+    
+}
+
+@media(max-width:1039px) {
+   /* #logo-header {
+        max-width: 150px;
+        min-width: 150px;
+        animation: is-upping-scale 1s ease-out infinite alternate;
+    }
+
+    /*.toFill-area {
+        display: flex;
+        justify-content: center;
+    }*/
+}
+
+@keyframes gradient {
+    from/*INICIO ANIMAÇÃO*/
+    {
+        background-position: 0 50%;
+    }
+    to {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes is-bouncing {
+    to {
+        transform: translateY(30px);
+    }
+}
+
+@keyframes is-upping-scale {
+    to {
+        transform: scale(1.1);
+    }
+}

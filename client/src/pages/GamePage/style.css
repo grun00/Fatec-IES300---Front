@@ -52,7 +52,7 @@ span:is(#span-countdown, .message, #powers-title) {
     padding: 1rem;
 }
 
-#question p, .username, .question-number {
+#question p, .username, .question-number, .skip-counter {
     color: var(--font-color);
 }
 
