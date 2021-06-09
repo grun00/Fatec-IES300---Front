@@ -20,13 +20,12 @@
 }
 
 .respostaUniversitarios, .respostaConvidados {
-    font-family: NATS, sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 80px;
     color: red;
 }
-
 
 .container {
     -webkit-font-smoothing: antialiased;
@@ -115,7 +114,7 @@
     display: block;
     color: wheat;
     margin: 20px;
-    font-family: NATS, sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 23px;
@@ -132,7 +131,7 @@
 }
 
 #pergunta, .alternativa, .opcaoPular, .opcaoParar {
-    font-family: NATS, sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 23px;
@@ -172,7 +171,7 @@
 
 .containerAjuda, .containerCarta{
     height: 100px;
-    font-family: NATS, sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
@@ -292,7 +291,7 @@
 }
 
 .gameLoad-area h1,  .gameLoad-area h4 {
-    font-family: NATS, sans-serif;
+    font-family: Roboto, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 23px;
@@ -309,6 +308,43 @@
     font-size: 1.25rem;
 }
 
+#waitingPlayer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+#roundMessage {
+    font-size: 4rem;
+    color: var(--font-color);
+    font-family: "Pixel-font";
+}
+
+#jumpingDots {
+    display: flex;
+    flex-direction: row;
+}
+
+#jumpingDots .circleWaiting {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: var(--font-color);
+    margin: 70px 5px;
+    animation: jumping-dots 1.25s ease-in-out infinite alternate;
+}
+
+#jumpingDots .circleWaiting:nth-child(2){
+    animation: jumping-dots 1.25s 0.25s ease-in-out infinite alternate;
+}
+
+#jumpingDots .circleWaiting:nth-child(3){
+    animation: jumping-dots 1.25s 0.5s ease-in-out infinite alternate;
+}
 
 
 @media(min-width: 1040px) {
@@ -364,5 +400,15 @@
 @keyframes is-upping-scale {
     to {
         transform: scale(1.1);
+    }
+}
+
+@keyframes jumping-dots{
+    50% {
+        transform: translateY(50px);
+    }
+
+    100% {
+        transform: translateY(-10px);
     }
 }

@@ -35,19 +35,19 @@ const MatchScreen = () => {
   const { isAuth } = useContext(AuthContext);
 
   const handlePlayerAnswer = (answer) => {
-      const matchData = {
-          questionNumber,
-          player: user.username,
-          myChosenAlternative: answer.alternative,
-          correct: answer.isCorrect,
-          difficulty: currentQuestion.difficulty,
+    const matchData = {
+      questionNumber,
+      player: user.username,
+      myChosenAlternative: answer.alternative,
+      correct: answer.isCorrect,
+      difficulty: currentQuestion.difficulty,
     };
-        setMatchData(matchData);
-  } 
+    setMatchData(matchData);
+  };
 
   const handleTimeUp = () => {
-      setTimeUp(true);
-  }
+    setTimeUp(true);
+  };
 
   useEffect(() => {
     setUpdateInfo(true);
@@ -83,42 +83,58 @@ const MatchScreen = () => {
         setRoundMessage("");
       }
     } else {
-      setRoundMessage("Aguardando adversário...");
+      setRoundMessage("Aguardando adversario");
     }
   }, [roomInfo]);
-    
+
   useEffect(() => {
-    if(timeUp) {
-        if(!matchData) {
-            const timeUpData = {
-                questionNumber,
-                player: user.username,
-                myChosenAlternative: 'timeUp',
-                correct: false,
-                currentTime: 0,
-            };
-            socket.emit("recordAnswer", timeUpData);
-        } else {
-            socket.emit("recordAnswer", matchData);
-        }
+    if (timeUp) {
+      if (!matchData) {
+        const timeUpData = {
+          questionNumber,
+          player: user.username,
+          myChosenAlternative: "timeUp",
+          correct: false,
+          currentTime: 0,
+        };
+        socket.emit("recordAnswer", timeUpData);
+      } else {
+        socket.emit("recordAnswer", matchData);
+      }
     }
     setTimeUp(false);
     setMatchData(null);
     setIsReady(true);
-  }, [timeUp])
-    
+  }, [timeUp]);
+
   const handleNextQuestion = () => {
-      if (questionNumber < questions?.length) {
-          setIsReady(false);
-          setQuestionNumber((prev) => (prev += 1));
-        } else if(questionNumber >  questions?.length) {
-            setRoundMessage("Jogo Encerrado!");
-            setMatchStart(false);
-  }
-} 
+    if (questionNumber < questions?.length) {
+      setIsReady(false);
+      setQuestionNumber((prev) => (prev += 1));
+    } else if (questionNumber > questions?.length) {
+      setRoundMessage("Jogo Encerrado!");
+      setMatchStart(false);
+    }
+  };
   return (
     <>
-      {questionNumber > -1 && currentQuestion ?  <MatchScreenComponent currentQuestion={currentQuestion} handlePlayerAnswer={handlePlayerAnswer} handleTimeUp={handleTimeUp} handleNextQuestion={handleNextQuestion} /> : <span>{roundMessage}</span>}
+      {questionNumber > -1 && currentQuestion ? (
+        <MatchScreenComponent
+          currentQuestion={currentQuestion}
+          handlePlayerAnswer={handlePlayerAnswer}
+          handleTimeUp={handleTimeUp}
+          handleNextQuestion={handleNextQuestion}
+        />
+      ) : (
+        <div id="waitingPlayer">
+          <span id="roundMessage">{roundMessage}</span>
+          <div id="jumpingDots">
+            <span className="circleWaiting"></span>
+            <span className="circleWaiting"></span>
+            <span className="circleWaiting"></span>
+          </div>
+        </div>
+      )}
     </>
   );
 };
