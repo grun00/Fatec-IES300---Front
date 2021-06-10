@@ -22,9 +22,12 @@ const PageLobby = () => {
   const [roomPwd, setRoomPwd] = useState();
   const [roomId, setRoomId] = useState();
   const [updateInfo, setUpdateInfo] = useState(false);
-  
+  const [joinRoomName, setJoinRoomName] = useState();
+  const [joinRoomId, setJoinRoomId] = useState();
+  const [joinRoomUserCount, setJoinRoomUserCount] = useState();
+
   const history = useHistory();
-  
+
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
     modal.classList.add("show");
