@@ -351,28 +351,6 @@
     cursor: default;
 }
 
-.eliminada {
-    background: #785D1B;
-    box-shadow: 0 10px 0 #644d11;
-    cursor: not-allowed;
-}
-
-.eliminada, .eliminada:focus {
-    background: #785D1B;
-    border: 2px solid #785D1B;    
-}
-
-.eliminada:hover {
-    transform: translateY(2px);
-    box-shadow: 0 8px 0 #644d11;
-    transition: all 300ms ease;
-}
-
-.eliminada:active {
-    transform: translateY(8px);
-    box-shadow: none;
-    transition: all 200ms ease;
-}
 
 .naoEscolhida {
     background: var(--secondary-color);
@@ -462,6 +440,28 @@
     transition: all 150ms ease;
 }
 
+.eliminada {
+    background: #785D1B;
+    box-shadow: 0 10px 0 #644d11;
+    cursor: not-allowed;
+}
+
+.eliminada, .eliminada:focus {
+    background: #785D1B;
+    border: 2px solid #785D1B;    
+}
+
+.eliminada:hover {
+    transform: translateY(2px);
+    box-shadow: 0 8px 0 #644d11;
+    transition: all 300ms ease;
+}
+
+.eliminada:active {
+    transform: translateY(8px);
+    box-shadow: none;
+    transition: all 200ms ease;
+}
 
 .gameLoad-area, .gameCartas-area {
     position: absolute;
