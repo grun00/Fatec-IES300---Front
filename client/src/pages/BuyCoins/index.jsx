@@ -1,15 +1,44 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/textInput";
 import Bitcoin from "../../images/bitcoin.png";
 import { Redirect } from "react-router";
+import api from "../../services/api";
 import {AuthContext, UserContext} from "../../context/UserContext"
 
 const BuyCoinsPage = (props) => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(20);
   const {user} = useContext(UserContext);
   const {isAuth} = useContext(AuthContext);
+  const [netW, setNetW] = useState(300);
+
+function atualizaQuantidade(valor,netW){
+  setValue(value - value + valor)
+  
+  setNetW(netW)
+}
+
+  function comprar(e){
+
+    e.preventDefault();
+
+    const rota = "/players/" + user._id;
+    const net = parseInt(user.netWorth,10)+netW
+    
+    if(CPFvalidation(document.getElementById('cpf').value)){
+     
+      api.patch(rota,{  "netWorth": net })
+
+      alert("Pedido realizado com sucesso !")
+
+      user.netWorth = net
+
+    }else{
+      alert("Dados incorretos")
+    }
+    
+  }
 
   function valida(){
     let cpf = document.getElementById('cpf');
@@ -73,8 +102,8 @@ if(!user && !isAuth){
         <div id="BuyCoins-area">
           <form
             id="BuyCoins-form"
-            action="http://dontpad.com/naotemnadapracomprar"
-            target="_blank"
+            /*action={rota}*/
+            /*target="_blank"*/
             method="none"
           >
             <h1>Compre suas VituCoins</h1>
@@ -84,8 +113,9 @@ if(!user && !isAuth){
                 <input
                   type="radio"
                   name="N-coins"
+                  checked={!value || value==20}
                   id="300vc"
-                  onClick={() => setValue(value - value + 20)}
+                  onClick={() => atualizaQuantidade(20,300) }
                 />
                 <label htmlFor="300vc">
                   300 VC's
@@ -102,7 +132,7 @@ if(!user && !isAuth){
                   type="radio"
                   name="N-coins"
                   id="1000vc"
-                  onClick={() => setValue(value - value + 40)}
+                  onClick={() => atualizaQuantidade(40,1000)}
                 />
                 <label htmlFor="1000vc">
                   1000 VC's
@@ -119,7 +149,7 @@ if(!user && !isAuth){
                   type="radio"
                   name="N-coins"
                   id="2500vc"
-                  onClick={() => setValue(value - value + 75)}
+                  onClick={() => atualizaQuantidade(75,2500)}
                 />
                 <label htmlFor="2500vc">
                   2500 VC's
@@ -136,7 +166,7 @@ if(!user && !isAuth){
                   type="radio"
                   name="N-coins"
                   id="5000vc"
-                  onClick={() => setValue(value - value + 150)}
+                  onClick={() => atualizaQuantidade(150,5000) }
                 />
                 <label htmlFor="5000vc">
                   5000 VC's
@@ -153,7 +183,7 @@ if(!user && !isAuth){
                   type="radio"
                   name="N-coins"
                   id="10000vc"
-                  onClick={() => setValue(value - value + 260)}
+                  onClick={() => atualizaQuantidade(260,10000)}
                 />
                 <label htmlFor="10000vc">
                   10000 VC's
@@ -221,7 +251,7 @@ if(!user && !isAuth){
                 </div>
               </div>
             </div>
-            <button className="button-accept">Comprar agora</button>
+            <button className="button-accept" type="button" onClick={comprar.bind(this)}>Comprar agora</button>
           </form>
         </div>
       </div>
