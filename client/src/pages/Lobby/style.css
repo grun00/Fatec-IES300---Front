@@ -75,7 +75,7 @@
   flex-wrap: wrap;
 }
 
-#modal-create-room {
+#modal-create-room, #modal-join-room {
   display: flex;
   position: relative;
   justify-content: space-evenly;
@@ -91,7 +91,13 @@
   box-shadow: 0px 0px 26px -1px var(--font-color);
 }
 
-#modal-create-room h3 {
+#modal-join-room {
+  justify-content: center;
+  width: 600px;
+  height: 450px;
+}
+
+#modal-create-room h3, #modal-join-room h3{
   text-align: center;
   color: var(--secondary-color);
   font-size: 2rem;

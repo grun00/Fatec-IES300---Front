@@ -151,7 +151,7 @@ body {
     display: flex;
 }
 
-.modal-container.show :is(#modal-create-room, #modal-buy) {
+.modal-container.show :is(#modal-create-room, #modal-buy, #modal-join-room-container) {
     animation: modal 0.2s;
 }
 
