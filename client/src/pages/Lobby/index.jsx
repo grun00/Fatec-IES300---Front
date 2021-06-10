@@ -169,7 +169,7 @@ const PageLobby = () => {
           <div id="modal-create-room-container" className="modal-container">
             <div id="modal-create-room">
               <h3>Criando sala</h3>
-              <form className="modal-fields">
+              <div className="modal-fields">
                 <button className="modal-close-button">X</button>
                 <Input
                   id="input-create-name"
@@ -194,14 +194,14 @@ const PageLobby = () => {
                 />
 
                 <button className="button-accept" onClick={createRoom}>Criar sala agora</button>
-              </form>
+              </div>
             </div>
           </div>
 
           <div id="modal-join-room-container" className="modal-container">
             <div id="modal-join-room">
               <h3>Entrar na sala</h3>
-              <form className="modal-fields">
+              <div className="modal-fields">
                 <button className="modal-close-button">X</button>
 
                 <Input
@@ -217,7 +217,7 @@ const PageLobby = () => {
                 />
 
                 <button className="button-accept" onClick={joinRoom}>Entrar na sala agora</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
