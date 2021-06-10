@@ -6,6 +6,7 @@ nav#header {
   height: 90px;
   background-color: var(--primary-color);
   align-items: center;
+  justify-content: center;
   z-index: 100;
 }
 
@@ -133,6 +134,43 @@ input:checked ~ label ul#links-hamburguer li {
 input:checked ~ label ul#links-hamburguer li a:hover {
   color: var(--font-color);
   transition: all 0.3s;
+}
+
+#userIdentification{ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+#userAvatarHeader {
+  width: 50px;
+  margin: 0 10px;
+  transition: all 300ms ease;
+}
+
+#userIdentification:hover #userAvatarHeader {
+  transform: scale(1.2);
+  transition: all 300ms ease;
+}
+
+#loggedHeader {
+  font-family: "Pixel-font";
+  font-size: 1.3rem;
+  color: var(--secondary-color);
+  letter-spacing: 1.3px;
+  text-shadow: 1px 3px 0 #7a7a7a;
+}
+
+#userLogged{
+  text-decoration: none;
+  transition: all 300ms ease;
+}
+
+#userLogged:hover {
+  color: var(--font-color);
+  transform: scale(1.2);
+  transition: all 300ms ease;
 }
 
 @keyframes is-upping-scale {
