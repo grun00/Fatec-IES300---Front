@@ -22,9 +22,12 @@ const PageLobby = () => {
   const [roomPwd, setRoomPwd] = useState();
   const [roomId, setRoomId] = useState();
   const [updateInfo, setUpdateInfo] = useState(false);
-  
+  const [joinRoomName, setJoinRoomName] = useState();
+  const [joinRoomId, setJoinRoomId] = useState();
+  const [joinRoomUserCount, setJoinRoomUserCount] = useState();
+
   const history = useHistory();
-  
+
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
     modal.classList.add("show");
@@ -59,7 +62,7 @@ const PageLobby = () => {
 
   const createRoom = (e) => {
     e.preventDefault();
-    socket.emit("createRoom", roomName);
+    socket.emit("createRoom", { roomName: roomName, roomPwd: roomPwd });
     socket.on("roomCreated", () => {
       setUpdateInfo(true);
       history.push("/gamepage");
@@ -70,12 +73,13 @@ const PageLobby = () => {
     e.preventDefault();
     const roomAttrs = e.currentTarget.innerText.split("\n");
     const roomObject = {
-      name: roomAttrs[0],
-      id: roomAttrs[1],
-      userCount: Number(roomAttrs[2].substr(0, 1)),
-      maxPlayers: Number(roomAttrs[2].substr(2)),
+      name: joinRoomName,
+      id: joinRoomId,
+      password: roomPwd,
+      userCount: Number(joinRoomUserCount.substr(0, 1)),
+      maxPlayers: Number(joinRoomUserCount.substr(2)),
     };
-    socket.emit("joinRoom", roomObject.name);
+    socket.emit("joinRoom", { roomName: roomObject.name, roomPwd: roomObject.password });
     socket.on("joinedRoom", (data) => {
       if (data) {
         setUpdateInfo(true);
@@ -147,7 +151,13 @@ const PageLobby = () => {
                           key={id}
                           roomName={room}
                           roomCode={("0000" + id).substr(-4, 4)}
-                          onClick={joinRoom}
+                          onClick={(e) => {
+                            let croomInfo = e.currentTarget.innerText.split("\n");
+                            setJoinRoomName(croomInfo[0])
+                            setJoinRoomId(croomInfo[1])
+                            setJoinRoomUserCount(croomInfo[2])
+                            showModal("modal-join-room-container");
+                          }}
                           userCount={roomData.players.length}
                         />
                       );
@@ -179,22 +189,34 @@ const PageLobby = () => {
                   placeholderText="Insira uma senha para sala"
                   maxLength="8"
                   onChange={(e) => {
-                    setRoomPwd(e.value);
-                  }}
-                />
-
-                <Input
-                  id="input-create-token"
-                  name="create-room-input-token"
-                  labelText="Codigo"
-                  placeholderText="Insira um código personalizado"
-                  maxLength="4"
-                  onChange={(e) => {
-                    setRoomId(e.value);
+                    setRoomPwd(e.target.value);
                   }}
                 />
 
                 <button className="button-accept" onClick={createRoom}>Criar sala agora</button>
+              </form>
+            </div>
+          </div>
+
+          <div id="modal-join-room-container" className="modal-container">
+            <div id="modal-join-room">
+              <h3>Entrar na sala</h3>
+              <form className="modal-fields">
+                <button className="modal-close-button">X</button>
+
+                <Input
+                  id="input-join-password"
+                  inputType="password"
+                  name="join-room-input-password"
+                  labelText="Senha"
+                  placeholderText="Insira a senha (vazio se nao existe)"
+                  maxLength="8"
+                  onChange={(e) => {
+                    setRoomPwd(e.target.value);
+                  }}
+                />
+
+                <button className="button-accept" onClick={joinRoom}>Entrar na sala agora</button>
               </form>
             </div>
           </div>
