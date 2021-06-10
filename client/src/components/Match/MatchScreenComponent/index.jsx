@@ -3,7 +3,7 @@ import React, {
   useState,
 } from "react";
 
-import Header from "../../Header/Header";
+import Header from "../../Match/MatchHeader/MatchHeader"
 import GameScreen from "../GameScreen";
 import LoadScreen from "../LoadScreen";
 import CartasScreen from "../CartasScreen";

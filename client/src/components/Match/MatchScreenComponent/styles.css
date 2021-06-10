@@ -39,7 +39,7 @@
 }
 .gameToFill-area {
     display: grid;
-    grid-template-rows: 75px calc(100vh - 75px);
+    grid-template-rows: 90px calc(100vh - 90px);
 }
 
 .header {
@@ -98,7 +98,6 @@
     height: 150vh;
     border-radius: 100%;
     background: #13262F;
-    z-index: 1;
 }
 
 #div-menu-itens {
@@ -138,28 +137,38 @@
 }
 
 #tempo {
-    margin-left: calc(50% - 43px);
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 86px;
-    height: 40px;
-    font-size: 35px;
-    font-family: sans-serif;
+    font-size: 3.5rem;
+    text-align: center;
+    color: var(--font-color);
+    font-family: "Pixel-font";
+    margin: 2rem;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+        0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+        0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+        0 20px 20px rgba(0, 0, 0, 0.15);
 }
 
 #pergunta {
+    font-size: 1.6rem;
     color: black;
-    margin: 5px 12px;
+    text-align: center;
+    padding: 2rem;
 }
 
 .ajudaSection {
+    display: flex;
+    flex-direction: column;
     background: rgba(19, 38, 47, 0.6);
+    justify-content: space-evenly;
 }
 
 .iconesAjuda {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-content: center;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 30%;
 }
 
 .iconesCartas {
@@ -178,33 +187,73 @@
     color: black;
     text-align: center;
     float: left;
+    
 }
 
-.containerAjuda{
-    margin: 12px;
+.containerAjuda {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    
 }
+
 .containerCarta{
     margin: 10px;
 }
 
 .opcaoAjuda {
-    width: 70px;
-    height: 70px;
-    position: relative;
-    margin-left: calc(50% - 35px);
-    margin-bottom: 5px;
-    border-radius: 100%;
-    background: #C4C4C4;    
+    width: 90px;
+    margin: 1.3rem;
+    padding: 0.3rem;
+    border-radius: 50%;
+    background: #c4c4c4;    
+    box-shadow: inset 3px 0 0 #c4c4c4, inset -3px 0 0 #c4c4c4,
+     3px 3px 0 #c4c4c4,  -3px 3px 0 #c4c4c4,
+     4px 4px 0 #999,  -4px 4px 0 #999,
+    0 6px 0 #666, 0 9px 0 #666, 0 12px 0 #666, 0 15px 0 #666;
     cursor: pointer;
 }
 
+.opcaoAjuda:hover {
+    transform: translateY(4px);
+    box-shadow: inset 3px 0 0 #c4c4c4, inset -3px 0 0 #c4c4c4,
+    3px 3px 0 #c4c4c4,  -3px 3px 0 #c4c4c4,
+    4px 4px 0 #999,  -4px 4px 0 #999,
+    0 6px 0 #666, 0 9px 0 #666, 0 12px 0 #666;
+    transition: all 150ms ease-in;
+}
+
+.opcaoAjuda:active {
+    transform: translateY(11px);
+    box-shadow:inset 3px 0 0 #c4c4c4, inset -3px 0 0 #c4c4c4,
+    3px 3px 0 #c4c4c4,  -3px 3px 0 #c4c4c4;
+    transition: all 150ms ease-in;
+}
+
 .disabledOpcaoAjuda {
-    cursor: default;;
+    cursor: not-allowed;
 }
 
 .icone-ajuda {
-    width: 57px;
-    margin: 6px;
+    align-self: center;
+}
+
+#ajudaName {
+    font-family: "Pixel-font";
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-shadow: 0 1px 0 #696969, 0 2px 0 #777;
+    transition: all 150ms ease-in-out;
+}
+
+.opcaoAjuda:hover ~ #ajudaName  {
+    color: var(--secondary-color);
+    text-shadow: 0 1px 0 #444, 0 2px 0 #494949;  
+    transition: all 150ms ease-in-out;
 }
 
 .icone-carta {
@@ -213,19 +262,77 @@
 }
 
 .opcaoPular {
-    background: #13262F;
-    border-radius: 15px;
+    background: var(--primary-color);
+    box-shadow: 0 10px 0 #0d1a20;
+    text-shadow: 0 1px 0 #696969, 0 2px 0 #777;
+    border-radius: 10px;
     color: white;
+    font-family: "Pixel-font";
+    padding: 15px 8px;
+    cursor: pointer;
+    transition: all ease 100ms;
 }
+
+.opcaoPular:hover{
+    transform: translateY(2px);
+    box-shadow: 0 8px 0 #0d1a20;
+    transition: all ease 500ms;
+}
+
+.opcaoPular:active {
+    transform: translateY(10px);
+    box-shadow: none;
+    transition: all ease 100ms;
+}
+
 
 .opcaoParar {
     position: relative;
     margin-top: 200px;
+    font-family: "Pixel-font";
+    text-shadow: 0 1px 0 #696969, 0 2px 0 #777;
     width: 300px;
     margin-left: calc( 50% - 150px);
     border-radius: 10px;
     background: #8C1C13;
+    box-shadow: inset 10px 0 0 #881a12, inset -10px 0 0 #881a12,
+    10px 2px 0 #881a12, -10px 2px 0 #881a12, 
+    10px 4px 0 #881a12, -10px 4px 0 #881a12,
+    0 6px 0 #5d130e, 0 8px 0 #5d130e, 
+    0 10px 0 #5d130e, 0 12px 0 #5d130e, 0 14px 0 #5d130e, 
+    0 16px 0 #5d130e, 0 18px 0 #5d130e, 0 20px 0 #5d130e,
+    0 22px 0 #5d130e, 0 24px 0 #5d130e, 0 26px 0 #5d130e,
+    0 28px 0 #5d130e,
+    7px 28px 3px #4e110d, -7px 28px 3px #4e110d, 
+    7px 30px 3px #4e110d, -7px 30px 3px #4e110d;
+    border-radius: 50%;
     color: white;
+    padding: 40px 8px;
+    cursor: pointer;
+    transition: all ease 200ms;
+    letter-spacing: 1.2px;
+}
+
+.opcaoParar:hover {
+    transform: translateY(5px);
+    box-shadow: inset 10px 0 0 #881a12, inset -10px 0 0 #881a12,
+    10px 2px 0 #881a12, -10px 2px 0 #881a12, 
+    10px 4px 0 #881a12, -10px 4px 0 #881a12,
+    0 6px 0 #5d130e, 0 8px 0 #5d130e, 
+    0 10px 0 #5d130e, 0 12px 0 #5d130e, 0 14px 0 #5d130e, 
+    0 16px 0 #5d130e, 0 18px 0 #5d130e,  0 20px 0 #5d130e,
+    0 22px 0 #5d130e, 0 24px 0 #5d130e,
+    7px 24px 3px #4e110d, -7px 24px 3px #4e110d, 
+    7px 26px 3px #4e110d, -7px 26px 3px #4e110d;
+    transition: all 0.5s ease;
+}
+
+.opcaoParar:active {
+    transform: translateY(30px);
+    box-shadow: inset 10px 0 0 #881a12, inset -10px 0 0 #881a12,
+    10px 2px 0 #881a12, -10px 2px 0 #881a12, 
+    10px 4px 0 #881a12, -10px 4px 0 #881a12;
+    transition: all 200ms ease;
 }
 
 .field {
@@ -234,19 +341,20 @@
 
 .alternativa {
     color: white;
-}
-
-.eliminada {
-    background: #785D1B;
-}
-
-.naoEscolhida {
-    background: #D5A021;
-    cursor: pointer;
+    position: relative;
+    border-radius: 8px;
+    margin: 1rem 0;
+    transition: all 300ms ease;
 }
 
 .desabilitada {
     cursor: default;
+}
+
+.eliminada {
+    background: #785D1B;
+    box-shadow: 0 10px 0 #644d11;
+    cursor: not-allowed;
 }
 
 .eliminada, .eliminada:focus {
@@ -254,39 +362,113 @@
     border: 2px solid #785D1B;    
 }
 
+.eliminada:hover {
+    transform: translateY(2px);
+    box-shadow: 0 8px 0 #644d11;
+    transition: all 300ms ease;
+}
+
+.eliminada:active {
+    transform: translateY(8px);
+    box-shadow: none;
+    transition: all 200ms ease;
+}
+
+.naoEscolhida {
+    background: var(--secondary-color);
+    box-shadow: 0 10px 0 #caa211;
+    cursor: pointer;
+}
+
+.naoEscolhida:hover {
+    box-shadow: 0 8px 0 #caa211;
+    transform: translateY(2px);
+    transition: all 300ms ease;
+}
+
+.naoEscolhida:active {
+    box-shadow: none;
+    transform: translateY(8px);
+    transition: all 150ms ease;
+}
+
 .escolhida, .escolhida:focus{
-    background: #ece803;
-    border: 2px solid #ece803;
+    background: #ffd900;
+    box-shadow: 0 10px 0 #dbba00;
+    color: rgba(0, 0, 0, 0.4);
+    transition: all 300ms ease-in-out;
     background-image: url('../../../images/escolhido.png');
     background-repeat: no-repeat;
     background-position: left;
     background-position-x: 22px;
+    transition: all 300ms ease-in-out;
+}
+
+.escolhida:hover {
+    box-shadow: 0 8px 0 #dbba00;
+    transform: translateY(2px);
+    transition: all 300ms ease;
+}
+
+.escolhida:active {
+    box-shadow: none;
+    transform: translateY(8px);
+    transition: all 150ms ease;
 }
 
 .correta, .correta:focus{
-    background: #096C07;
-    border: 2px solid #096C07;
+    background: #0b6b09;
+    box-shadow: 0 10px 0 #064b05;
     background-image: url('../../../images/certo.png');
     background-repeat: no-repeat;
     background-position: left;
     background-position-x: 22px;
+    transition: all 300ms ease-in-out;
 }
+
+.correta:hover {
+    box-shadow: 0 8px 0 #064b05;
+    transform: translateY(2px);
+    transition: all 300ms ease;
+}
+
+.correta:active {
+    box-shadow: none;
+    transform: translateY(8px);
+    transition: all 150ms ease;
+}
+
 
 .errada, .errada:focus {
     background: #8C1C13;
-    border: 2px solid #8C1C13;  
+    box-shadow: 0 10px 0 #4e110d;  
     background-image: url('../../../images/errado.png');
     background-repeat: no-repeat;
     background-position: left;
     background-position-x: 22px;  
+    transition: all 300ms ease-in-out;
 }
+
+.errada:hover {
+    box-shadow: 0 8px 0 #4e110d;
+    transform: translateY(2px);
+    transition: all 300ms ease;
+}
+
+
+.errada:active {
+    box-shadow: none;
+    transform: translateY(8px);
+    transition: all 150ms ease;
+}
+
 
 .gameLoad-area, .gameCartas-area {
     position: absolute;
-    top: 75px;
+    top: 90px;
     background: #000000c9;
     width: 100vw;
-    height: calc(100vh - 75px);
+    height: calc(100vh - 90px);
     text-align: center;
 }
 

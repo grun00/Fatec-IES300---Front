@@ -2,9 +2,9 @@ import React from "react";
 import "../../global.css";
 import { ButtonInput } from "../Input/buttonInput.js";
 import { AjudaInput } from "../Input/ajudaInput.js";
-import Universitarios from "../../images/universitarios.png";
-import Cartas from "../../images/cartas.png";
-import Convidados from "../../images/convidados.png";
+import Universitarios from "../../assets/universitario.svg";
+import Cartas from "../../assets/carta.svg";
+import Convidados from "../../assets/placa.svg";
 import { ReactSVG } from "react-svg";
 import Vitinho from "../../images/vitinho.svg";
 
@@ -53,7 +53,8 @@ const Alter = (props) => {
     return (
       <ButtonInput
         inputName="opcaoParar"
-        inputValue={"Parar com R$ " + props.reais + " mil"}
+        //inputValue={"Parar com R$ " + props.reais + " mil"}
+        inputValue={"Pular questao"}
         className="opcaoParar"
         onClick={() => props.onClickParar()}
         disabled={props.disabled}

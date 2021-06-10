@@ -11,7 +11,7 @@ export const AjudaInput = ({ inputName, onClick, className, disabled, iconeAjuda
             >                
                 <img className="icone-ajuda" src={iconeAjuda} />
             </div>
-            {labelText}           
+            <span id="ajudaName">{labelText}</span>           
         </div>
         )
 }
