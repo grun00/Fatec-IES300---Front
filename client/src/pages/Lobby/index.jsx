@@ -62,7 +62,7 @@ const PageLobby = () => {
 
   const createRoom = (e) => {
     e.preventDefault();
-    socket.emit("createRoom", roomName);
+    socket.emit("createRoom", { roomName: roomName, roomPwd: roomPwd });
     socket.on("roomCreated", () => {
       setUpdateInfo(true);
       history.push("/gamepage");
@@ -78,7 +78,7 @@ const PageLobby = () => {
       userCount: Number(roomAttrs[2].substr(0, 1)),
       maxPlayers: Number(roomAttrs[2].substr(2)),
     };
-    socket.emit("joinRoom", roomObject.name);
+    socket.emit("joinRoom", { roomName: roomObject.name, roomPwd: roomObject.password });
     socket.on("joinedRoom", (data) => {
       if (data) {
         setUpdateInfo(true);
