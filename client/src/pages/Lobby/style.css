@@ -133,6 +133,30 @@
   text-align: center;
 }
 
+#select-area.input-field {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#theme-select-box {
+  border: 2px solid var(--primary-color);
+  font-family: 'Roboto';
+  font-size: 1rem;
+  /*background-color: transparent;
+  color: var(--font-color);*/
+  background:  url(../../images/seta.png) no-repeat right #fff;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  appearance: none;
+}
+
+#theme-select-box:is(:focus, :hover) {
+  color: #000;
+  border: 2px solid var(--secondary-color);
+}
+
 @media (max-width: 700px) {
   #Lobby-area h1 {
     padding: 1.5rem;

@@ -193,15 +193,6 @@ const PageLobby = () => {
                   isRequired="true"
                 />
 
-                <label for="theme-select-box"> Tema das perguntas</label>
-                <select
-                  id='theme-select-box'
-                  value={selectedOption}
-                  onChange={e => setSelectedOption(e.target.value)}>
-                  {questionThemes.map(o => (
-                    <option key={o.value} value={o.value}>{o.label}</option>
-                  ))}
-                </select>
 
                 <Input
                   id="input-create-password"
@@ -214,6 +205,18 @@ const PageLobby = () => {
                     setRoomPwd(e.target.value);
                   }}
                 />
+
+                <label id="select-area" for="theme-select-box" className="input-field">
+                  <label for="theme-select-box"> Tema das perguntas:</label>
+                  <select
+                    id='theme-select-box'
+                    value={selectedOption}
+                    onChange={e => setSelectedOption(e.target.value)}>
+                    {questionThemes.map(o => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
+                </label>
 
                 <button className="button-accept" onClick={createRoom}>Criar sala agora</button>
               </div>
