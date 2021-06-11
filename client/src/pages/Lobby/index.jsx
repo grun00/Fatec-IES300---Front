@@ -25,6 +25,14 @@ const PageLobby = () => {
   const [joinRoomName, setJoinRoomName] = useState();
   const [joinRoomId, setJoinRoomId] = useState();
   const [joinRoomUserCount, setJoinRoomUserCount] = useState();
+  const questionThemes = [
+    { label: 'Todos os temas', value: '' },
+    { label: 'Atualidades', value: 'Atualidades' },
+    { label: 'TI', value: 'TI' },
+    { label: 'Conhecimentos Gerais', value: 'Conhecimentos Gerais' },
+    { label: 'Entretenimento', value: 'Entretenimento' }
+  ]
+  const [selectedOption, setSelectedOption] = useState(questionThemes[0].value);
 
   const history = useHistory();
 
@@ -62,7 +70,11 @@ const PageLobby = () => {
 
   const createRoom = (e) => {
     e.preventDefault();
-    socket.emit("createRoom", { roomName: roomName, roomPwd: roomPwd });
+    socket.emit("createRoom", {
+      roomName: roomName,
+      roomPwd: roomPwd,
+      roomTheme: selectedOption
+    });
     socket.on("roomCreated", () => {
       setUpdateInfo(true);
       history.push("/gamepage");
@@ -181,6 +193,16 @@ const PageLobby = () => {
                   isRequired="true"
                 />
 
+                <label for="theme-select-box"> Tema das perguntas</label>
+                <select
+                  id='theme-select-box'
+                  value={selectedOption}
+                  onChange={e => setSelectedOption(e.target.value)}>
+                  {questionThemes.map(o => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
+                  ))}
+                </select>
+
                 <Input
                   id="input-create-password"
                   inputType="password"
@@ -206,7 +228,7 @@ const PageLobby = () => {
 
                 <Input
                   id="input-join-password"
-                  inputType="password"
+                  inputType="text"
                   name="join-room-input-password"
                   labelText="Senha"
                   placeholderText="Insira a senha (vazio se nao existe)"
