@@ -359,7 +359,7 @@ const MatchScreenComponent = (props) => {
   }
 
   React.useEffect(() => {         
-    !encerrado && liberarAlternativas(); //para liberar uma alternativa por vez
+    !encerrado && !inicializado && liberarAlternativas(); //para liberar uma alternativa por vez
   }, [statusAlterVisibilidade]);
 
   const opcaoCarta = (i) => {
