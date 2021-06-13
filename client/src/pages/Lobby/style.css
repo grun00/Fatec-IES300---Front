@@ -22,6 +22,7 @@
 
 #Lobby-area h1 {
   font-size: 2.3rem;
+  color: var(--secondary-color);
   align-self: center;
   padding: 2rem;
   text-shadow: 1px 3px 0 #7a7a7a, 1px 13px 5px #aba8a8;
@@ -74,7 +75,7 @@
   flex-wrap: wrap;
 }
 
-#modal-create-room {
+#modal-create-room, #modal-join-room {
   display: flex;
   position: relative;
   justify-content: space-evenly;
@@ -90,8 +91,15 @@
   box-shadow: 0px 0px 26px -1px var(--font-color);
 }
 
-#modal-create-room h3 {
+#modal-join-room {
+  justify-content: center;
+  width: 600px;
+  height: 450px;
+}
+
+#modal-create-room h3, #modal-join-room h3{
   text-align: center;
+  color: var(--secondary-color);
   font-size: 2rem;
   letter-spacing: 1.5px;
 }
@@ -123,6 +131,30 @@
   height: 80px;
   cursor: pointer;
   text-align: center;
+}
+
+#select-area.input-field {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#theme-select-box {
+  border: 2px solid var(--primary-color);
+  font-family: 'Roboto';
+  font-size: 1rem;
+  /*background-color: transparent;
+  color: var(--font-color);*/
+  background:  url(../../images/seta.png) no-repeat right #fff;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  appearance: none;
+}
+
+#theme-select-box:is(:focus, :hover) {
+  color: #000;
+  border: 2px solid var(--secondary-color);
 }
 
 @media (max-width: 700px) {

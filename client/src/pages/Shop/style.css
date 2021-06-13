@@ -1,0 +1,96 @@
+@import url("../../global.css");
+
+#pageShopArea {
+  display: flex;
+  flex-direction: column;
+}
+
+#shopArea {
+  width: 80%;
+  max-width: 1400px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--font-color);
+  border: 3px solid var(--primary-color);
+  margin: 2rem 4rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 26px -1px var(--primary-color);
+}
+
+#shopArea #shopItems{
+  width: 100%;
+}
+
+#shopArea h1 {
+  font-size: 2.6rem;
+  align-self: center;
+  padding: 2rem;
+  text-shadow: 1px 3px 0 #7a7a7a, 1px 13px 5px #a9aba8;
+  border-radius: 50px;
+}
+
+.itemsField {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0.6rem 4rem;
+}
+
+#shopItems h2 {
+  font-size: 2.2rem;
+  padding: 0.5rem 3rem;
+  text-shadow: 2px 2px 0 #777;
+}
+
+#modal-buy {
+  width: 50%;
+  background-color: var(--font-color);
+  border: 3px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+#modal-buy h3 {
+  font-size: 2rem;
+  text-shadow: 1px 3px 0 #7a7a7a, 1px 13px 5px #a9aba8;
+  text-align: center;
+}
+
+#modal-buy #confirmationPhrase {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+#modal-buy .modal-buttons-area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#modal-buy .modal-buttons-area .button-accept {
+  animation: scale 2s ease-in-out infinite alternate;
+}
+
+#modal-buy .modal-buttons-area :is(.button-accept, .button-deny) {
+  margin: 2rem;
+  box-shadow: 0px 0px 26px -8px var(--primary-color)
+}
+
+
+
+@keyframes scale {
+   from {
+    transform: scale(1.06);
+  }
+  
+  to {
+    transform: scale(1);
+  }
+}

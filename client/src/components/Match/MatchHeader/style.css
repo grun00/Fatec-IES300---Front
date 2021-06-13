@@ -1,0 +1,149 @@
+@import "../../../global.css";
+
+nav#header-match {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90px;
+    background-color: var(--primary-color);
+    align-items: center;
+    z-index: 100;
+}
+
+#hamburguer-checkbox-match {
+  display: none;
+}
+
+.menu-match {
+  border-radius: 50%;
+  width: 80px;
+  height: 10vh;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  transition: 0.5s ease;
+}
+
+.menu-match:hover {
+  transform: scale(1.2);
+  transition: 0.3s ease;
+}
+
+.menu-match:hover .hamburguer-match::after,
+.menu-match:hover .hamburguer-match {
+  background-color: red;
+}
+
+.hamburguer-match {
+  display: block;
+  background-color: var(--secondary-color);
+  width: 45px;
+  height: 4px;
+  border-radius: 16px;
+  position: relative;
+  left: 15px;
+  top: 40px;
+  transition: 0.3s ease;
+  transform: rotate(45deg);
+}
+
+.hamburguer-match::after,
+.hamburguer-match::before {
+  background-color: var(--secondary-color);
+  border-radius: 16px;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: 0.3s ease;
+}
+
+.hamburguer-match::before {
+  transform: rotate(90deg);
+  bottom: 0;
+  background-color: var(--secondary-color);
+}
+
+.hamburguer-match::after {
+  transform: rotate(90deg);
+  top: 0;
+  background-color: var(--secondary-color);
+}
+
+#modal-forfeit {
+  width: 60%;
+  background-color: var(--font-color);
+  border: 3px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+#modal-forfeit h3 {
+  font-size: 3rem;
+  color: #970413;
+  text-shadow: 1px 3px 0 #444, 1px 13px 5px #a9aba8;
+  text-align: center;
+}
+
+#modal-forfeit #confirmationPhrase {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+#modal-forfeit .modal-buttons-area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#modal-forfeit .modal-buttons-area .button-deny {
+  animation: scale 2s ease-in-out infinite alternate;
+}
+
+#modal-forfeit .modal-buttons-area :is(.button-accept, .button-deny) {
+  margin: 2rem;
+  box-shadow: 0px 0px 26px -8px var(--primary-color);
+  text-shadow: 1px 3px 0 #666;
+}
+
+#info-players-match {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+#info-players-match .player-match {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+#info-players-match #vsSpan {
+    font-family: "Pixel-font";
+    color: var(--secondary-color);
+    font-size: 2.5rem;
+    text-shadow: 0 4px 0px #7c640d, 0 10px 5px #9e7f11;
+}
+
+#info-players-match .player-match .player-name-match {
+    padding: 0 1rem;
+    color: var(--font-color);
+    font-size: 1.3rem;
+}
+
+#info-players-match .player-match .player-image-match {
+    width: 60px;
+}
+
+
+
+
+

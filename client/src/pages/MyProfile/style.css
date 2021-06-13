@@ -44,7 +44,7 @@
   align-items: center;
   margin: 2rem 2rem;
   margin-left: 4rem;
-  border-radius: 8px;
+  border-radius: 91% 9% 70% 30% / 30% 70% 30% 70%;
   background-color: var(--primary-color);
   box-shadow: 0px 0px 30px -1px var(--primary-color);
 }
@@ -61,7 +61,7 @@ h2.h2-profile {
   text-align: center;
   padding: 1rem;
   color: var(--secondary-color);
-  text-shadow: 4px 3px 0 #5f4e03;
+  text-shadow: 4px 3px 0 rgb(87, 72, 30);
 }
 
 #profile-area #photo-field #photo-area {
@@ -73,8 +73,9 @@ h2.h2-profile {
 #profile-area #photo-field #photo-area img#profile-photo {
   width: 200px;
   align-self: center;
-  border: 4px solid var(--secondary-color);
+  border: 4px solid var(--font-color);
   border-radius: 50%;
+  box-shadow: 0px 0px 30px -13px var(--font-color)
 }
 
 #profile-area #photo-field #photo-area #edit-photo-button {
@@ -118,11 +119,10 @@ h2.h2-profile {
   justify-content: space-around;
 }
 
-#infos-profile-area #userdata-fields #user-basic-info #vitucoin-amount h3 {
+#infos-profile-area #userdata-fields #user-basic-info #vitucoin-amount h2 {
   color: var(--secondary-color);
-  text-shadow: 1px 3px 0 #7a7a7a;
+  padding-bottom: 0;
   font-size: 1.8rem;
-  padding: 0.6rem 0;
 }
 
 #infos-profile-area
@@ -201,27 +201,6 @@ h2.h2-profile {
   text-align: center;
 }
 
-/*#profile-area #userdata-fields .input-field {
-    max-width: 400px;
-    margin: 2rem;
-  }
-  
-  #profile-area #userdata-fields .input-field label {
-    color: var(--primary-color);
-    font-size: 1rem;
-  }
-  
- #profile-area #userdata-fields .input-field input {
-    color: #000;
-  }
-  
- #profile-area #userdata-fields input::placeholder {
-    color: #000000;
-  }
-  
- #profile-area #userdata-fields .input-field .underline::before {
-    border: var(--primary-color) 1px solid;
-  } */
 
 #profile-area h1 {
   font-size: 2.3rem;
