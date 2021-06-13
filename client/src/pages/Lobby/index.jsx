@@ -207,7 +207,7 @@ const PageLobby = () => {
                 />
 
                 <label id="select-area" for="theme-select-box" className="input-field">
-                  <label for="theme-select-box"> Tema das perguntas:</label>
+                  <label for="theme-select-box">Escolha um tema para excluir:</label>
                   <select
                     id='theme-select-box'
                     value={selectedOption}
