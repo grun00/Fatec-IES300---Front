@@ -5,6 +5,13 @@
   flex-direction: column;
 }
 
+#comprar{
+  text-decoration: none;
+  
+  color: white;
+  
+}
+
 #shopArea {
   width: 80%;
   max-width: 1400px;

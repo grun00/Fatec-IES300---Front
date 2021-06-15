@@ -24,16 +24,16 @@ function atualizaQuantidade(valor,netW){
     e.preventDefault();
 
     const rota = "/players/" + user._id;
-    const net = parseInt(user.netWorth,10)+netW
-    
+    const net = parseInt(user.money,10)+netW
+    console.log(net);
     if(CPFvalidation(document.getElementById('cpf').value)){
      
-      api.patch(rota,{  "netWorth": net })
+      api.patch(rota,{  "money": net })
 
       alert("Pedido realizado com sucesso !")
 
-      user.netWorth = net
-
+      user.money = net
+      
     }else{
       alert("Dados incorretos")
     }

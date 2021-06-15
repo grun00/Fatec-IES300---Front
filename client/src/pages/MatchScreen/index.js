@@ -43,6 +43,7 @@ const MatchScreen = () => {
       difficulty: currentQuestion.difficulty,
     };
     setMatchData(matchData);
+    console.log(matchData);
   };
 
   const handleTimeUp = () => {
@@ -108,10 +109,12 @@ const MatchScreen = () => {
   }, [timeUp]);
 
   const handleNextQuestion = () => {
-    if (questionNumber < questions?.length) {
+    if (questionNumber < questions?.length-8) {
       setIsReady(false);
       setQuestionNumber((prev) => (prev += 1));
-    } else if (questionNumber > questions?.length) {
+    } else /*if (questionNumber > questions?.length-14)*/ {
+      console.log(matchData);
+      console.log(roomInfo);
       setRoundMessage("Jogo Encerrado!");
       setMatchStart(false);
     }
