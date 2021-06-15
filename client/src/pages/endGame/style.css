@@ -1,0 +1,241 @@
+#rankingpage-area {
+    display: flex;
+    flex-direction: column;
+}
+
+table {
+	width: 600px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px -1px var(--primary-color);
+}
+
+th,
+td {
+	padding: 10px;
+	background-color: rgba(161, 51, 51, 0.2);
+	color: rgb(19, 16, 16);
+    
+}
+
+
+
+#ranking-area {
+    align-items: center;
+    align-self: center;
+    background-color: var(--font-color);
+    border: 3px solid var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0px 0px 26px -1px var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 3rem 4rem;
+    max-width: 1400px;
+    width: 60%;
+}
+
+.title-container {
+    position: relative;
+    align-self: center;
+    margin-top: 2rem;
+    font-size: 1rem;
+    padding: 2rem;
+    text-shadow: 1px 3px 0 #7A7A7A, 1px 13px 5px #aba8a8;
+    letter-spacing: 4px;
+    border-radius: 50px;
+    animation: is-bouncing-ranking 8s ease-in-out infinite alternate ;
+}
+
+.title-container .Trophy-image {
+    width: 50px;
+    position: absolute;
+    top: 10px;
+    animation: bitcoin-rotating 2.5s ease-in-out alternate-reverse infinite;
+}
+
+.Medal {
+    width: 70px;
+    position: absolute;
+    top: 10px;
+    animation: bitcoin-rotating 2.5s ease-in-out alternate-reverse infinite;
+}
+
+.title-container .Trophy-image:first-child {
+    left: -40px;
+}
+.title-container .Trophy-image:last-child {
+    right: -40px;
+    animation: bitcoin-rotating 2.5s ease-in-out alternate infinite;
+}
+
+.player-list {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 70%;
+    align-items: center;
+}
+.table-player1 {
+    display: flex;
+    flex-direction: column;
+    border-radius: 3rem;
+    margin: 10 auto;
+    width: 100%;
+    align-items: flex-start;
+    padding: 1rem 0;
+    background-color: var(--font-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px -1px var(--primary-color);
+    
+}
+.table-player2 {
+    display: flex;
+    flex-direction: column;
+    border-radius: 3rem;
+    margin: 0 auto;
+    width: 100%;
+    align-items: left;
+    padding: 1rem 0;
+    background-color: var(--font-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px -1px var(--primary-color);
+}
+
+.list-header {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+}
+
+.list-header h3 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    text-shadow: 1px 3px 2px #13262fc4;
+}
+
+.player-rank {
+    display: flex;
+    width: 80%;
+    padding: 1rem 1.8rem 1rem 2.3rem;
+    border-radius: 2.5em;
+    margin: 0.5rem;
+    background-color:var(--primary-color);
+    justify-content: space-between;   
+    align-items: center;
+}
+
+.player-rank:hover {
+    background-color: #23495a;
+    transition: all 0.3s;
+    transform: scale(1.05);
+}
+
+.current-player {
+    background-color: #5a3e23;
+    transform: scale(1.05);
+}
+
+.trophy-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-networth {
+    padding-right: 1rem;
+    font-family: 'Pixel-font';
+}
+
+.player-networth, 
+.player-name  {
+    font-size: 1.1rem;
+    color: var(--font-color);
+}
+
+.player-name{
+    padding-left: 1em;
+}
+
+@media (max-width: 1300px) {
+    .title-container {
+        font-size: 0.8rem;
+        padding: 1.3rem;
+    }
+
+    .title-container .Trophy-image {
+        width: 50px;
+        top: 5px;
+    }
+
+    .title-container .Trophy-image:first-child {
+        left: -25px;
+    }
+    .title-container .Trophy-image:last-child {
+        right: -25px;
+    }
+}
+
+@media (max-width: 1050px) {
+    #ranking-area {
+        width: 80%;
+    }
+
+}
+
+@media (max-width: 870px) {
+    .title-container {
+        font-size: 0.8rem;
+        padding: 1.3rem;
+        animation: none;
+    }
+
+    .list-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .player-networth {
+        padding-right: 0.95rem;
+    }
+    
+    .player-networth, 
+    .player-name  {
+        font-size: 0.95rem;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .Trophy-image {
+        display: none;
+    }
+
+    .title-container {
+        text-align: center;
+    }
+
+}
+
+
+@keyframes bitcoin-rotating {
+    from {
+        transform: rotate(-25deg);
+    } to {
+        transform: rotate(50deg);
+    }
+}
+
+@keyframes is-bouncing-ranking {
+    50% {
+        transform: translateY(8px) scale(1.2);
+    }
+
+    100% {
+        transform: translateY(-8px) scale(1);
+    }
+}
