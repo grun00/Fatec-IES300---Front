@@ -23,6 +23,7 @@ const Header = (props) => {
                             <li><Link to='/ranking'>Ranking</Link></li>
                             <li><Link to='/meuperfil'>Meu perfil</Link></li>
                             <li><Link to='/comprar'>Comprar VituCoins</Link></li>
+                            <li><Link to='/final-do-jogo'>Tela Final do Jogo</Link></li>
                             <li><Link to='/'>Sair</Link></li>
                         </ul>
                     </div>

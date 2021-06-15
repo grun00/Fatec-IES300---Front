@@ -17,6 +17,7 @@ import Lobby from "./pages/Lobby";
 import BuyCoins from "./pages/BuyCoins";
 import Error404 from "./pages/Error";
 import MyProfile from "./pages/MyProfile";
+import EndGame from "./pages/endGame"
 
 const Routes = () => {
   const [user, setUser] = useState(null);
@@ -47,6 +48,7 @@ const Routes = () => {
               <Route exact path="/lobby" component={Lobby} />
               <Route exact path="/comprar" component={BuyCoins} />
               <Route exact path="/meuperfil" component={MyProfile} />
+              <Route exact path="/final-do-jogo" component={EndGame} />
             </UserContext.Provider>
           </AuthContext.Provider>
         </SocketContext.Provider>
