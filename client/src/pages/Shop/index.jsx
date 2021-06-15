@@ -108,13 +108,7 @@ const ShopPage = () => {
     modal.classList.remove("show");
   }
 
-  function irCompra(){
-    console.log("teste");
-    window.location.href="/comprar";
-  }
-
-  
-  
+ 
 
   return (
     <>

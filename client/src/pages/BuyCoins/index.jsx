@@ -25,7 +25,7 @@ function atualizaQuantidade(valor,netW){
 
     const rota = "/players/" + user._id;
     const net = parseInt(user.money,10)+netW
-    console.log(net);
+    
     if(CPFvalidation(document.getElementById('cpf').value)){
      
       api.patch(rota,{  "money": net })
