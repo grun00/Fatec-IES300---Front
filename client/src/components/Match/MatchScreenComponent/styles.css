@@ -1,0 +1,596 @@
+@import '../../../global.css';
+
+.inativo {
+    display: none;
+}
+
+#vitinho svg{
+    width: 100px;
+    height: 150px;
+    position: fixed;
+    top: calc(100% - 144px);
+}
+
+
+.convidados svg, .universitarios svg{
+    width: 100%;
+    height: 150px;
+    position: fixed;
+    top: calc(100% - 150px);
+}
+
+.respostaUniversitarios, .respostaConvidados {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 80px;
+    color: red;
+}
+
+.container {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 100vw;
+    animation: gradient 5s linear infinite alternate;
+    background: #ffff;
+    background-size: 600% 600%;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+.gameToFill-area {
+    display: grid;
+    grid-template-rows: 90px calc(100vh - 90px);
+}
+
+.header {
+    background: #13262F;
+    width: 100vw;
+}
+
+#logo-header {
+    max-width: 140px;
+    min-width: 140px;
+    margin: 5px;
+    animation: is-upping-scale 1s ease-out infinite alternate;
+}
+
+#configLogin {
+    float: right;
+    width: 160px;
+    height: 75px;
+    display: grid;
+    margin-right: 30px;
+    grid-template-columns: 1fr 1fr;
+    padding: 8px;
+}
+
+.border-icone {
+    width: 60px;
+    margin: 10px;
+}
+
+#div-login-header {
+    border-radius: 100%;
+    background: #C4C4C4;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+}
+
+#login-header {
+    width: 55px;
+    position: relative;
+    margin: 5px 3px;
+    z-index: 2;
+}
+
+#menu-header {
+    width: 60px;
+    position: relative;
+    z-index: 2;
+}
+
+#div-menu-container {
+    position: fixed;
+    top: -25vh;
+    right: -65vh;
+    width: 150vh;
+    height: 150vh;
+    border-radius: 100%;
+    background: #13262F;
+}
+
+#div-menu-itens {
+    position: relative;
+    top: 50vh;
+    margin: 44px;
+    text-align: right;
+    width: 70vh;
+    color: white;
+}
+
+#div-menu-itens a {
+    display: block;
+    color: wheat;
+    margin: 20px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    text-decoration: none;
+}
+
+.gameInterface-area {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;  
+}
+
+.perguntaSection {
+    background: rgba(19, 38, 47, 0.45);     
+}
+
+#pergunta, .alternativa, .opcaoPular, .opcaoParar {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+}
+
+#tempo {
+    font-size: 3.5rem;
+    text-align: center;
+    color: var(--font-color);
+    font-family: "Pixel-font";
+    margin: 2rem;
+    color: #ffffff;
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+        0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+        0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+        0 20px 20px rgba(0, 0, 0, 0.15);
+}
+
+#pergunta {
+    font-size: 1.6rem;
+    color: black;
+    text-align: center;
+    padding: 2rem;
+}
+
+.ajudaSection {
+    display: flex;
+    flex-direction: column;
+    background: rgba(19, 38, 47, 0.6);
+    justify-content: space-evenly;
+}
+
+.iconesAjuda {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 30%;
+}
+
+.iconesCartas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.containerAjuda, .containerCarta{
+    height: 100px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    color: black;
+    text-align: center;
+    float: left;
+    
+}
+
+.containerAjuda {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.containerCarta{
+    margin: 10px;
+}
+
+.opcaoAjuda {
+    width: 90px;
+    margin: 1.3rem;
+    padding: 0.3rem;
+    border-radius: 50%;
+    background: #c4c4c4;    
+    box-shadow: inset 3px 0 0 #c4c4c4, inset -3px 0 0 #c4c4c4,
+     3px 3px 0 #c4c4c4,  -3px 3px 0 #c4c4c4,
+     4px 4px 0 #999,  -4px 4px 0 #999,
+    0 6px 0 #666, 0 9px 0 #666, 0 12px 0 #666, 0 15px 0 #666;
+    cursor: pointer;
+}
+
+.opcaoAjuda:hover {
+    transform: translateY(4px);
+    box-shadow: inset 3px 0 0 #c4c4c4, inset -3px 0 0 #c4c4c4,
+    3px 3px 0 #c4c4c4,  -3px 3px 0 #c4c4c4,
+    4px 4px 0 #999,  -4px 4px 0 #999,
+    0 6px 0 #666, 0 9px 0 #666, 0 12px 0 #666;
+    transition: all 150ms ease-in;
+}
+
+.opcaoAjuda:active {
+    transform: translateY(11px);
+    box-shadow:inset 3px 0 0 #c4c4c4, inset -3px 0 0 #c4c4c4,
+    3px 3px 0 #c4c4c4,  -3px 3px 0 #c4c4c4;
+    transition: all 150ms ease-in;
+}
+
+.disabledOpcaoAjuda {
+    cursor: not-allowed;
+}
+
+.icone-ajuda {
+    align-self: center;
+}
+
+#ajudaName {
+    font-family: "Pixel-font";
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-shadow: 0 1px 0 #696969, 0 2px 0 #777;
+    transition: all 150ms ease-in-out;
+}
+
+.opcaoAjuda:hover ~ #ajudaName  {
+    color: var(--secondary-color);
+    text-shadow: 0 1px 0 #444, 0 2px 0 #494949;  
+    transition: all 150ms ease-in-out;
+}
+
+.icone-carta {
+    width: 125px;
+    margin: 40px;
+}
+
+.opcaoPular {
+    background: var(--primary-color);
+    box-shadow: 0 10px 0 #0d1a20;
+    text-shadow: 0 1px 0 #696969, 0 2px 0 #777;
+    border-radius: 10px;
+    color: white;
+    font-family: "Pixel-font";
+    padding: 15px 8px;
+    cursor: pointer;
+    transition: all ease 100ms;
+}
+
+.opcaoPular:hover{
+    transform: translateY(2px);
+    box-shadow: 0 8px 0 #0d1a20;
+    transition: all ease 500ms;
+}
+
+.opcaoPular:active {
+    transform: translateY(10px);
+    box-shadow: none;
+    transition: all ease 100ms;
+}
+
+
+.opcaoParar {
+    position: relative;
+    margin-top: 200px;
+    font-family: "Pixel-font";
+    text-shadow: 0 1px 0 #696969, 0 2px 0 #777;
+    width: 300px;
+    margin-left: calc( 50% - 150px);
+    border-radius: 10px;
+    background: #8C1C13;
+    box-shadow: inset 10px 0 0 #881a12, inset -10px 0 0 #881a12,
+    10px 2px 0 #881a12, -10px 2px 0 #881a12, 
+    10px 4px 0 #881a12, -10px 4px 0 #881a12,
+    0 6px 0 #5d130e, 0 8px 0 #5d130e, 
+    0 10px 0 #5d130e, 0 12px 0 #5d130e, 0 14px 0 #5d130e, 
+    0 16px 0 #5d130e, 0 18px 0 #5d130e, 0 20px 0 #5d130e,
+    0 22px 0 #5d130e, 0 24px 0 #5d130e, 0 26px 0 #5d130e,
+    0 28px 0 #5d130e,
+    7px 28px 3px #4e110d, -7px 28px 3px #4e110d, 
+    7px 30px 3px #4e110d, -7px 30px 3px #4e110d;
+    border-radius: 50%;
+    color: white;
+    padding: 40px 8px;
+    cursor: pointer;
+    transition: all ease 200ms;
+    letter-spacing: 1.2px;
+}
+
+.opcaoParar:hover {
+    transform: translateY(5px);
+    box-shadow: inset 10px 0 0 #881a12, inset -10px 0 0 #881a12,
+    10px 2px 0 #881a12, -10px 2px 0 #881a12, 
+    10px 4px 0 #881a12, -10px 4px 0 #881a12,
+    0 6px 0 #5d130e, 0 8px 0 #5d130e, 
+    0 10px 0 #5d130e, 0 12px 0 #5d130e, 0 14px 0 #5d130e, 
+    0 16px 0 #5d130e, 0 18px 0 #5d130e,  0 20px 0 #5d130e,
+    0 22px 0 #5d130e, 0 24px 0 #5d130e,
+    7px 24px 3px #4e110d, -7px 24px 3px #4e110d, 
+    7px 26px 3px #4e110d, -7px 26px 3px #4e110d;
+    transition: all 0.5s ease;
+}
+
+.opcaoParar:active {
+    transform: translateY(30px);
+    box-shadow: inset 10px 0 0 #881a12, inset -10px 0 0 #881a12,
+    10px 2px 0 #881a12, -10px 2px 0 #881a12, 
+    10px 4px 0 #881a12, -10px 4px 0 #881a12;
+    transition: all 200ms ease;
+}
+
+.field {
+    padding: 3px 10px;
+}
+
+.alternativa {
+    color: white;
+    position: relative;
+    border-radius: 8px;
+    margin: 1rem 0;
+    transition: all 300ms ease;
+}
+
+.desabilitada {
+    cursor: default;
+}
+
+
+.naoEscolhida {
+    background: var(--secondary-color);
+    box-shadow: 0 10px 0 #caa211;
+    cursor: pointer;
+}
+
+.naoEscolhida:hover {
+    box-shadow: 0 8px 0 #caa211;
+    transform: translateY(2px);
+    transition: all 300ms ease;
+}
+
+.naoEscolhida:active {
+    box-shadow: none;
+    transform: translateY(8px);
+    transition: all 150ms ease;
+}
+
+.escolhida, .escolhida:focus{
+    background: #ffd900;
+    box-shadow: 0 10px 0 #dbba00;
+    color: rgba(0, 0, 0, 0.4);
+    transition: all 300ms ease-in-out;
+    background-image: url('../../../images/escolhido.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-x: 22px;
+    transition: all 300ms ease-in-out;
+}
+
+.escolhida:hover {
+    box-shadow: 0 8px 0 #dbba00;
+    transform: translateY(2px);
+    transition: all 300ms ease;
+}
+
+.escolhida:active {
+    box-shadow: none;
+    transform: translateY(8px);
+    transition: all 150ms ease;
+}
+
+.correta, .correta:focus{
+    background: #0b6b09;
+    box-shadow: 0 10px 0 #064b05;
+    background-image: url('../../../images/certo.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-x: 22px;
+    transition: all 300ms ease-in-out;
+}
+
+.correta:hover {
+    box-shadow: 0 8px 0 #064b05;
+    transform: translateY(2px);
+    transition: all 300ms ease;
+}
+
+.correta:active {
+    box-shadow: none;
+    transform: translateY(8px);
+    transition: all 150ms ease;
+}
+
+
+.errada, .errada:focus {
+    background: #8C1C13;
+    box-shadow: 0 10px 0 #4e110d;  
+    background-image: url('../../../images/errado.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-position-x: 22px;  
+    transition: all 300ms ease-in-out;
+}
+
+.errada:hover {
+    box-shadow: 0 8px 0 #4e110d;
+    transform: translateY(2px);
+    transition: all 300ms ease;
+}
+
+
+.errada:active {
+    box-shadow: none;
+    transform: translateY(8px);
+    transition: all 150ms ease;
+}
+
+.eliminada {
+    background: #785D1B;
+    box-shadow: 0 10px 0 #644d11;
+    cursor: not-allowed;
+}
+
+.eliminada, .eliminada:focus {
+    background: #785D1B;
+    border: 2px solid #785D1B;    
+}
+
+.eliminada:hover {
+    transform: translateY(2px);
+    box-shadow: 0 8px 0 #644d11;
+    transition: all 300ms ease;
+}
+
+.eliminada:active {
+    transform: translateY(8px);
+    box-shadow: none;
+    transition: all 200ms ease;
+}
+
+.gameLoad-area, .gameCartas-area {
+    position: absolute;
+    top: 90px;
+    background: #000000c9;
+    width: 100vw;
+    height: calc(100vh - 90px);
+    text-align: center;
+}
+
+.gameLoad-area h1,  .gameLoad-area h4 {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    color: white;
+}
+
+.gameLoad-area h1 {
+    font-size: 5rem;
+    margin-top: calc(50vh - 7rem);
+}
+
+.gameLoad-area h4 {
+    font-size: 1rem;
+    font-size: 1.25rem;
+}
+
+#waitingPlayer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+#roundMessage {
+    font-size: 4rem;
+    color: var(--font-color);
+    font-family: "Pixel-font";
+}
+
+#jumpingDots {
+    display: flex;
+    flex-direction: row;
+}
+
+#jumpingDots .circleWaiting {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: var(--font-color);
+    margin: 70px 5px;
+    animation: jumping-dots 1.25s ease-in-out infinite alternate;
+}
+
+#jumpingDots .circleWaiting:nth-child(2){
+    animation: jumping-dots 1.25s 0.25s ease-in-out infinite alternate;
+}
+
+#jumpingDots .circleWaiting:nth-child(3){
+    animation: jumping-dots 1.25s 0.5s ease-in-out infinite alternate;
+}
+
+
+@media(min-width: 1040px) {
+   /* #logo-menu {
+        min-width: 400px;
+        max-width: 40vw;
+        animation: is-bouncing 2s ease infinite alternate;
+    }
+
+    .toFill-area {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    #background-gamescreen {
+        background-color: #13262F;
+    }
+*/
+    
+    
+}
+
+@media(max-width:1039px) {
+   /* #logo-header {
+        max-width: 150px;
+        min-width: 150px;
+        animation: is-upping-scale 1s ease-out infinite alternate;
+    }
+
+    /*.toFill-area {
+        display: flex;
+        justify-content: center;
+    }*/
+}
+
+@keyframes gradient {
+    from/*INICIO ANIMAÇÃO*/
+    {
+        background-position: 0 50%;
+    }
+    to {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes is-bouncing {
+    to {
+        transform: translateY(30px);
+    }
+}
+
+@keyframes is-upping-scale {
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes jumping-dots{
+    50% {
+        transform: translateY(50px);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}

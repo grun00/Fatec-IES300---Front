@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
 import Header from "../../components/Header/Header";
 import Avatar from "../../assets/avatar.svg";
 import Input from "../../components/Input/textInput";
 import Pencil from "../../assets/pencil.svg";
 import Vitucoin from "../../images/bitcoin.png";
+import {UserContext} from "../../context/UserContext";
 
 const PageMyProfile = () => {
-  const [profileNickname, setProfileNickname] = useState("Astolfinho");
-  const [profileName, setProfileName] = useState("Astolfo Santos");
-  const [playerStatus, setPlayerStatus] = useState("Offline");
-  const [playerCreate, setPlayerCreate] = useState("02/06/2000");
-  const [playerNetworth, setPlayerNetworth] = useState("1000000");
-  const [playerVictorys, setPlayerVictorys] = useState("26");
-  const [playerAmount, setPlayerAmount] = useState("1300");
+  const {user} = useContext(UserContext);
+  const [profileNickname, setProfileNickname] = useState(user.username);
+  const [profileName, setProfileName] = useState(user.name);
+  const [playerStatus, setPlayerStatus] = useState("Online");
+  const [playerCreate, setPlayerCreate] = useState(user.dt_criacao);
+  const [playerNetworth, setPlayerNetworth] = useState(user.netWorth);
+  const [playerVictorys, setPlayerVictorys] = useState(user.wins);
+  const [playerAmount, setPlayerAmount] = useState(user.money);
 
   function showModal(modalID) {
     let modal = document.getElementById(modalID);
@@ -28,11 +30,13 @@ const PageMyProfile = () => {
     });
   }
   
+
+
   return (
     <>
       <div id="profile-page">
         <Header />
-        <form id="profile-area">
+        <div id="profile-area">
           <h1>Meu Perfil</h1>
           <div id="profile-data">
             <div id="photo-field">
@@ -54,7 +58,7 @@ const PageMyProfile = () => {
                   <h3>Nome: <span className="profile-infos">{profileName}</span></h3>
                   <h3>Nick: <span className="profile-infos">{profileNickname}</span></h3>
                   <div id="vitucoin-amount">
-                    <h3>Minhas Vitucoins</h3>
+                    <h2 className="h2-profile">Minhas Vitucoins</h2>
                     <img
                       id="image-amount"
                       src={Vitucoin}
@@ -85,16 +89,16 @@ const PageMyProfile = () => {
             <div id="modal-change-avatar">
               <h3>Escolha seu icone de avatar</h3>
               <div className="modal-fields">
-              <form className="modal-fields">
+              <div className="modal-fields">
                 <button className="modal-close-button">X</button>
 
                 <button className="button-accept">Selecionar</button>
-              </form>
+              </div>
               </div>
             </div>
           </div>
 
-        </form>
+        </div>
       </div>
     </>
   );

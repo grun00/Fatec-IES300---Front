@@ -1,141 +1,180 @@
-@import '../../global.css';
+@import "../../global.css";
 
 nav#header {
-    display: flex;
-    width: 100%;
-    height: 90px;
-    background-color: var(--primary-color);
-    align-items: center;
-    z-index: 100;
+  display: flex;
+  width: 100%;
+  height: 90px;
+  background-color: var(--primary-color);
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
 }
 
 nav h3 {
-    color: var(--font-color);
-    display: block;
+  color: var(--font-color);
+  display: block;
 }
 
 img#logo-header {
-    top: 10px;
-    left: 30px;
-    position: absolute;
-    max-width: 130px;
-    min-width: 130px;
-    animation: is-upping-scale 2s ease  infinite alternate;
-    cursor: pointer;
+  top: 10px;
+  left: 30px;
+  position: absolute;
+  max-width: 130px;
+  min-width: 130px;
+  animation: is-upping-scale 2s ease infinite alternate;
+  cursor: pointer;
 }
 
 #hamburguer-checkbox {
-    display: none;
+  display: none;
 }
 
 .menu {
-    border-radius: 50%;
-    width: 80px;
-    height: 10vh;
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 0;
-    transition: 0.5s ease;
+  border-radius: 50%;
+  width: 80px;
+  height: 10vh;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 0;
+  transition: 0.5s ease;
 }
 
 .menu:hover {
-    transform: scale(1.1);
-    transition: 0.5s ease;
+  transform: scale(1.1);
+  transition: 0.5s ease;
 }
 
 .hamburguer {
-    display: block;
-    background-color: var(--secondary-color);
-    width: 45px;
-    height: 4px;
-    border-radius: 16px;
-    position: relative;
-    left: 15px;
-    top: 40px;
-    transition: 0.5s ease;
+  display: block;
+  background-color: var(--secondary-color);
+  width: 45px;
+  height: 4px;
+  border-radius: 16px;
+  position: relative;
+  left: 15px;
+  top: 40px;
+  transition: 0.5s ease;
 }
 
-.hamburguer::after, .hamburguer::before{
-    background-color: var(--secondary-color);
-    border-radius: 16px;
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transition: 0.3s ease;
+.hamburguer::after,
+.hamburguer::before {
+  background-color: var(--secondary-color);
+  border-radius: 16px;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: 0.3s ease;
 }
 
 .hamburguer::before {
-    top: -10px;
+  top: -10px;
 }
 
 .hamburguer::after {
-    bottom: -10px;
+  bottom: -10px;
 }
 
 #links-hamburguer {
-    list-style: none;
-    position: absolute;
-    top: 80px;
-    right: 20px;
+  list-style: none;
+  position: absolute;
+  top: 80px;
+  right: 20px;
 }
 
 #links-hamburguer li {
-    display: none;
-    text-align: right;
-    padding: 0.6rem;
-    width: 300px;
-    cursor: default;
+  display: none;
+  text-align: right;
+  padding: 0.6rem;
+  width: 300px;
+  cursor: default;
 }
 
-#links-hamburguer li a{
-    text-decoration: none;
-    font-size: 1.1rem;
-    padding: 0.3rem;
-    color: var(--primary-color);
+#links-hamburguer li a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.3rem;
+  color: var(--primary-color);
 }
 
 input:checked ~ label .hamburguer {
-    transform: rotate(45deg);
-    background-color: var(--primary-color);
+  transform: rotate(45deg);
+  background-color: var(--primary-color);
 }
 
 input:checked ~ label .hamburguer::before {
-    transform: rotate(90deg);
-    top: 0;
-    background-color: var(--primary-color);
+  transform: rotate(90deg);
+  top: 0;
+  background-color: var(--primary-color);
 }
 
-input:checked ~ label .hamburguer::after{
-    transform: rotate(90deg);
-    bottom: 0;
-    background-color: var(--primary-color);
+input:checked ~ label .hamburguer::after {
+  transform: rotate(90deg);
+  bottom: 0;
+  background-color: var(--primary-color);
 }
 
 input:checked ~ label .menu:hover {
-    transform: none;
+  transform: none;
 }
 
-input:checked ~ label span{
-    box-shadow: 0 0 0 320px var(--secondary-color), 0 0 0 320px var(--secondary-color);
+input:checked ~ label span {
+  box-shadow: 0 0 0 380px var(--secondary-color),
+    0 0 0 380px var(--secondary-color);
 }
 
-input:checked ~ label ul#links-hamburguer li{
-    display: flex;
-    flex-direction: row-reverse;
-    transition: all 0.3s ease;
+input:checked ~ label ul#links-hamburguer li {
+  display: flex;
+  flex-direction: row-reverse;
+  transition: all 0.3s ease;
 }
 
+input:checked ~ label ul#links-hamburguer li a:hover {
+  color: var(--font-color);
+  transition: all 0.3s;
+}
 
-input:checked ~ label ul#links-hamburguer li a:hover{
-    color: var(--font-color);
-    transition: all 0.3s;
+#userIdentification{ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+#userAvatarHeader {
+  width: 50px;
+  margin: 0 10px;
+  transition: all 300ms ease;
+}
+
+#userIdentification:hover #userAvatarHeader {
+  transform: scale(1.2);
+  transition: all 300ms ease;
+}
+
+#loggedHeader {
+  font-family: "Pixel-font";
+  font-size: 1.3rem;
+  color: var(--secondary-color);
+  letter-spacing: 1.3px;
+  text-shadow: 1px 3px 0 #7a7a7a;
+}
+
+#userLogged{
+  text-decoration: none;
+  transition: all 300ms ease;
+}
+
+#userLogged:hover {
+  color: var(--font-color);
+  transform: scale(1.2);
+  transition: all 300ms ease;
 }
 
 @keyframes is-upping-scale {
-    to {
-        transform: scale(1.05);
-    }
+  to {
+    transform: scale(1.05);
+  }
 }
