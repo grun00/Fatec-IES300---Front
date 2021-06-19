@@ -29,7 +29,7 @@ const MatchScreenComponent = (props) => {
   }
     
   const getRespUniv = () => {
-    const prob = 70 - 10 * Number(1); //probabilidade em % da resposta correta (diminui com a dificuldade)
+    const prob = 70 - 10 * Number(pergunta.difficulty); //probabilidade em % da resposta correta (diminui com a dificuldade)
     const respostaUniversitario = [];
     const resposta = ["A", "B", "C", "D"];
     const max = 300 / (100 - prob);
@@ -42,7 +42,7 @@ const MatchScreenComponent = (props) => {
   }    
 
   const getRespConv = () => {
-    const prob = 60 - 10 * Number(1); //probabilidade em % da resposta correta (diminui com a dificuldade)
+    const prob = 60 - 10 * Number(pergunta.difficulty); //probabilidade em % da resposta correta (diminui com a dificuldade)
     const respostaConvidado = [];
     const resposta = ["A", "B", "C", "D"];
     const max = 300 / (100 - prob);
