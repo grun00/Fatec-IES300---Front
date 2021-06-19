@@ -123,7 +123,7 @@ const MatchScreenComponent = (props) => {
     const status = statusAlternativa.slice();
     for (let opcao in status) {
         if (status[opcao].search("escolhida") != -1) {
-          try {
+          
             if(pergunta.answerIndex == opcao) {
               status[opcao] = "correta";  
               props.handlePlayerAnswer({alternative: opcao, isCorrect: true});   
@@ -131,10 +131,7 @@ const MatchScreenComponent = (props) => {
               status[opcao] = "errada";
               props.handlePlayerAnswer({alternative: opcao, isCorrect: false});
           }
-          } catch (error) {
-            console.log("erro");
-          }
-          
+            
         }
     }
     setStatusAlternativa(status); //console.log('verificou')       
@@ -359,7 +356,7 @@ const MatchScreenComponent = (props) => {
             cont++;
         }   
         setInicializado(true);       
-        setTempo(3.0);          //liberarAlternativas(i+1);
+        setTempo(15.0);          //liberarAlternativas(i+1);
     }, 1000);
   }
 

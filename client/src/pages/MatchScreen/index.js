@@ -141,8 +141,7 @@ const MatchScreen = () => {
  
 
   const handleNextQuestion = () => {
-    console.log(questionNumber);
-    console.log(questions?.length-14);
+    
     if (questionNumber < questions?.length) {
       setIsReady(false);
       setQuestionNumber((prev) => (prev += 1));
