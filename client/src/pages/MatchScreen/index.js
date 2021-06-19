@@ -67,7 +67,7 @@ const MatchScreen = () => {
   
   };
 
-/*
+
   useEffect(() => {
     setUpdateInfo(true);
     return () => socket.close();
@@ -146,7 +146,7 @@ const MatchScreen = () => {
   
   }, [timeUp]);
 
-  */
+  
 
 
 

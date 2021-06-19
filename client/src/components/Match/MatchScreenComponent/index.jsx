@@ -126,49 +126,54 @@ const MatchScreenComponent = (props) => {
 
       case 1:
 
-        setScoreAtual(old_score => {
+        setScoreAtual(old_score => 
           old_score + 10000
-          props.handleScoreAtual(old_score + 10000)
+          
 
-        }
+        
 
         )
+        props.handleScoreAtual(scoreAtual )
         break;
       case 2:
 
-        setScoreAtual(old_score => {
+        setScoreAtual(old_score => 
           old_score + 20000
-          props.handleScoreAtual(old_score + 20000)
+          
 
-        }
+        
 
         )
+        props.handleScoreAtual(scoreAtual + 20000)
         break;
       case 3:
 
-        setScoreAtual(old_score => {
+        setScoreAtual(old_score => 
           old_score + 70000
-          props.handleScoreAtual(old_score + 70000)
+          
 
-        }
+        
 
         )
+        props.handleScoreAtual(scoreAtual + 70000)
         break;
       case 4:
 
-        setScoreAtual(old_score => {
+        setScoreAtual(old_score => 
           old_score * 2
-          props.handleScoreAtual(old_score * 2)
+          
 
-        }
+        
 
         )
+        props.handleScoreAtual(scoreAtual * 2)
         break;
 
       default:
         console.log("pergunta sem nivel");
     }
   }
+
 
   const verificar = () => { //verificar alternativa escolhida apos termino
     const status = statusAlternativa.slice();
@@ -410,7 +415,7 @@ const MatchScreenComponent = (props) => {
         cont++;
       }
       setInicializado(true);
-      setTempo(15.0);          //liberarAlternativas(i+1);
+      setTempo(5.0);          //liberarAlternativas(i+1);
     }, 1000);
   }
 
