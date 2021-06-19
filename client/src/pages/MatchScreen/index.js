@@ -19,6 +19,7 @@ const MatchScreen = () => {
   const [questionNumber, setQuestionNumber] = useState(-1);
   const [matchData, setMatchData] = useState(null);
   const [skips, setSkips] = useState(1);
+  const [scoreAtual, setScoreAtual] = useState(0);
 
   // Match Flags
   const [isReady, setIsReady] = useState(false);
@@ -38,18 +39,19 @@ const MatchScreen = () => {
   
 
   const handlePlayerAnswer = (answer) => {
+    /*
     var point = 0;
     if(answer.isCorrect ){
       point += 2;
     }
-
+*/
     const matchData = {
       questionNumber,
       player: user.username,
       myChosenAlternative: answer.alternative,
       correct: answer.isCorrect,
       difficulty: currentQuestion.difficulty,
-      points: point,
+      points: scoreAtual,
     };
     setMatchData(matchData);
     console.log(matchData);
@@ -59,6 +61,13 @@ const MatchScreen = () => {
     setTimeUp(true);
   };
 
+  const handleScoreAtual = (score) => {
+
+    setScoreAtual(score);
+  
+  };
+
+/*
   useEffect(() => {
     setUpdateInfo(true);
     return () => socket.close();
@@ -134,7 +143,11 @@ const MatchScreen = () => {
     setTimeUp(false);
     setMatchData(null);
     setIsReady(true);
+  
   }, [timeUp]);
+
+  */
+
 
 
   /* Acrescentei esse mas n deu certo, sem esse até que uma das telas tinha dado certo, agr nenhuma deu. */ 
@@ -180,11 +193,13 @@ const MatchScreen = () => {
           handlePlayerAnswer={handlePlayerAnswer}
           handleTimeUp={handleTimeUp}
           handleNextQuestion={handleNextQuestion}
+          handleScoreAtual={handleScoreAtual}
         />
       ) : ( fim ? (
         
         <EndGame 
           nome={roomInfo}
+          scoreAtual={scoreAtual}
         />
         ) : (
         

@@ -19,11 +19,11 @@ const MatchScreenComponent = (props) => {
     const itens = {};
     let i = 4;
     for (let a = 0; a < 4; a++) {
-        do {
+      do {
         i = Math.floor(Math.random() * 4); //sorteia as cartas
-        } while (itens[i] !== undefined);
-        itens[i] = i;
-        cartaDesvirada[a] = i;
+      } while (itens[i] !== undefined);
+      itens[i] = i;
+      cartaDesvirada[a] = i;
     }
     return cartaDesvirada;
   }
@@ -34,9 +34,9 @@ const MatchScreenComponent = (props) => {
     const resposta = ["A", "B", "C", "D"];
     const max = 300 / (100 - prob);
     for (let a = 0; a < 3; a++) {
-        let i = Math.floor(Math.random() * max);
-        let rand = i < 4 ? i : pergunta.answerIndex; //sorteia a resposta proporcionalmente
-        respostaUniversitario[a] = resposta[rand];
+      let i = Math.floor(Math.random() * max);
+      let rand = i < 4 ? i : pergunta.answerIndex; //sorteia a resposta proporcionalmente
+      respostaUniversitario[a] = resposta[rand];
     }
     return respostaUniversitario;
   }
@@ -47,9 +47,9 @@ const MatchScreenComponent = (props) => {
     const resposta = ["A", "B", "C", "D"];
     const max = 300 / (100 - prob);
     for (let a = 0; a < 5; a++) {
-        let i = Math.floor(Math.random() * max);
-        let rand = i < 4 ? i : pergunta.answerIndex; //sorteia a resposta proporcionalmente
-        respostaConvidado[a] = resposta[rand];
+      let i = Math.floor(Math.random() * max);
+      let rand = i < 4 ? i : pergunta.answerIndex; //sorteia a resposta proporcionalmente
+      respostaConvidado[a] = resposta[rand];
     }
     return respostaConvidado;
   }
@@ -74,7 +74,7 @@ const MatchScreenComponent = (props) => {
 
   const [statusLoad, setStatusLoad] = useState('inativo');
   const [statusMenu, setStatusMenu] = useState('inativo');
-  const [msgLoad, setMgsLoad] = useState(["",""]);
+  const [msgLoad, setMgsLoad] = useState(["", ""]);
   const [statusPulo, setStatusPulo] = useState(3);
   const [statusCartas, setStatusCartas] = useState('inativo');
   const [statusVitinho, setStatusVitinho] = useState('inativo');
@@ -87,15 +87,15 @@ const MatchScreenComponent = (props) => {
   const idAlternativa = ['A', 'B', 'C', 'D'];
   const pergunta = props.currentQuestion;
 
-  const [statusAlternativa, setStatusAlternativa] = useState(()=>iniciarStatusAlternativas());
-  const [statusAlterVisibilidade, setStatusAlterVisibilidade] = useState(()=>iniciarStatusAlterVisibilidade());
-  const [statusRespConvidado, setStatusRespConvidado] = useState(()=>iniciarStatusRespConv());
-  const [statusRespUniversitario, setStatusRespUniversitario] = useState(()=>iniciarStatusRespUniv());
+  const [statusAlternativa, setStatusAlternativa] = useState(() => iniciarStatusAlternativas());
+  const [statusAlterVisibilidade, setStatusAlterVisibilidade] = useState(() => iniciarStatusAlterVisibilidade());
+  const [statusRespConvidado, setStatusRespConvidado] = useState(() => iniciarStatusRespConv());
+  const [statusRespUniversitario, setStatusRespUniversitario] = useState(() => iniciarStatusRespUniv());
   const [tempo, setTempo] = useState('');
-  const [cartaViradas, setCartaViradas] = useState(()=>getCartaVir()); //todas viradas
-  const [cartaDesviradas, setCartaDesviradas] = useState(()=>getCartaDesv());
-  const [respostaUniversitarios, setRespostaUniversitarios] = useState(()=>getRespUniv());
-  const [respostaConvidados, setRespostaConvidados] = useState(()=>getRespConv());
+  const [cartaViradas, setCartaViradas] = useState(() => getCartaVir()); //todas viradas
+  const [cartaDesviradas, setCartaDesviradas] = useState(() => getCartaDesv());
+  const [respostaUniversitarios, setRespostaUniversitarios] = useState(() => getRespUniv());
+  const [respostaConvidados, setRespostaConvidados] = useState(() => getRespConv());
   const [scoreAtual, setScoreAtual] = useState(0);
 
   const handleClickMenu = () => {
@@ -115,55 +115,86 @@ const MatchScreenComponent = (props) => {
   const marcar = (opcao) => { //marcar alternativa escolhida
     const status = statusAlternativa.slice();
     for (let i in status)
-        status[i] = "naoEscolhida";
+      status[i] = "naoEscolhida";
     status[opcao] = "escolhida";
     setStatusAlternativa(status);
-}
+  }
 
-const add_score = (difficulty) => {
+  const add_score = (difficulty) => {
+
     switch (difficulty) {
+
       case 1:
-        setScoreAtual(old_score => old_score + 10000)
+
+        setScoreAtual(old_score => {
+          old_score + 10000
+          props.handleScoreAtual(old_score + 10000)
+
+        }
+
+        )
         break;
       case 2:
-        setScoreAtual(scoreAtual + 20000)
+
+        setScoreAtual(old_score => {
+          old_score + 20000
+          props.handleScoreAtual(old_score + 20000)
+
+        }
+
+        )
         break;
       case 3:
-        setScoreAtual(scoreAtual + 70000)
+
+        setScoreAtual(old_score => {
+          old_score + 70000
+          props.handleScoreAtual(old_score + 70000)
+
+        }
+
+        )
         break;
       case 4:
-        setScoreAtual(scoreAtual *2)
+
+        setScoreAtual(old_score => {
+          old_score * 2
+          props.handleScoreAtual(old_score * 2)
+
+        }
+
+        )
         break;
+
       default:
         console.log("pergunta sem nivel");
     }
-}
+  }
 
   const verificar = () => { //verificar alternativa escolhida apos termino
     const status = statusAlternativa.slice();
     for (let opcao in status) {
-        if (status[opcao].search("escolhida") != -1) {
+      if (status[opcao].search("escolhida") != -1) {
 
-          if(pergunta.answerIndex == opcao) {
-              status[opcao] = "correta";
-              add_score(pergunta.difficulty);
-              props.handlePlayerAnswer({alternative: opcao, isCorrect: true});
+        if (pergunta.answerIndex == opcao) {
+          status[opcao] = "correta";
+          add_score(pergunta.difficulty);
+          props.handlePlayerAnswer({ alternative: opcao, isCorrect: true });
 
-          } else {
-              status[opcao] = "errada";
-              props.handlePlayerAnswer({alternative: opcao, isCorrect: false});
-          }
-            
+        } else {
+          status[opcao] = "errada";
+          props.handlePlayerAnswer({ alternative: opcao, isCorrect: false });
         }
+
+      }
     }
     setStatusAlternativa(status); //console.log('verificou')
     setInicializado(false);
     setTimeout(() => {  //console.log('atualizou')
-        setFinalizado(true);
-        carregarPergunta(); //*******no meu codigo era assim que carregava o proximo ******************//
+      setFinalizado(true);
+      carregarPergunta(); //*******no meu codigo era assim que carregava o proximo ******************//
 
-  }, 1500);
-  console.log(`score: ${scoreAtual}`);
+    }, 1500);
+    console.log(`score: ${scoreAtual}`);
   }
 
   const carregarPergunta = () => {
@@ -214,11 +245,11 @@ const add_score = (difficulty) => {
   }, [pergunta]);
 
   useEffect(() => {
-    !finalizado &&  statusLoad === "inativo" && iniciar();
+    !finalizado && statusLoad === "inativo" && iniciar();
   }, [finalizado]);
 
   useEffect(() => {
-    if(!encerrado && tempo > 0.0){
+    if (!encerrado && tempo > 0.0) {
       const timer = setTimeout(() => {
         const tempoAtual = tempo;
         setTempo(tempoAtual - 0.1); //funcionamento do cronometro
@@ -298,18 +329,18 @@ const add_score = (difficulty) => {
   };
 
   const tempoRespostaUniversitarios = (i, ultimo) => {
-    setTimeout(() =>  {
+    setTimeout(() => {
       const statusRespUn = statusRespUniversitario.slice();
-      statusRespUn[(i+2)%3] = "inativo";
+      statusRespUn[(i + 2) % 3] = "inativo";
       statusRespUn[i] = "ativo";
       if (i != ultimo) tempoRespostaUniversitarios((i + 1) % 3, ultimo);
       else
-        setTimeout(() =>  {
+        setTimeout(() => {
           const status = statusRespUniversitario.slice();
           status[i] = "inativo";
           setStatusRespUniversitario(status);
-          setTimeout(() =>  {
-              setStatusUniversitarios('inativo');
+          setTimeout(() => {
+            setStatusUniversitarios('inativo');
           }, (1000));
         }, Math.floor(Math.random() * 1000) + 1000);
       setStatusRespUniversitario(statusRespUn);
@@ -368,18 +399,18 @@ const add_score = (difficulty) => {
 
   const liberarAlternativas = () => {
     setTimeout(() => {
-        const status = statusAlterVisibilidade.slice();
-        let cont = 0;
-         while (cont < 4) {
-            if (status[cont] == "inativo") {
-                status[cont] = ""
-                setStatusAlterVisibilidade(status);
-                return;
-            }
-            cont++;
+      const status = statusAlterVisibilidade.slice();
+      let cont = 0;
+      while (cont < 4) {
+        if (status[cont] == "inativo") {
+          status[cont] = ""
+          setStatusAlterVisibilidade(status);
+          return;
         }
-        setInicializado(true);
-        setTempo(15.0);          //liberarAlternativas(i+1);
+        cont++;
+      }
+      setInicializado(true);
+      setTempo(15.0);          //liberarAlternativas(i+1);
     }, 1000);
   }
 
@@ -393,7 +424,7 @@ const add_score = (difficulty) => {
   }
 
   const handleClickCarta = (i) => {
-   //mostra carta escolhida e depois guarda as cartas
+    //mostra carta escolhida e depois guarda as cartas
     const cv = cartaViradas.slice();
     const cd = cartaDesviradas.slice();
     cv[i] = cd[i];
@@ -411,7 +442,7 @@ const add_score = (difficulty) => {
     for (let a = 0; a < tot; a++) {
       do {
         i = Math.floor(Math.random() * 3 + Number(pergunta.answerIndex) + 1) % 4;
-      } while(itens[i] != undefined);
+      } while (itens[i] != undefined);
       itens[i] = i;
       status[i] = "eliminada";
     }
@@ -421,7 +452,7 @@ const add_score = (difficulty) => {
   const renderAlternativa = (i) =>
     idAlternativa[i] + ": " + pergunta.randomAlternatives[i];
   const renderStatusAlternativas = (i) =>
-    statusAlterVisibilidade[i] + (!inicializado ? " desabilitada " : " " ) + statusAlternativa[i];
+    statusAlterVisibilidade[i] + (!inicializado ? " desabilitada " : " ") + statusAlternativa[i];
   const renderRespostaUniversitario = (i) => respostaUniversitarios[i];
   const renderStatusRespostaUniversitario = (i) => statusRespUniversitario[i];
   const renderRespostaConvidado = (i) => respostaConvidados[i];
@@ -443,7 +474,7 @@ const add_score = (difficulty) => {
               statusAlternativa={(i) => renderStatusAlternativas(i)}
               statusVitinho={statusVitinho}
               pergunta={pergunta.question}
-              alternativas = {pergunta.randomAlternatives}
+              alternativas={pergunta.randomAlternatives}
               disabled={!inicializado ? "disabled" : ""}
               pulos={statusPulo}
               onClickAjuda={(i) => handleClickAjuda(i)}
