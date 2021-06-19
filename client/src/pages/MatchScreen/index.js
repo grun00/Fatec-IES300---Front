@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Redirect } from "react-router";
 
 import MatchScreenComponent from "../../components/Match/MatchScreenComponent";
+import EndGame from "../../components/EndGame";
 
 import {
   AuthContext,
@@ -33,16 +34,25 @@ const MatchScreen = () => {
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserContext);
   const { isAuth } = useContext(AuthContext);
+  const [fim, setFim] = useState(false);
+  
 
   const handlePlayerAnswer = (answer) => {
+    var point = 0;
+    if(answer.isCorrect ){
+      point += 2;
+    }
+
     const matchData = {
       questionNumber,
       player: user.username,
       myChosenAlternative: answer.alternative,
       correct: answer.isCorrect,
       difficulty: currentQuestion.difficulty,
+      points: point,
     };
     setMatchData(matchData);
+    console.log(matchData);
   };
 
   const handleTimeUp = () => {
@@ -63,6 +73,7 @@ const MatchScreen = () => {
   }, [questionNumber]);
 
   useEffect(() => {
+    console.log("updateInfo")
     if (updateInfo) {
       console.log("updateInfo");
       socket.emit("getRoomInfo");
@@ -72,17 +83,34 @@ const MatchScreen = () => {
           setQuestions(data.questions);
         }
       });
+      
     }
+    console.log(roomInfo);
   }, [updateInfo]);
 
+  var c = 0;
+
   useEffect(() => {
+    console.log("roomInfo");
     if (roomInfo.playerCount > 1) {
       setMatchStart(true);
       if (questionNumber === -1) {
         setQuestionNumber(0);
         setRoundMessage("");
       }
+      
+      c = c+1;
+      console.log(roomInfo);
+      if(Object.values(Object.values(roomInfo.match)).length > 1 ){
+        if(Object.values(Object.values(roomInfo.match)[0]).length == 15 && Object.values(Object.values(roomInfo.match)[1]).length == 15){
+          setFim(true);
+        }
+      }
+      setRoundMessage("Jogo Encerrado! Aguardando respostas do adversário.");
+
+
     } else {
+      console.log("Aguardando");
       setRoundMessage("Aguardando adversario");
     }
   }, [roomInfo]);
@@ -96,6 +124,7 @@ const MatchScreen = () => {
           myChosenAlternative: "timeUp",
           correct: false,
           currentTime: 0,
+          points: 0,
         };
         socket.emit("recordAnswer", timeUpData);
       } else {
@@ -107,13 +136,41 @@ const MatchScreen = () => {
     setIsReady(true);
   }, [timeUp]);
 
+
+  /* Acrescentei esse mas n deu certo, sem esse até que uma das telas tinha dado certo, agr nenhuma deu. */ 
+ 
+
   const handleNextQuestion = () => {
+    console.log(questionNumber);
+    console.log(questions?.length-14);
     if (questionNumber < questions?.length) {
       setIsReady(false);
       setQuestionNumber((prev) => (prev += 1));
+      
+      socket.emit("getRoomInfo");
+      socket.on("roomInfo", (data) => {
+        setRoomInfo(data);
+        if (!questions) {
+          setQuestions(data.questions);
+        }
+      });
+      console.log(roomInfo);
     } else if (questionNumber > questions?.length) {
       setRoundMessage("Jogo Encerrado!");
+      
+      setQuestionNumber(15);
+      setCurrentQuestion(false);
       setMatchStart(false);
+      
+      socket.emit("getRoomInfo");
+      socket.on("roomInfo", (data) => {
+        setRoomInfo(data);
+        if (!questions) {
+          setQuestions(data.questions);
+        }
+      });
+      console.log(roomInfo);
+      setUpdateInfo(true);
     }
   };
   return (
@@ -125,7 +182,13 @@ const MatchScreen = () => {
           handleTimeUp={handleTimeUp}
           handleNextQuestion={handleNextQuestion}
         />
-      ) : (
+      ) : ( fim ? (
+        
+        <EndGame 
+          nome={roomInfo}
+        />
+        ) : (
+        
         <div id="waitingPlayer">
           <span id="roundMessage">{roundMessage}</span>
           <div id="jumpingDots">
@@ -134,6 +197,7 @@ const MatchScreen = () => {
             <span className="circleWaiting"></span>
           </div>
         </div>
+        )
       )}
     </>
   );

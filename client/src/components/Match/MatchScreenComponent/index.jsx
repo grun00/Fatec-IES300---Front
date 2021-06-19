@@ -29,7 +29,7 @@ const MatchScreenComponent = (props) => {
   }
     
   const getRespUniv = () => {
-    const prob = 70 - 10 * Number(pergunta.difficulty); //probabilidade em % da resposta correta (diminui com a dificuldade)
+    const prob = 70 - 10 * Number(1); //probabilidade em % da resposta correta (diminui com a dificuldade)
     const respostaUniversitario = [];
     const resposta = ["A", "B", "C", "D"];
     const max = 300 / (100 - prob);
@@ -42,7 +42,7 @@ const MatchScreenComponent = (props) => {
   }    
 
   const getRespConv = () => {
-    const prob = 60 - 10 * Number(pergunta.difficulty); //probabilidade em % da resposta correta (diminui com a dificuldade)
+    const prob = 60 - 10 * Number(1); //probabilidade em % da resposta correta (diminui com a dificuldade)
     const respostaConvidado = [];
     const resposta = ["A", "B", "C", "D"];
     const max = 300 / (100 - prob);
@@ -123,13 +123,18 @@ const MatchScreenComponent = (props) => {
     const status = statusAlternativa.slice();
     for (let opcao in status) {
         if (status[opcao].search("escolhida") != -1) {
-          if(pergunta.answerIndex == opcao) {
+          try {
+            if(pergunta.answerIndex == opcao) {
               status[opcao] = "correta";  
               props.handlePlayerAnswer({alternative: opcao, isCorrect: true});   
           } else {
               status[opcao] = "errada";
               props.handlePlayerAnswer({alternative: opcao, isCorrect: false});
           }
+          } catch (error) {
+            console.log("erro");
+          }
+          
         }
     }
     setStatusAlternativa(status); //console.log('verificou')       
@@ -354,7 +359,7 @@ const MatchScreenComponent = (props) => {
             cont++;
         }   
         setInicializado(true);       
-        setTempo(15.0);          //liberarAlternativas(i+1);
+        setTempo(3.0);          //liberarAlternativas(i+1);
     }, 1000);
   }
 
