@@ -12,7 +12,7 @@ import UniversitariosScreen from "../UniversitariosScreen";
 
 import "./styles.css";
 
-const MatchScreenComponent = (props) => {  
+const MatchScreenComponent = (props) => {
   const [numPerguntaAtual, setNumPerguntaAtual] = useState(-1);
   const getCartaDesv = () => {
     const cartaDesvirada = [];
@@ -24,10 +24,10 @@ const MatchScreenComponent = (props) => {
         } while (itens[i] !== undefined);
         itens[i] = i;
         cartaDesvirada[a] = i;
-    }  
+    }
     return cartaDesvirada;
   }
-    
+
   const getRespUniv = () => {
     const prob = 70 - 10 * Number(1); //probabilidade em % da resposta correta (diminui com a dificuldade)
     const respostaUniversitario = [];
@@ -37,9 +37,9 @@ const MatchScreenComponent = (props) => {
         let i = Math.floor(Math.random() * max);
         let rand = i < 4 ? i : pergunta.answerIndex; //sorteia a resposta proporcionalmente
         respostaUniversitario[a] = resposta[rand];
-    }  
+    }
     return respostaUniversitario;
-  }    
+  }
 
   const getRespConv = () => {
     const prob = 60 - 10 * Number(1); //probabilidade em % da resposta correta (diminui com a dificuldade)
@@ -50,7 +50,7 @@ const MatchScreenComponent = (props) => {
         let i = Math.floor(Math.random() * max);
         let rand = i < 4 ? i : pergunta.answerIndex; //sorteia a resposta proporcionalmente
         respostaConvidado[a] = resposta[rand];
-    } 
+    }
     return respostaConvidado;
   }
 
@@ -59,7 +59,7 @@ const MatchScreenComponent = (props) => {
   }
   const iniciarStatusAlternativas = () => {
     return Array(4).fill('naoEscolhida');
-  } 
+  }
 
   const iniciarStatusAlterVisibilidade = () => {
     return Array(4).fill('inativo');
@@ -71,22 +71,22 @@ const MatchScreenComponent = (props) => {
   const iniciarStatusRespUniv = () => { //ultimo elem usado para guardar universitario a ativar
     return Array(4).fill('inativo');
   }
-  
+
   const [statusLoad, setStatusLoad] = useState('inativo');
-  const [statusMenu, setStatusMenu] = useState('inativo');    
+  const [statusMenu, setStatusMenu] = useState('inativo');
   const [msgLoad, setMgsLoad] = useState(["",""]);
   const [statusPulo, setStatusPulo] = useState(3);
   const [statusCartas, setStatusCartas] = useState('inativo');
   const [statusVitinho, setStatusVitinho] = useState('inativo');
   const [statusUniversitarios, setStatusUniversitarios] = useState('inativo');
-  const [statusConvidados, setStatusConvidados] = useState('inativo');    
-  const [statusPergunta, setStatusPergunta] = useState('inativo');    
+  const [statusConvidados, setStatusConvidados] = useState('inativo');
+  const [statusPergunta, setStatusPergunta] = useState('inativo');
   const [inicializado, setInicializado] = useState(false);
   const [encerrado, setEncerrado] = useState(true);
   const [finalizado, setFinalizado] = useState(true);
   const idAlternativa = ['A', 'B', 'C', 'D'];
   const pergunta = props.currentQuestion;
-  
+
   const [statusAlternativa, setStatusAlternativa] = useState(()=>iniciarStatusAlternativas());
   const [statusAlterVisibilidade, setStatusAlterVisibilidade] = useState(()=>iniciarStatusAlterVisibilidade());
   const [statusRespConvidado, setStatusRespConvidado] = useState(()=>iniciarStatusRespConv());
@@ -96,11 +96,12 @@ const MatchScreenComponent = (props) => {
   const [cartaDesviradas, setCartaDesviradas] = useState(()=>getCartaDesv());
   const [respostaUniversitarios, setRespostaUniversitarios] = useState(()=>getRespUniv());
   const [respostaConvidados, setRespostaConvidados] = useState(()=>getRespConv());
+  const [scoreAtual, setScoreAtual] = useState(0);
 
   const handleClickMenu = () => {
     return statusMenu === "ativo" ? abrirMenu() : fecharMenu();
   };
-  
+
   const abrirMenu = () => {
     carregamentoClose();
     setStatusMenu("inativo");
@@ -114,19 +115,40 @@ const MatchScreenComponent = (props) => {
   const marcar = (opcao) => { //marcar alternativa escolhida
     const status = statusAlternativa.slice();
     for (let i in status)
-        status[i] = "naoEscolhida";        
-    status[opcao] = "escolhida";  
+        status[i] = "naoEscolhida";
+    status[opcao] = "escolhida";
     setStatusAlternativa(status);
+}
+
+const add_score = (difficulty) => {
+    switch (difficulty) {
+      case 1:
+        setScoreAtual(old_score => old_score + 10000)
+        break;
+      case 2:
+        setScoreAtual(scoreAtual + 20000)
+        break;
+      case 3:
+        setScoreAtual(scoreAtual + 70000)
+        break;
+      case 4:
+        setScoreAtual(scoreAtual *2)
+        break;
+      default:
+        console.log("pergunta sem nivel");
+    }
 }
 
   const verificar = () => { //verificar alternativa escolhida apos termino
     const status = statusAlternativa.slice();
     for (let opcao in status) {
         if (status[opcao].search("escolhida") != -1) {
-          
-            if(pergunta.answerIndex == opcao) {
-              status[opcao] = "correta";  
-              props.handlePlayerAnswer({alternative: opcao, isCorrect: true});   
+
+          if(pergunta.answerIndex == opcao) {
+              status[opcao] = "correta";
+              add_score(pergunta.difficulty);
+              props.handlePlayerAnswer({alternative: opcao, isCorrect: true});
+
           } else {
               status[opcao] = "errada";
               props.handlePlayerAnswer({alternative: opcao, isCorrect: false});
@@ -134,65 +156,66 @@ const MatchScreenComponent = (props) => {
             
         }
     }
-    setStatusAlternativa(status); //console.log('verificou')       
+    setStatusAlternativa(status); //console.log('verificou')
     setInicializado(false);
     setTimeout(() => {  //console.log('atualizou')
         setFinalizado(true);
         carregarPergunta(); //*******no meu codigo era assim que carregava o proximo ******************//
-        
-    }, 1500);
+
+  }, 1500);
+  console.log(`score: ${scoreAtual}`);
   }
 
   const carregarPergunta = () => {
     const num = numPerguntaAtual + 1;
-    setNumPerguntaAtual(num); 
+    setNumPerguntaAtual(num);
     setTempo('');
     props.handleTimeUp();
   }
 
-  useEffect(() => {         
-    numPerguntaAtual > -1 && finalizado && setStatusAlternativa(iniciarStatusAlternativas()); 
+  useEffect(() => {
+    numPerguntaAtual > -1 && finalizado && setStatusAlternativa(iniciarStatusAlternativas());
   }, [numPerguntaAtual]);
 
-  useEffect(() => {         
-    numPerguntaAtual > -1 && finalizado && setStatusAlterVisibilidade(iniciarStatusAlterVisibilidade()); 
+  useEffect(() => {
+    numPerguntaAtual > -1 && finalizado && setStatusAlterVisibilidade(iniciarStatusAlterVisibilidade());
   }, [statusAlternativa]);
 
-  useEffect(() => {       
+  useEffect(() => {
     finalizado && setStatusRespConvidado(iniciarStatusRespConv());
   }, [statusAlterVisibilidade]);
 
-  useEffect(() => {           
+  useEffect(() => {
     finalizado && setStatusRespUniversitario(iniciarStatusRespUniv());
   }, [statusRespConvidado]);
 
-  useEffect(() => {           
+  useEffect(() => {
     finalizado && setCartaViradas(getCartaVir());
   }, [statusRespUniversitario]);
 
-  useEffect(() => {      
+  useEffect(() => {
     finalizado && setCartaDesviradas(getCartaDesv());
   }, [cartaViradas]);
 
-  useEffect(() => { 
+  useEffect(() => {
     finalizado && setRespostaUniversitarios(getRespUniv());
   }, [cartaDesviradas]);
 
-  useEffect(() => {        
+  useEffect(() => {
     finalizado && setRespostaConvidados(getRespConv());
   }, [respostaUniversitarios]);
 
-  useEffect(() => {     
+  useEffect(() => {
     finalizado && props.handleNextQuestion();
   }, [respostaConvidados]);
 
   useEffect(() => {
     setFinalizado(false);
-  }, [pergunta]);  
+  }, [pergunta]);
 
   useEffect(() => {
     !finalizado &&  statusLoad === "inativo" && iniciar();
-  }, [finalizado]);  
+  }, [finalizado]);
 
   useEffect(() => {
     if(!encerrado && tempo > 0.0){
@@ -201,7 +224,7 @@ const MatchScreenComponent = (props) => {
         setTempo(tempoAtual - 0.1); //funcionamento do cronometro
       }, 100);
     }
-      
+
   }, [tempo]);
 
   useEffect(() => {
@@ -233,7 +256,7 @@ const MatchScreenComponent = (props) => {
             tempoRespostaUniversitarios(primeiro, ultimo);
           }, 1500);
         }
-      },      
+      },
       () => {
         if (temAjuda(["AGUARDE!", "Embaralhando as cartas"])) {
           setTimeout(() => {
@@ -277,20 +300,20 @@ const MatchScreenComponent = (props) => {
   const tempoRespostaUniversitarios = (i, ultimo) => {
     setTimeout(() =>  {
       const statusRespUn = statusRespUniversitario.slice();
-      statusRespUn[(i+2)%3] = "inativo";            
-      statusRespUn[i] = "ativo";            
+      statusRespUn[(i+2)%3] = "inativo";
+      statusRespUn[i] = "ativo";
       if (i != ultimo) tempoRespostaUniversitarios((i + 1) % 3, ultimo);
       else
         setTimeout(() =>  {
-          const status = statusRespUniversitario.slice(); 
+          const status = statusRespUniversitario.slice();
           status[i] = "inativo";
           setStatusRespUniversitario(status);
           setTimeout(() =>  {
-              setStatusUniversitarios('inativo'); 
-          }, (1000));   
+              setStatusUniversitarios('inativo');
+          }, (1000));
         }, Math.floor(Math.random() * 1000) + 1000);
       setStatusRespUniversitario(statusRespUn);
-    }, Math.floor(Math.random() * 1000) + 1000); 
+    }, Math.floor(Math.random() * 1000) + 1000);
   }
 
   useEffect(() => {
@@ -343,24 +366,24 @@ const MatchScreenComponent = (props) => {
     }, 2000);
   };
 
-  const liberarAlternativas = () => {        
+  const liberarAlternativas = () => {
     setTimeout(() => {
         const status = statusAlterVisibilidade.slice();
         let cont = 0;
          while (cont < 4) {
             if (status[cont] == "inativo") {
                 status[cont] = ""
-                setStatusAlterVisibilidade(status);         
+                setStatusAlterVisibilidade(status);
                 return;
             }
             cont++;
-        }   
-        setInicializado(true);       
+        }
+        setInicializado(true);
         setTempo(15.0);          //liberarAlternativas(i+1);
     }, 1000);
   }
 
-  React.useEffect(() => {         
+  React.useEffect(() => {
     !encerrado && liberarAlternativas(); //para liberar uma alternativa por vez
   }, [statusAlterVisibilidade]);
 
@@ -372,16 +395,16 @@ const MatchScreenComponent = (props) => {
   const handleClickCarta = (i) => {
    //mostra carta escolhida e depois guarda as cartas
     const cv = cartaViradas.slice();
-    const cd = cartaDesviradas.slice();         
-    cv[i] = cd[i]; 
+    const cd = cartaDesviradas.slice();
+    cv[i] = cd[i];
     setCartaViradas(cv);
     setTimeout(() => {
       setStatusCartas("inativo");
       eliminarAlternativas(cd[i]);
     }, 1000);
   }
-  
-  const eliminarAlternativas = (tot) => { 
+
+  const eliminarAlternativas = (tot) => {
     const status = statusAlterVisibilidade.slice();
     const itens = {};
     let i = 0;
@@ -397,12 +420,12 @@ const MatchScreenComponent = (props) => {
 
   const renderAlternativa = (i) =>
     idAlternativa[i] + ": " + pergunta.randomAlternatives[i];
-  const renderStatusAlternativas = (i) => 
+  const renderStatusAlternativas = (i) =>
     statusAlterVisibilidade[i] + (!inicializado ? " desabilitada " : " " ) + statusAlternativa[i];
   const renderRespostaUniversitario = (i) => respostaUniversitarios[i];
   const renderStatusRespostaUniversitario = (i) => statusRespUniversitario[i];
   const renderRespostaConvidado = (i) => respostaConvidados[i];
-  const renderStatusRespostaConvidado = (i) => statusRespConvidado[i];  
+  const renderStatusRespostaConvidado = (i) => statusRespConvidado[i];
 
   return (
     <>
