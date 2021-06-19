@@ -16,7 +16,7 @@ const MatchScreen = () => {
   const [questions, setQuestions] = useState(null);
   const [updateInfo, setUpdateInfo] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [questionNumber, setQuestionNumber] = useState(-1);
+  const [questionNumber, setQuestionNumber] = useState(-2);
   const [matchData, setMatchData] = useState(null);
   const [skips, setSkips] = useState(1);
   const [scoreAtual, setScoreAtual] = useState(0);
@@ -38,21 +38,61 @@ const MatchScreen = () => {
   const [fim, setFim] = useState(false);
   
 
+
+
   const handlePlayerAnswer = (answer) => {
     /*
     var point = 0;
     if(answer.isCorrect ){
       point += 2;
     }
+
+    
 */
+
+var scoreRodada = scoreAtual;
+      switch (answer.difficulty) {
+  
+        case 0:
+          
+          
+          scoreRodada += 10000
+          
+          break;
+        case 1:
+  
+          scoreRodada += 20000
+          
+          break;
+        case 2:
+  
+          scoreRodada += 70000
+          
+          break;
+        case 3:
+  
+          scoreRodada *= 2;
+          
+          break;
+  
+        default:
+          console.log("pergunta sem nivel");
+      }
+      setScoreAtual(scoreRodada);
+      
+
+    
+
+    console.log("Aki 2 " +scoreAtual);
     const matchData = {
       questionNumber,
       player: user.username,
       myChosenAlternative: answer.alternative,
       correct: answer.isCorrect,
       difficulty: currentQuestion.difficulty,
-      points: scoreAtual,
+      points: scoreRodada,
     };
+    
     setMatchData(matchData);
     console.log(matchData);
   };
@@ -62,9 +102,11 @@ const MatchScreen = () => {
   };
 
   const handleScoreAtual = (score) => {
-
+    console.log("Aki 4" + score);
     setScoreAtual(score);
-  
+    console.log("Aki" + score);
+    console.log("Aki 3" + scoreAtual);
+    
   };
 
 
@@ -75,6 +117,7 @@ const MatchScreen = () => {
 
   useEffect(() => {
     if (matchStart || isReady) {
+      console.log(questionNumber);
       setCurrentQuestion(questions[questionNumber]);
       setIsReady(false);
       setMatchData(null);
@@ -90,11 +133,12 @@ const MatchScreen = () => {
         setRoomInfo(data);
         if (!questions) {
           setQuestions(data.questions);
+          console.log(data.questions);
         }
       });
       
     }
-    console.log(roomInfo);
+    
   }, [updateInfo]);
 
   var c = 0;
@@ -103,7 +147,7 @@ const MatchScreen = () => {
     console.log("roomInfo");
     if (roomInfo.playerCount > 1) {
       setMatchStart(true);
-      if (questionNumber === -1) {
+      if (questionNumber === -2) {
         setQuestionNumber(0);
         setRoundMessage("");
       }
@@ -111,7 +155,7 @@ const MatchScreen = () => {
       c = c+1;
       console.log(roomInfo);
       if(Object.values(Object.values(roomInfo.match)).length > 1 ){
-        if(Object.values(Object.values(roomInfo.match)[0]).length == 15 && Object.values(Object.values(roomInfo.match)[1]).length == 15){
+        if(Object.values(Object.values(roomInfo.match)[0]).length == 16 && Object.values(Object.values(roomInfo.match)[1]).length == 16){
           setFim(true);
         }
       }
@@ -133,7 +177,7 @@ const MatchScreen = () => {
           myChosenAlternative: "timeUp",
           correct: false,
           currentTime: 0,
-          points: 0,
+          points: scoreAtual,
         };
         socket.emit("recordAnswer", timeUpData);
       } else {
@@ -187,7 +231,7 @@ const MatchScreen = () => {
   };
   return (
     <>
-      {questionNumber > -1 && currentQuestion ? (
+      {questionNumber > -2 && currentQuestion ? (
         <MatchScreenComponent
           currentQuestion={currentQuestion}
           handlePlayerAnswer={handlePlayerAnswer}

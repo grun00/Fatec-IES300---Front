@@ -32,7 +32,7 @@ const PageLeaderBoard = (props) => {
 	  
 	  if(Object.values(Object.values(props.nome.match)).length > 1 ){
 
-		  if( Object.values(Object.values(props.nome.match)[0]).length == 15 && Object.values(Object.values(props.nome.match)[1]).length == 15) {
+		  if( Object.values(Object.values(props.nome.match)[0]).length == 16 && Object.values(Object.values(props.nome.match)[1]).length == 16) {
 			  
 				player1 = Object.values(Object.values(props.nome.match)[0]);
 				player2 = Object.values(Object.values(props.nome.match)[1]);
@@ -60,12 +60,17 @@ const PageLeaderBoard = (props) => {
 				
 				setAcertos([corretas1,corretas2]);
 				setErros([15 - corretas1, 15 -corretas2]);
-				setPontos([ponto1,ponto2]);
+				
 				
 				console.log(pontos);
 
 				var vencedor = 0;
 				var net = parseInt(user.netWorth,10);
+
+
+				ponto1 = player1[15]["points"];
+				ponto2 = player2[15]["points"];
+				setPontos([ponto1,ponto2]);
 				if(ponto1 > ponto2){
 					net += ponto1;
 					setVencedor(0);

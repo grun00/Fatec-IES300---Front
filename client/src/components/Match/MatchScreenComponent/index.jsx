@@ -121,11 +121,11 @@ const MatchScreenComponent = (props) => {
   }
 
   const add_score = (difficulty) => {
-
+  var scoreRodada = scoreAtual;
     switch (difficulty) {
 
-      case 1:
-
+      case 0:
+        
         setScoreAtual(old_score => 
           old_score + 10000
           
@@ -133,9 +133,9 @@ const MatchScreenComponent = (props) => {
         
 
         )
-        props.handleScoreAtual(scoreAtual )
+        props.handleScoreAtual(scoreRodada +10000 )
         break;
-      case 2:
+      case 1:
 
         setScoreAtual(old_score => 
           old_score + 20000
@@ -144,9 +144,9 @@ const MatchScreenComponent = (props) => {
         
 
         )
-        props.handleScoreAtual(scoreAtual + 20000)
+        props.handleScoreAtual(scoreRodada + 20000)
         break;
-      case 3:
+      case 2:
 
         setScoreAtual(old_score => 
           old_score + 70000
@@ -155,9 +155,9 @@ const MatchScreenComponent = (props) => {
         
 
         )
-        props.handleScoreAtual(scoreAtual + 70000)
+        props.handleScoreAtual(scoreRodada + 70000)
         break;
-      case 4:
+      case 3:
 
         setScoreAtual(old_score => 
           old_score * 2
@@ -166,7 +166,7 @@ const MatchScreenComponent = (props) => {
         
 
         )
-        props.handleScoreAtual(scoreAtual * 2)
+        props.handleScoreAtual(scoreRodada * 2)
         break;
 
       default:
@@ -182,8 +182,8 @@ const MatchScreenComponent = (props) => {
 
         if (pergunta.answerIndex == opcao) {
           status[opcao] = "correta";
-          add_score(pergunta.difficulty);
-          props.handlePlayerAnswer({ alternative: opcao, isCorrect: true });
+          /*add_score(pergunta.difficulty);*/
+          props.handlePlayerAnswer({ alternative: opcao, isCorrect: true , difficulty: pergunta.difficulty});
 
         } else {
           status[opcao] = "errada";
@@ -203,8 +203,8 @@ const MatchScreenComponent = (props) => {
   }
 
   const carregarPergunta = () => {
-    const num = numPerguntaAtual + 1;
-    setNumPerguntaAtual(num);
+    /*const num = numPerguntaAtual + 1;*/
+    setNumPerguntaAtual(num => num += 1);
     setTempo('');
     props.handleTimeUp();
   }
@@ -250,7 +250,7 @@ const MatchScreenComponent = (props) => {
   }, [pergunta]);
 
   useEffect(() => {
-    !finalizado && statusLoad === "inativo" && iniciar();
+    !finalizado && numPerguntaAtual >= -1 && statusLoad === "inativo" && iniciar() ;
   }, [finalizado]);
 
   useEffect(() => {
