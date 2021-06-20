@@ -515,7 +515,7 @@ const MatchScreenComponent = (props) => {
           <div className="footer"></div>
         </div>
         <div id="song-area" className={"inativo"}>
-          <audio id="theme-song" autoPlay loop muted>
+          <audio id="theme-song" autoPlay >
             <source src={audioSrc} type="audio/mp3" />
           </audio>
         </div>
