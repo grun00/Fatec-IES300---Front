@@ -9,6 +9,7 @@ import Logo from "../../images/logo.png";
 import Avatar from "../../assets/avatar.svg"
 
 const Header = (props) => {
+
   const { socket } = useContext(SocketContext);
   const {user} = useContext(UserContext);
   const [profileNickname, setProfileNickname] = useState(user.username);
@@ -54,3 +55,4 @@ const Header = (props) => {
   );
 };
 export default Header;
+
