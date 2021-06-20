@@ -419,9 +419,10 @@ const MatchScreenComponent = (props) => {
     }, 1000);
   }
 
-  React.useEffect(() => {
-    !encerrado && liberarAlternativas(); //para liberar uma alternativa por vez
-  }, [statusAlterVisibilidade]);
+
+  React.useEffect(() => {         
+    !encerrado && !inicializado && liberarAlternativas(); //para liberar uma alternativa por vez
+
 
   const opcaoCarta = (i) => {
     const cv = cartaViradas.slice();
