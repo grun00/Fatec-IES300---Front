@@ -71,6 +71,14 @@ const MatchScreenComponent = (props) => {
     return Array(4).fill("inativo");
   };
 
+  const [audio, setAudio] = useState({
+    abertura: ["abertura.mp3"],
+    rodada: ["rodada1.mp3", "rodada2.mp3"],
+    esporro: ["esporro1.mp3", "esporro2.mp3"],
+    vitoria: ["vitoria.mp3"],
+    derrota: ["derrota.mp3"]
+  });
+
   const [statusLoad, setStatusLoad] = useState("inativo");
   const [statusMenu, setStatusMenu] = useState("inativo");
   const [msgLoad, setMgsLoad] = useState(["", ""]);
