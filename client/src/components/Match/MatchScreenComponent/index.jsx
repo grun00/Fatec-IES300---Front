@@ -402,9 +402,11 @@ const MatchScreenComponent = (props) => {
     }, 1000);
   };
 
+
   useEffect(() => {
     !encerrado && liberarAlternativas(); //para liberar uma alternativa por vez
   }, [statusAlterVisibilidade]);
+
 
   const opcaoCarta = (i) => {
     const cv = cartaViradas.slice();
