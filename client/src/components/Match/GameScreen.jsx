@@ -38,25 +38,24 @@ const Alter = (props) => {
     );
   };
 
+  // const opcaoPular = () => {
+  //   return (
+  //     <ButtonInput
+  //       inputName="opcaoPular"
+  //       inputValue={"Pular " + props.pulos + "/3"}
+  //       className="opcaoPular"
+  //       onClick={() => props.onClickPular()}
+  //       disabled={props.disabled}
+  //     />
+  //   );
+  // };
   const opcaoPular = () => {
     return (
       <ButtonInput
-        inputName="opcaoPular"
-        inputValue={"Pular " + props.pulos + "/3"}
-        className="opcaoPular"
-        onClick={() => props.onClickPular()}
-        disabled={props.disabled}
-      />
-    );
-  };
-  const opcaoParar = () => {
-    return (
-      <ButtonInput
         inputName="opcaoParar"
-        //inputValue={"Parar com R$ " + props.reais + " mil"}
         inputValue={"Pular questao"}
         className="opcaoParar"
-        onClick={() => props.onClickParar()}
+        onClick={(e) => props.onClickPular(e)}
         disabled={props.disabled}
       />
     );
@@ -81,7 +80,6 @@ const Alter = (props) => {
           {optionAjuda(2)}
         </div>
         {opcaoPular()}
-        {opcaoParar()}
       </div>
     </React.Fragment>
   );
