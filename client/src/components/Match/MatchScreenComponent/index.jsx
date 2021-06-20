@@ -76,8 +76,22 @@ const MatchScreenComponent = (props) => {
     rodada: ["rodada1.mp3", "rodada2.mp3"],
     esporro: ["esporro1.mp3", "esporro2.mp3"],
     vitoria: ["vitoria.mp3"],
-    derrota: ["derrota.mp3"]
+    derrota: ["derrota.mp3"],
   });
+
+  const [audioSrc, setAudioSrc] = useState("");
+
+  const playAudio = (tipo, rodada) => {
+    let src = "";
+    if (tipo === "esporro") {
+      src = selecionar();
+    } else if (rodada) {
+      src = audio[tipo][Number(rodada)];
+    } else {
+      src = audio[tipo][0];
+    }
+    setAudioSrc(src);
+  };
 
   const [statusLoad, setStatusLoad] = useState("inativo");
   const [statusMenu, setStatusMenu] = useState("inativo");
@@ -157,9 +171,9 @@ const MatchScreenComponent = (props) => {
         }
       }
     }
-    if (props.skipMessage){
+    if (props.skipMessage) {
       carregamento(["DANÇOU!", props.skipMessage]);
-      setTimeout(() => carregamentoClose(), 1500)
+      setTimeout(() => carregamentoClose(), 1500);
     }
     setStatusAlternativa(status); //console.log('verificou')
     setInicializado(false);
@@ -292,14 +306,13 @@ const MatchScreenComponent = (props) => {
   };
 
   const handleClickPulo = (e) => {
-    e.preventDefault()
-    if(temAjuda(["PULOU!", "Aguarde o adversário"])){
-      props.handleSkipQuestion()
+    e.preventDefault();
+    if (temAjuda(["PULOU!", "Aguarde o adversário"])) {
+      props.handleSkipQuestion();
       setTimeout(() => {
-        carregamentoClose()
+        carregamentoClose();
       }, 1500);
     }
-    
   };
 
   const temAjuda = (msg) => {
@@ -307,15 +320,14 @@ const MatchScreenComponent = (props) => {
     if (!inicializado) return;
     let pulos = statusPulo;
     if (pulos > 0) {
-      if(numPerguntaAtual >=16){
-        msg = ["NEGATIVO!", "Na rodada do dobro não tem ajuda!"]
+      if (numPerguntaAtual >= 16) {
+        msg = ["NEGATIVO!", "Na rodada do dobro não tem ajuda!"];
         setTimeout(() => carregamentoClose(), 1000);
         pulos = 0;
-      }else{
+      } else {
         setStatusPulo(pulos - 1);
       }
-    }
-    else {
+    } else {
       msg = ["QUE TRISTE!", "Você não tem mais nenhuma ajuda!"];
       setTimeout(() => carregamentoClose(), 1000);
     }
@@ -410,11 +422,9 @@ const MatchScreenComponent = (props) => {
     }, 1000);
   };
 
-
   useEffect(() => {
     !encerrado && liberarAlternativas(); //para liberar uma alternativa por vez
   }, [statusAlterVisibilidade]);
-
 
   const opcaoCarta = (i) => {
     const cv = cartaViradas.slice();
@@ -503,6 +513,11 @@ const MatchScreenComponent = (props) => {
             />
           </div>
           <div className="footer"></div>
+        </div>
+        <div id="song-area" className={"inativo"}>
+          <audio id="theme-song" autoPlay loop muted>
+            <source src={audioSrc} type="audio/mp3" />
+          </audio>
         </div>
       </div>
     </>
