@@ -24,6 +24,7 @@ import Boy1 from "../../assets/avatars/boy-1.svg";
 import Girl from "../../assets/avatars/girl.svg";
 import Man from "../../assets/avatars/man.svg";
 import Man1 from "../../assets/avatars/man-1.svg";
+import { Link } from "react-router-dom";
 
 import { UserContext} from "../../context/UserContext";
 import api from "../../services/api";
@@ -56,11 +57,11 @@ const ShopPage = () => {
 
     backp.push({"item_id":item,"quantity":qtd});
     
-    var net = parseInt(user.netWorth,10) - netW;
-    user.netWorth = net;
+    var net = parseInt(user.money,10) - netW;
+    user.money = net;
     
 
-    api.patch(rota,{  "backpack":backp , "netWorth":net })
+    api.patch(rota,{  "backpack":backp , "money":net })
 
 
     user.backpack = backp;
@@ -77,10 +78,16 @@ const ShopPage = () => {
 
     let modal = document.getElementById("modal-confirm-buy-container");
     
-    setItem(idItem);
-    setNetW(net);
-    
+    if(user.money < net){
+      modal = document.getElementById("modal-confirm-pobre-container");
+    }else{
+
+      setItem(idItem);
+      setNetW(net);
+      
+    }
     modal.classList.add("show");
+    
 
   };
 
@@ -95,6 +102,13 @@ const ShopPage = () => {
   }
 
   
+
+  function fechaModal4(){
+    let modal = document.getElementById("modal-confirm-pobre-container");
+    modal.classList.remove("show");
+  }
+
+ 
 
   return (
     <>
@@ -223,6 +237,24 @@ const ShopPage = () => {
                   Sim, quero comprar! 🤩{" "}
                 </button>
                 <button className="button-deny" onClick={(fechaModal1.bind(this))}>Nao, agora nao. </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="modal-confirm-pobre-container" className="modal-container">
+            <div id="modal-buy">
+              <h3>Saldo insuficiente</h3>
+              <p id="confirmationPhrase">
+                Você não possui VituCoins suficientes para comprar esse item. 🤔
+              </p>
+
+              <div className="modal-buttons-area">
+                <button className="button-accept"  >
+                
+                  <Link to="/comprar" id="comprar" >Comprar VituCoins</Link>
+                  
+                </button>
+                <button className="button-deny" onClick={(fechaModal4.bind(this))}>Sou pobre </button>
               </div>
             </div>
           </div>

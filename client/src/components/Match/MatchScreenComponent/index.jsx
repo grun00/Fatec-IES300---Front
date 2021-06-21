@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+
+import React, { useContext, useEffect, useState } from "react";
+
 
 import Header from "../../Match/MatchHeader/MatchHeader";
 import GameScreen from "../GameScreen";
@@ -6,10 +8,52 @@ import LoadScreen from "../LoadScreen";
 import CartasScreen from "../CartasScreen";
 import ConvidadosScreen from "../ConvidadosScreen";
 import UniversitariosScreen from "../UniversitariosScreen";
+import { UserContext} from "../../../context/UserContext";
 
 import "./styles.css";
 
-const MatchScreenComponent = (props) => {
+
+const MatchScreenComponent = (props) => {  
+
+  const {user} = useContext(UserContext);
+
+  const [universitarios, setUniversitarios] = useState(() => {
+    for(var i=0; i<user.backpack.length; i++){
+      if(user.backpack[i].item_id == "60ba86bec6a9b11a5cb359a7"){
+      return parseInt(user.backpack[i].quantity,10) ;
+      }
+    }
+    return 0;
+  });
+  const [cartas, setCartas] = useState(() => {
+    for(var i=0; i<user.backpack.length; i++){
+      if(user.backpack[i].item_id == "609ead9f9fc12b2ee4553793"){
+      return parseInt(user.backpack[i].quantity,10 );
+      }
+    }
+    return 0;
+  });
+  const [convidados, setConvidados] = useState(() => {
+    for(var i=0; i<user.backpack.length; i++){
+      if(user.backpack[i].item_id == "60ba86fec6a9b11a5cb359a8"){
+      return parseInt(user.backpack[i].quantity,10) ;
+      }
+    }
+    return 0;
+  });
+
+  const [pular, setPular] = useState(() => {
+    for(var i=0; i<user.backpack.length; i++){
+      if(user.backpack[i].item_id == "60ba8736c6a9b11a5cb359a9"){
+      return parseInt(user.backpack[i].quantity,10) ;
+      }
+    }
+    return 0;
+  });
+
+
+
+
   const [numPerguntaAtual, setNumPerguntaAtual] = useState(-1);
   const getCartaDesv = () => {
     const cartaDesvirada = [];
@@ -170,6 +214,7 @@ const MatchScreenComponent = (props) => {
     props.handleTimeUp();
   };
 
+
   useEffect(() => {
     numPerguntaAtual > -1 &&
       finalizado &&
@@ -296,6 +341,7 @@ const MatchScreenComponent = (props) => {
 
   const temAjuda = (msg) => {
     //verifica se tem ajuda e lanca
+    
     if (!inicializado) return;
     let pulos = statusPulo;
     if (pulos > 0) {
@@ -308,8 +354,42 @@ const MatchScreenComponent = (props) => {
       }
     }
     else {
-      msg = ["QUE TRISTE!", "Você não tem mais nenhuma ajuda!"];
+
+      if(msg[1] == "Embaralhando as cartas"){
+         if(cartas > 0){
+            setCartas(cartas - 1);
+            carregamento(msg);
+            return true;
+         }
+      
+      }else if(msg[1] == "Consultando os convidados"){
+        if(convidados > 0){
+          setConvidados(convidados-1);
+          carregamento(msg);
+          return true;
+        }
+        
+      }else if(msg[1] == "Consultando os universitários"){
+        if(universitarios > 0){
+          setUniversitarios(universitarios-1); 
+          carregamento(msg);
+          return true;
+        }
+        
+      }else {
+        if(pular > 0)     {   
+          setPular(pular-1);
+          carregamento(msg);
+          return true;
+        }
+        
+      }
+      msg = ["QUE TRISTE!", "Você não tem mais nenhuma ajuda"];
+      carregamento(msg);
+
       setTimeout(() => carregamentoClose(), 1000);
+      return false;
+      
     }
     carregamento(msg);
     return pulos !== 0;
@@ -464,7 +544,13 @@ const MatchScreenComponent = (props) => {
               statusAlternativa={(i) => renderStatusAlternativas(i)}
               statusVitinho={statusVitinho}
               pergunta={pergunta.question}
-              alternativas={pergunta.randomAlternatives}
+
+              qtd_universitario={universitarios}
+              qtd_cartas={cartas}
+              qtd_convidados={convidados}
+              qtd_pular={pular}
+              alternativas = {pergunta.randomAlternatives}
+
               disabled={!inicializado ? "disabled" : ""}
               pulos={statusPulo}
               onClickAjuda={(i) => handleClickAjuda(i)}

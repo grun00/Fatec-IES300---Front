@@ -44,6 +44,7 @@ const MatchScreen = () => {
   };
 
   const handlePlayerAnswer = (answer) => {
+
     if (playerSkipped || opponentSkipped) {
       setMatchData({
         questionNumber,
@@ -89,6 +90,7 @@ const MatchScreen = () => {
 
       setMatchData(matchData);
     }
+
   };
 
   const handleTimeUp = () => {
@@ -187,6 +189,7 @@ const MatchScreen = () => {
       });
       console.log(roomInfo);
     } else if (questionNumber > questions?.length) {
+    
       setRoundMessage("Jogo Encerrado!");
 
       setQuestionNumber(15);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../global.css";
 import { ButtonInput } from "../Input/buttonInput.js";
 import { AjudaInput } from "../Input/ajudaInput.js";
@@ -7,9 +7,11 @@ import Cartas from "../../assets/carta.svg";
 import Convidados from "../../assets/placa.svg";
 import { ReactSVG } from "react-svg";
 import Vitinho from "../../images/vitinho.svg";
+import { UserContext} from "../../context/UserContext";
 
 const Alter = (props) => {
   
+
  const renderAlternativa = (i, val) => {
     return (
       <ButtonInput
@@ -75,9 +77,15 @@ const Alter = (props) => {
       </div>
       <div className="ajudaSection">
         <div className="iconesAjuda">
-          {optionAjuda(0)}
-          {optionAjuda(1)}
-          {optionAjuda(2)}
+          <div>
+          {optionAjuda(0)}<br/><center>{props.qtd_universitario}</center> 
+          </div>
+          <div>
+          {optionAjuda(1)}<br/><center>{props.qtd_cartas}</center> 
+          </div>
+          <div>
+          {optionAjuda(2)}<br/><center>{props.qtd_convidados}</center> 
+          </div>
         </div>
         {opcaoPular()}
       </div>
