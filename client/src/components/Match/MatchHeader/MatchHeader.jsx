@@ -4,7 +4,7 @@ import "./style.css";
 import Logo from "../../../images/logo.png";
 import Avatar from "../../../assets/avatar.svg";
 
-const MatchHeader = () => {
+const MatchHeader = (props) => {
   const buyingItem = (confirmModal) => {
     let modal = document.getElementById(confirmModal);
     modal.classList.add("show");
@@ -26,13 +26,13 @@ const MatchHeader = () => {
         <div id="info-players-match">
           <div className="player-match">
             <img className="player-image-match" src={Avatar} alt="" />
-            <span className="player-name-match">Astolfo</span>
+            <span className="player-name-match">{props.players[0].username}</span>
           </div>
 
           <span id="vsSpan">VS.</span>
 
           <div className="player-match">
-            <span className="player-name-match">Rodolfo</span>
+            <span className="player-name-match">{props.players[1].username}</span>
             <img className="player-image-match" src={Avatar} alt="" />
           </div>
         </div>

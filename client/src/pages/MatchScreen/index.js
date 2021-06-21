@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Redirect } from "react-router";
 
 import MatchScreenComponent from "../../components/Match/MatchScreenComponent";
+import EndGame from "../../components/EndGame";
 
 import {
   AuthContext,
@@ -15,9 +16,9 @@ const MatchScreen = () => {
   const [questions, setQuestions] = useState(null);
   const [updateInfo, setUpdateInfo] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(null);
-  const [questionNumber, setQuestionNumber] = useState(-1);
+  const [questionNumber, setQuestionNumber] = useState(-2);
   const [matchData, setMatchData] = useState(null);
-  const [skips, setSkips] = useState(1);
+  const [scoreAtual, setScoreAtual] = useState(0);
 
   // Match Flags
   const [isReady, setIsReady] = useState(false);
@@ -25,29 +26,79 @@ const MatchScreen = () => {
   const [matchStart, setMatchStart] = useState(false);
   const [opponentSkipped, setOpponentSkipped] = useState(false);
   const [playerSkipped, setPlayerSkipped] = useState(false);
-  const [questionScreen, setQuestionScreen] = useState(null);
-
   const [roundMessage, setRoundMessage] = useState("");
 
   // Game Contexts
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserContext);
   const { isAuth } = useContext(AuthContext);
+  const [fim, setFim] = useState(false);
+
+  socket.on("opponentSkipped", () => {
+    setOpponentSkipped(true);
+  });
+
+  const handleSkipQuestion = () => {
+    socket.emit("skipQuestion");
+    setPlayerSkipped(true);
+  };
 
   const handlePlayerAnswer = (answer) => {
-    const matchData = {
-      questionNumber,
-      player: user.username,
-      myChosenAlternative: answer.alternative,
-      correct: answer.isCorrect,
-      difficulty: currentQuestion.difficulty,
-    };
-    setMatchData(matchData);
-    
+
+    if (playerSkipped || opponentSkipped) {
+      setMatchData({
+        questionNumber,
+        player: user.username,
+        myChosenAlternative: "skipped",
+        correct: false,
+        difficulty: currentQuestion.difficulty,
+        points: scoreAtual,
+      });
+    } else {
+      var scoreRodada = scoreAtual;
+      switch (answer.difficulty) {
+        case 0:
+          scoreRodada += 10000;
+
+          break;
+        case 1:
+          scoreRodada += 20000;
+
+          break;
+        case 2:
+          scoreRodada += 70000;
+
+          break;
+        case 3:
+          scoreRodada *= 2;
+
+          break;
+
+        default:
+          console.log("pergunta sem nivel");
+      }
+      setScoreAtual(scoreRodada);
+
+      const matchData = {
+        questionNumber,
+        player: user.username,
+        myChosenAlternative: answer.alternative,
+        correct: answer.isCorrect,
+        difficulty: currentQuestion.difficulty,
+        points: scoreRodada,
+      };
+
+      setMatchData(matchData);
+    }
+
   };
 
   const handleTimeUp = () => {
     setTimeUp(true);
+  };
+
+  const handleScoreAtual = (score) => {
+    setScoreAtual(score);
   };
 
   useEffect(() => {
@@ -57,6 +108,7 @@ const MatchScreen = () => {
 
   useEffect(() => {
     if (matchStart || isReady) {
+      console.log(questionNumber);
       setCurrentQuestion(questions[questionNumber]);
       setIsReady(false);
       setMatchData(null);
@@ -64,6 +116,7 @@ const MatchScreen = () => {
   }, [questionNumber]);
 
   useEffect(() => {
+    console.log("updateInfo");
     if (updateInfo) {
       console.log("updateInfo");
       socket.emit("getRoomInfo");
@@ -77,12 +130,22 @@ const MatchScreen = () => {
   }, [updateInfo]);
 
   useEffect(() => {
+    console.log("roomInfo");
     if (roomInfo.playerCount > 1) {
       setMatchStart(true);
-      if (questionNumber === -1) {
+      if (questionNumber === -2) {
         setQuestionNumber(0);
         setRoundMessage("");
       }
+      if (Object.values(Object.values(roomInfo.match)).length > 1) {
+        if (
+          Object.values(Object.values(roomInfo.match)[0]).length === 16 &&
+          Object.values(Object.values(roomInfo.match)[1]).length === 16
+        ) {
+          setFim(true);
+        }
+      }
+      setRoundMessage("Jogo Encerrado! Aguardando respostas do adversário.");
     } else {
       setRoundMessage("Aguardando adversario");
     }
@@ -96,7 +159,7 @@ const MatchScreen = () => {
           player: user.username,
           myChosenAlternative: "timeUp",
           correct: false,
-          currentTime: 0,
+          points: scoreAtual,
         };
         socket.emit("recordAnswer", timeUpData);
       } else {
@@ -105,28 +168,64 @@ const MatchScreen = () => {
     }
     setTimeUp(false);
     setMatchData(null);
+    setPlayerSkipped(false);
+    setOpponentSkipped(false);
     setIsReady(true);
   }, [timeUp]);
+
+  /* Acrescentei esse mas n deu certo, sem esse até que uma das telas tinha dado certo, agr nenhuma deu. */
 
   const handleNextQuestion = () => {
     if (questionNumber < questions?.length) {
       setIsReady(false);
       setQuestionNumber((prev) => (prev += 1));
+
+      socket.emit("getRoomInfo");
+      socket.on("roomInfo", (data) => {
+        setRoomInfo(data);
+        if (!questions) {
+          setQuestions(data.questions);
+        }
+      });
+      console.log(roomInfo);
     } else if (questionNumber > questions?.length) {
     
       setRoundMessage("Jogo Encerrado!");
+
+      setQuestionNumber(15);
+      setCurrentQuestion(false);
       setMatchStart(false);
+
+      socket.emit("getRoomInfo");
+      socket.on("roomInfo", (data) => {
+        setRoomInfo(data);
+        if (!questions) {
+          setQuestions(data.questions);
+        }
+      });
+      console.log(roomInfo);
+      setUpdateInfo(true);
     }
   };
+
+  if (!user || !isAuth) {
+    return <Redirect to="/" />;
+  }
   return (
     <>
-      {questionNumber > -1 && currentQuestion ? (
+      {questionNumber > -2 && currentQuestion ? (
         <MatchScreenComponent
+          players={roomInfo.players}
           currentQuestion={currentQuestion}
           handlePlayerAnswer={handlePlayerAnswer}
           handleTimeUp={handleTimeUp}
           handleNextQuestion={handleNextQuestion}
+          handleScoreAtual={handleScoreAtual}
+          handleSkipQuestion={handleSkipQuestion}
+          skipMessage={opponentSkipped ? "Adversário Pulou" : null}
         />
+      ) : fim ? (
+        <EndGame nome={roomInfo} scoreAtual={scoreAtual} />
       ) : (
         <div id="waitingPlayer">
           <span id="roundMessage">{roundMessage}</span>
