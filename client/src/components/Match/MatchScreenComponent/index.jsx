@@ -9,6 +9,7 @@ import CartasScreen from "../CartasScreen";
 import ConvidadosScreen from "../ConvidadosScreen";
 import UniversitariosScreen from "../UniversitariosScreen";
 import { UserContext} from "../../../context/UserContext";
+import api from "../../../services/api";
 
 import "./styles.css";
 
@@ -354,38 +355,103 @@ const MatchScreenComponent = (props) => {
       }
     }
     else {
-
+      const rota = "/players/" + user._id;
+      var backp ;
+      backp = user.backpack;
       if(msg[1] == "Embaralhando as cartas"){
          if(cartas > 0){
+
+          for(var i=0; i<backp.length; i++){
+            if(backp[i].item_id == "609ead9f9fc12b2ee4553793"){
+              
+              backp[i].quantity = cartas -1 ;
+              
+              
+            }
+          }
+          api.patch(rota,{  "backpack":backp  })
+
+          user.backpack = backp;
+
             setCartas(cartas - 1);
             carregamento(msg);
+
+            
+
             return true;
          }
       
       }else if(msg[1] == "Consultando os convidados"){
         if(convidados > 0){
+
+          for(var i=0; i<backp.length; i++){
+            if(backp[i].item_id == "60ba86fec6a9b11a5cb359a8"){
+              
+              backp[i].quantity = convidados -1;
+              
+              
+            }
+          }
+          api.patch(rota,{  "backpack":backp  })
+
+            user.backpack = backp;
           setConvidados(convidados-1);
           carregamento(msg);
+          
           return true;
         }
         
       }else if(msg[1] == "Consultando os universitários"){
         if(universitarios > 0){
+
+          for(var i=0; i<backp.length; i++){
+            if(backp[i].item_id == "60ba86bec6a9b11a5cb359a7"){
+              
+              backp[i].quantity = universitarios - 1 ;
+              
+              
+            }
+          }
+          api.patch(rota,{  "backpack":backp  })
+
+            user.backpack = backp;
+
           setUniversitarios(universitarios-1); 
           carregamento(msg);
+          
           return true;
         }
         
       }else {
         if(pular > 0)     {   
+
+          for(var i=0; i<backp.length; i++){
+            if(backp[i].item_id == "60ba8736c6a9b11a5cb359a9"){
+              
+              backp[i].quantity = pular  - 1 ;
+              
+              
+            }
+          }
+          api.patch(rota,{  "backpack":backp  })
+
+            user.backpack = backp;
           setPular(pular-1);
           carregamento(msg);
+          
           return true;
         }
         
       }
       msg = ["QUE TRISTE!", "Você não tem mais nenhuma ajuda"];
       carregamento(msg);
+
+      /* atualiza items no banco */
+      
+      
+      
+    
+    
 
       setTimeout(() => carregamentoClose(), 1000);
       return false;

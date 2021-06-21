@@ -55,7 +55,7 @@ const Alter = (props) => {
     return (
       <ButtonInput
         inputName="opcaoParar"
-        inputValue={"Pular questao"}
+        inputValue={"Pular questao: " +  props.qtd_pular}
         className="opcaoParar"
         onClick={(e) => props.onClickPular(e)}
         disabled={props.disabled}
