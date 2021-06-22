@@ -1,11 +1,11 @@
 import React from 'react';
 import '../../global.css'
 import {CartaInput} from '../Input/cartaInput';
-import CartaVirada from '../../images/cartaVirada.jpg';
+import CartaVirada from '../../images/cartaVirada.png';
 import CartaReis from '../../images/cartaReis.png';
-import CartaAs from '../../images/cartaAs.png';
-import Carta2 from '../../images/carta2.png';
-import Carta3 from '../../images/carta3.png';
+import CartaAs from '../../images/cartaAs.svg';
+import Carta2 from '../../images/cartaDois.svg';
+import Carta3 from '../../images/cartaTres.svg';
 
 export default (props) => {  
   const cartas = [CartaReis, CartaAs, Carta2, Carta3, CartaVirada]; 
