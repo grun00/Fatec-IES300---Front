@@ -26,9 +26,7 @@ const PageLeaderBoard = (props) => {
   const {user} = useContext(UserContext);
   const {isAuth} = useContext(AuthContext);
   
-  const login = () => {
-
-  }
+  
 
   useEffect(() => {
 	  var player1 = null;
