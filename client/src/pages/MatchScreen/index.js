@@ -145,7 +145,7 @@ const MatchScreen = () => {
           setFim(true);
         }
       }
-      setRoundMessage("Jogo Encerrado! Aguardando respostas do adversário.");
+      setRoundMessage("Jogo Encerrado! Aguardando respostas do adversario.");
     } else {
       setRoundMessage("Aguardando adversario");
     }
