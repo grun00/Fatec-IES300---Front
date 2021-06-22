@@ -77,6 +77,7 @@ const Alter = (props) => {
       </div>
       <div className="ajudaSection">
         <div className="iconesAjuda">
+        
           <div>
           {optionAjuda(0)}<br/><center>{props.qtd_universitario}</center> 
           </div>
@@ -87,6 +88,9 @@ const Alter = (props) => {
           {optionAjuda(2)}<br/><center>{props.qtd_convidados}</center> 
           </div>
         </div>
+        
+        <center><b className="opcaoAjuda">Ajudas bônus da partida: {props.pulos} </b></center>
+
         {opcaoPular()}
       </div>
     </React.Fragment>
