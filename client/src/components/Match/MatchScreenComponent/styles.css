@@ -126,7 +126,7 @@
 }
 
 .perguntaSection {
-    background: rgba(19, 38, 47, 0.45);     
+    background: rgba(68, 167, 213, 0.60);     
 }
 
 #pergunta, .alternativa, .opcaoPular, .opcaoParar {
@@ -160,7 +160,7 @@
 .ajudaSection {
     display: flex;
     flex-direction: column;
-    background: rgba(19, 38, 47, 0.6);
+    background: rgba(4, 140, 212, 0.6);
     justify-content: space-evenly;
 }
 
