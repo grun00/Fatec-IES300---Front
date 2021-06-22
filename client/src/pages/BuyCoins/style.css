@@ -213,6 +213,43 @@ h6#invalido {
   color: rgb(54, 18, 18);
 }
 
+#modal-buyCoins {
+  width: 50%;
+  background-color: var(--font-color);
+  border: 3px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+#modal-buyCoins h3 {
+  font-size: 2rem;
+  text-shadow: 1px 3px 0 #7a7a7a, 1px 13px 5px #a9aba8;
+  text-align: center;
+}
+
+#modal-buyCoins #confirmationPhrase {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+#modal-buyCoins .modal-buttons-area {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#modal-buyCoins .modal-buttons-area .button-accept {
+  animation: scale 2s ease-in-out infinite alternate;
+}
+
+#modal-buyCoins .modal-buttons-area :is(.button-accept, .button-deny) {
+  margin: 2rem;
+  box-shadow: 0px 0px 26px -8px var(--primary-color)
+}
+
 @media (max-width: 1366px) {
   #BuyCoins-area {
     width: 90%;

@@ -25,12 +25,13 @@ function atualizaQuantidade(valor,netW){
 
     const rota = "/players/" + user._id;
     const net = parseInt(user.money,10)+netW
+    let modal = document.getElementById("modal-confirm-buyCoins-container");
     
     if(CPFvalidation(document.getElementById('cpf').value)){
      
       api.patch(rota,{  "money": net })
 
-      alert("Pedido realizado com sucesso !")
+      modal.classList.add("show");
 
       user.money = net
       
@@ -95,6 +96,12 @@ function atualizaQuantidade(valor,netW){
 if(!user && !isAuth){
   return <Redirect to='/' />
 }
+
+function fechaModal1(){
+  let modal = document.getElementById("modal-confirm-buyCoins-container");
+  modal.classList.remove("show");
+}
+
   return (
     <>
       <div id="PageBuyCoins-area">
@@ -253,6 +260,19 @@ if(!user && !isAuth){
             </div>
             <button className="button-accept" type="button" onClick={comprar.bind(this)}>Comprar agora</button>
           </form>
+          <div id="modal-confirm-buyCoins-container" className="modal-container">
+            <div id="modal-buyCoins">
+              <h3>Compra realizada com sucesso!</h3>
+              <p id="confirmationPhrase">
+                Parabéns! Você acabou de gastar dinheiros com joguinho on-line, você está orgulhoso disso? 
+              </p>
+
+              <div className="modal-buttons-area">
+                <button className="button-accept" onClick={(fechaModal1.bind(this))}>Sim, muito! 🤩</button>
+                <button className="button-deny" onClick={(fechaModal1.bind(this))}>Nao, mas agora ja foi 😑</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
