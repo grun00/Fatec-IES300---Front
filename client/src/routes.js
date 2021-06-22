@@ -12,7 +12,6 @@ import RegisterScreen from "./pages/RegisterScreen";
 import ForgotPassword from "./pages/ForgotPassword";
 import LeaderBoard from "./pages/LeaderBoard";
 import ChangePassword from "./pages/ChangePassword";
-import GamePage from "./pages/GamePage";
 import Lobby from "./pages/Lobby";
 import BuyCoins from "./pages/BuyCoins";
 import Error404 from "./pages/Error";
@@ -50,7 +49,6 @@ const Routes = () => {
               <Route exact path="/ForgotPassword" component={ForgotPassword} />
               <Route exact path="/ranking" component={LeaderBoard} />
               <Route exact path="/changepassword" component={ChangePassword} />
-              <Route exact path="/gamepage" component={GamePage} />
               <Route exact path="/lobby" component={Lobby} />
               <Route exact path="/comprar" component={BuyCoins} />
               <Route exact path="/meuperfil" component={MyProfile} />
