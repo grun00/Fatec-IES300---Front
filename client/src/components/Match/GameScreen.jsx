@@ -55,7 +55,7 @@ const Alter = (props) => {
     return (
       <ButtonInput
         inputName="opcaoParar"
-        inputValue={"Pular questao: " +  props.qtd_pular}
+        inputValue={"Pular: " +  props.qtd_pular}
         className="opcaoParar"
         onClick={(e) => props.onClickPular(e)}
         disabled={props.disabled}
@@ -76,6 +76,8 @@ const Alter = (props) => {
         <ReactSVG id="vitinho" className={props.statusVitinho} src={Vitinho} />
       </div>
       <div className="ajudaSection">
+
+      <center><b className="ajudaInfo">Ajudas bonus da partida: {props.pulos} </b></center>
         <div className="iconesAjuda">
         
           <div>
@@ -89,7 +91,7 @@ const Alter = (props) => {
           </div>
         </div>
         
-        <center><b className="opcaoAjuda">Ajudas bônus da partida: {props.pulos} </b></center>
+      
 
         {opcaoPular()}
       </div>
