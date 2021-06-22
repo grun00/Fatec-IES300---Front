@@ -227,7 +227,7 @@ const ShopPage = () => {
 
           <div id="modal-confirm-buy-container" className="modal-container">
             <div id="modal-buy">
-              <h3>Comprar "item"</h3>
+              <h3>Compra de item</h3>
               <p id="confirmationPhrase">
                 Você tem certeza de quer comprar esse item por {netW} Vitucoins? 🤔
               </p>
