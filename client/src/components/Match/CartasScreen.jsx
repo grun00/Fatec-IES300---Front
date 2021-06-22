@@ -2,7 +2,7 @@ import React from 'react';
 import '../../global.css'
 import {CartaInput} from '../Input/cartaInput';
 import CartaVirada from '../../images/cartaVirada.png';
-import CartaReis from '../../images/cartaReis.png';
+import CartaReis from '../../images/cartaRei.svg';
 import CartaAs from '../../images/cartaAs.svg';
 import Carta2 from '../../images/cartaDois.svg';
 import Carta3 from '../../images/cartaTres.svg';
