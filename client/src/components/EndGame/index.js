@@ -7,6 +7,7 @@ import Header from "../../components/Header/Header";
 import Trophy from "../../images/trophy.png"
 import FirstPlace from "../../images/1Place.png"
 import SecondPlace from "../../images/2Place.png"
+import { Link } from "react-router-dom"
 
 import {
 	AuthContext,
@@ -25,6 +26,9 @@ const PageLeaderBoard = (props) => {
   const {user} = useContext(UserContext);
   const {isAuth} = useContext(AuthContext);
   
+  const login = () => {
+
+  }
 
   useEffect(() => {
 	  var player1 = null;
@@ -173,9 +177,15 @@ const PageLeaderBoard = (props) => {
 				            <td>Erros</td>
 				            <td>{erros[perdedor]}</td>
 		              </tr>
+					  
 		            </tbody>
             	</table>
+				
             </div>
+			<button className="button-accept"  >
+        
+		<Link to="/lobby" id="comprar" >Sair da partida</Link>
+      </button>
           </div>
         </div>
       </div>
